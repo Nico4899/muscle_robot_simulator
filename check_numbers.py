@@ -7,6 +7,8 @@ same line and read in full.
   or be whitelisted: key labels such as "1-4" anywhere; years and licence versions in credits.
 - Every cited row must exist and have "read in full?" = yes.
 - Numbers written as words ("fifty", "twice") are printed as warnings for a human, not failures.
+- Numbers the page draws (in captions.json objects that carry "claim": "Cn", such as the band)
+  must appear in that row's value, and the row must be read in full.
 Exit 1 on any failure. A source file that does not exist yet is reported and skipped.
 """
 import json
@@ -144,6 +146,29 @@ def check_item(where, text, credit, oracle, claims, errors, warnings, cited_ids)
         warnings.append(f"{where}: number word '{word}': {text.strip()}")
 
 
+def claim_objects(node, where=""):
+    """(where, object) for every captions.json object that names a "claim"."""
+    if isinstance(node, dict):
+        if "claim" in node:
+            yield where, node
+        for k, v in node.items():
+            if not k.startswith("_"):
+                yield from claim_objects(v, f"{where}.{k}" if where else k)
+
+
+def check_claim_objects(path, claims, errors, cited_ids):
+    """Numbers drawn by the page from data (not text) still need their claims.md row."""
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    for where, obj in claim_objects(data):
+        row_id = obj["claim"]
+        cited_ids.add((row_id, f"{path}:{where}"))
+        allowed = ({float(x) for x in VALUE_NUMBER.findall(claims[row_id]["value"])}
+                   if row_id in claims else set())
+        for k, v in obj.items():
+            if isinstance(v, (int, float)) and not isinstance(v, bool) and float(v) not in allowed:
+                errors.append(f"{path}:{where}.{k}: number {v} not in the value of {row_id}")
+
+
 def main():
     oracle = json.loads(Path("oracle.json").read_text(encoding="utf-8"))
     claims = load_claims()
@@ -158,6 +183,8 @@ def main():
         for where, text, credit in readers[Path(src).suffix](src):
             n_items += 1
             check_item(where, text, credit, oracle, claims, errors, warnings, cited_ids)
+    if Path("captions.json").exists():
+        check_claim_objects("captions.json", claims, errors, cited_ids)
     for row_id, where in sorted(cited_ids):
         if row_id not in claims:
             errors.append(f"{where}: [{row_id}] is not a row of claims.md")

@@ -13,11 +13,12 @@
   "ja": "シミュレーション"
  },
  "band_label": "published: this actuator, 6.2° to 10.5° on average [C19]",
+ "band": {"lo_deg": 6.2, "hi_deg": 10.5, "claim": "C19"},
  "target_label": "target {{target_deg:.0f}}°",
  "clip_credit": "Morita, Nie & Takeuchi, Sci. Adv. 2025, Movie S11, trimmed, CC BY-NC 4.0. Timing matched by eye; angles not measured. [L1]",
  "steps": {
   "stimulate": "{{n_builds_page}} builds of the same joint, because no two muscle rings are alike.",
-  "fixed_force": "A published design tool for these robots gives every muscle the same fixed force. [C13]",
+  "fixed_force": "Published design tools for these robots give every muscle the same fixed force. [C13] [C24]",
   "rings_heavy": "Heavy load: the swing grows from {{swing_heavy_n1:.0f}}° to {{swing_heavy_n4:.0f}}° with more rings.",
   "rings_light": "Light load: {{swing_light_n1:.0f}}° to {{swing_light_n4:.0f}}°. Rings buy torque, not travel.",
   "spread": "Where does the spread sit? This is what my experiment will test.",
@@ -31,7 +32,8 @@
   "worst": "worst 1 in 10 builds",
   "chance": "chance to reach {{target_deg:.0f}}°",
   "rest": "rest angle",
-  "blocked": "blocked torque"
+  "blocked": "pull when held straight",
+  "no_balance": "builds without a balance point (joint at its stop)"
  },
  "sobol_title": "What drives the spread of the swing",
  "sobol_caption": "Shares depend on the illustrative ranges I chose."

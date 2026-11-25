@@ -1,0 +1,117 @@
+/* Page layout (spec 03): a 1920 x 1080 stage scaled to the window, light background, type of
+   at least 24 px, Okabe-Ito colour-blind-safe palette. */
+:root {
+  --bg: #fafaf7;
+  --ink: #1a1a1a;
+  --muted: #6b6b6b;
+  --you: #0072b2; /* blue: your joint */
+  --ring: #d55e00; /* vermillion: muscle rings */
+  --ring-rest: #f0b48a;
+  --band: #c4c4c4;
+  --ok: #009e73;
+  --fail: #cc79a7;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", sans-serif;
+  overflow: hidden;
+}
+
+#stage {
+  width: 1920px;
+  height: 1080px;
+  transform-origin: 0 0;
+  display: grid;
+  grid-template-columns: 600px 800px 520px;
+  grid-template-rows: 200px 880px;
+  grid-template-areas: "head head head" "left centre right";
+  font-size: 26px;
+}
+
+header {
+  grid-area: head;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 40px 0;
+}
+h1 { font-size: 40px; margin: 0; }
+.ja, .sub { margin: 6px 0 0; font-size: 26px; color: var(--muted); }
+
+.badges { display: flex; gap: 16px; }
+.badge {
+  font-size: 24px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 2px solid var(--ink);
+  white-space: nowrap;
+}
+.badge.sim { background: var(--ink); color: var(--bg); font-weight: 700; }
+.badge.parity.ok { border-color: var(--ok); color: var(--ok); }
+.badge.parity.fail { border-color: var(--fail); color: var(--fail); }
+
+#left { grid-area: left; padding: 0 24px 0 40px; }
+#clip { display: block; width: 100%; max-height: 760px; object-fit: contain; border-radius: 8px; background: #000; }
+.credit, .clip-missing { font-size: 24px; color: var(--muted); }
+.clip-mode { font-size: 24px; margin: 12px 0 0; font-weight: 600; }
+
+#centre { grid-area: centre; display: flex; flex-direction: column; align-items: center; }
+#joint { width: 760px; height: 700px; }
+.caption {
+  font-size: 30px;
+  line-height: 1.3;
+  margin: 8px 24px 0;
+  min-height: 120px;
+  text-align: center;
+}
+
+#right { grid-area: right; padding: 0 40px 0 16px; }
+#controls { display: flex; flex-direction: column; gap: 8px; }
+#controls button {
+  font: inherit;
+  font-size: 24px;
+  text-align: left;
+  padding: 6px 12px;
+  border: 2px solid #c8c8c8;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+#controls .row { display: flex; align-items: center; gap: 8px; font-size: 24px; }
+#controls .row button { width: 48px; text-align: center; }
+kbd {
+  font: inherit;
+  font-size: 24px;
+  padding: 0 6px;
+  border: 1px solid #b0b0b0;
+  border-radius: 4px;
+  background: #f0f0f0;
+}
+
+#readouts {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 16px;
+  margin: 24px 0 0;
+  font-size: 26px;
+}
+#readouts dt { color: var(--muted); }
+#readouts dd { margin: 0; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.flag { color: var(--fail); font-size: 24px; }
+
+/* joint drawing */
+.band { fill: var(--band); }
+.target { stroke: var(--ink); stroke-width: 3; stroke-dasharray: 12 8; }
+.build { stroke: #9a9a9a; stroke-width: 2; opacity: 0.35; }
+.legend-build { opacity: 0.8; }
+.anchor { stroke: #7a7a7a; stroke-width: 6; stroke-linecap: round; }
+.median { stroke: var(--ink); stroke-width: 6; }
+.you-link { stroke: var(--you); stroke-width: 10; stroke-linecap: round; }
+.ring { stroke: var(--ring-rest); stroke-width: 9; stroke-linecap: round; }
+.ring.active { stroke: var(--ring); }
+.hinge { fill: var(--bg); stroke: var(--ink); stroke-width: 4; }
+.svg-label { font-size: 24px; fill: var(--ink); }

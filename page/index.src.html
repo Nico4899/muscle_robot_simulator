@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muscle joint demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <header>
+    <div class="titles">
+      <h1 id="title-en"></h1>
+      <p class="ja" id="title-ja" lang="ja"></p>
+      <p class="sub" id="subtitle-en"></p>
+    </div>
+    <div class="badges">
+      <span class="badge sim" id="badge"></span>
+      <span class="badge parity" id="parity" title="checking the page against oracle.json">parity</span>
+    </div>
+  </header>
+
+  <section id="left">
+    <video id="clip" muted loop playsinline autoplay></video>
+    <p class="clip-mode" id="clip-mode"></p>
+    <p class="credit" id="clip-credit"></p>
+    <p class="clip-missing" id="clip-missing" hidden>The clip is Movie S11 of the paper:
+      <a href="https://doi.org/10.1126/sciadv.adu9962">Morita, Nie and Takeuchi, Science Advances</a></p>
+  </section>
+
+  <section id="centre">
+    <svg id="joint" viewBox="0 0 760 820" role="img" aria-label="Simulated joint seen from above"></svg>
+    <p class="caption" id="caption"></p>
+  </section>
+
+  <section id="right">
+    <div id="controls">
+      <button data-action="stimulate"><kbd>Space</kbd> stimulate side <b id="v-side"></b></button>
+      <button data-action="fixed"><kbd>F</kbd> fixed force: <b id="v-fixed"></b></button>
+      <div class="row">
+        <button data-action="rings-" aria-label="fewer rings">−</button>
+        <span><kbd>1-4</kbd> rings per side: <b id="v-rings"></b></span>
+        <button data-action="rings+" aria-label="more rings">+</button>
+      </div>
+      <button data-action="spread"><kbd>S</kbd> spread: <b id="v-preset"></b></button>
+      <button data-action="rebuild"><kbd>B</kbd> rebuild your joint</button>
+      <button data-action="shield"><kbd>H</kbd> shielding: <b id="v-shield"></b></button>
+      <button data-action="load"><kbd>L</kbd> load: <b id="v-load"></b></button>
+      <button data-action="new"><kbd>R</kbd> new builds</button>
+      <button data-action="reset"><kbd>Esc</kbd> reset</button>
+    </div>
+    <dl id="readouts">
+      <dt data-label="typical"></dt><dd id="r-typical"></dd>
+      <dt data-label="worst"></dt><dd id="r-worst"></dd>
+      <dt data-label="chance"></dt><dd id="r-chance"></dd>
+      <dt data-label="rest"></dt><dd id="r-rest"></dd>
+      <dt data-label="blocked"></dt><dd id="r-blocked"></dd>
+    </dl>
+    <p class="flag" id="r-no-balance" hidden></p>
+  </section>
+</div>
+<!-- build.py fills these three; in development app.js fetches the files instead -->
+<script type="application/json" id="data-oracle"></script>
+<script type="application/json" id="data-captions"></script>
+<script type="application/json" id="data-cues"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
