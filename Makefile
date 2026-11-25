@@ -4,7 +4,7 @@ oracle:
 	$(PY) make_oracle.py
 
 test:
-	node --test tests/
+	node --test tests/*.test.mjs
 	$(PY) -m pytest tests -q
 
 numbers:
