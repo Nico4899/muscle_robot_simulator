@@ -472,11 +472,18 @@ async function main() {
   clip.addEventListener("loadeddata", () => {
     clip_ok = true;
   });
-  clip.addEventListener("error", () => {
+  // no clip (public build, or the file is missing): the paper link instead of clip and credit
+  const no_clip = () => {
     clip.hidden = true;
+    document.getElementById("clip-credit").hidden = true;
     document.getElementById("clip-missing").hidden = false;
-  });
-  clip.src = src;
+  };
+  clip.addEventListener("error", no_clip);
+  if (src === "none") {
+    no_clip(); // the public build: no media
+  } else {
+    clip.src = src;
+  }
   let cue_now;
   let leading = null;
   const mode = document.getElementById("clip-mode");
