@@ -197,21 +197,28 @@ def test_I9_root_count_matches_independent_grid(A, B, eps, chi, kappa, stim, sta
 
 def test_I9_hand_built_three_roots():
     """Random draws almost never give several roots (spec 02). This joint has three with A
-    stimulated (pre-stretch 0.35, chi 0.85: every root has a strain above 37 %). The count must
-    match, and solve must take the root nearest its start."""
+    stimulated (pre-stretch 0.35, chi 0.85: every root has a strain above 37 %): stable,
+    unstable, stable. The count must match; from any start the solver must follow the torque to
+    the next root in that direction, which is a stable one. From rest that is the stable root
+    at about -0.59 rad, not the nearer unstable one at about +0.22."""
     p = joint(0.35, 0.85, 3.0)
     A = (10.0, 0.2)
     B = (15.0, 0.15)
     found = independent_roots(A, B, "A", p)
     assert len(found) == 3
-    for r in found:  # start on each root: that root comes back
-        th, n = solve(A, B, "A", p, r)
+    th_rest, _ = rest(A, B, p)
+    for start in (-1.0, -0.3, th_rest, 0.3, 0.45, 1.0):
+        if residual(start, A, B, "A", p) < 0:  # torque pushes down: next root below
+            expected = max(r for r in found if r < start)
+        else:  # pushes up: next root above
+            expected = min(r for r in found if r > start)
+        th, n = solve(A, B, "A", p, start)
         assert n == 3
-        assert abs(th - r) <= 3e-3
-    th_rest, _ = rest(A, B, p)  # from rest: the nearest of the three
-    nearest = min(found, key=lambda r: abs(r - th_rest))
+        assert abs(th - expected) <= 3e-3, f"from {start:+.3f}: {th:+.4f}, expected {expected:+.4f}"
+        slope = (residual(th + 1e-6, A, B, "A", p) - residual(th - 1e-6, A, B, "A", p)) / 2e-6
+        assert slope < 0, f"from {start:+.3f}: unstable root {th:+.4f}"
     th, _ = solve(A, B, "A", p, th_rest)
-    assert abs(th - nearest) <= 3e-3
+    assert abs(th - found[0]) <= 3e-3  # the stable root near -0.59, the joint's real swing
 
 
 @EXAMPLES

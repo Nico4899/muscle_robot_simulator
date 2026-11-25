@@ -182,6 +182,7 @@ def run_case(builds, preset, load, shield, n_rings):
     return {
         "median_deg": quantile(swings, 0.5),
         "q10_deg": quantile(swings, 0.1),
+        "q90_deg": quantile(swings, 0.9),  # with q10 and the median: the relative width (I12)
         "p_target": n_hit / len(builds),
         "rest_sd_deg": sd(rests),
         "blocked_torque": quantile(torques, 0.5),
