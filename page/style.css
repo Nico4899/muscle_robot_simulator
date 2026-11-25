@@ -55,7 +55,7 @@ h1 { font-size: 40px; margin: 0; }
 .badge.parity.fail { border-color: var(--fail); color: var(--fail); }
 
 #left { grid-area: left; padding: 0 24px 0 40px; }
-#clip { display: block; width: 100%; max-height: 760px; object-fit: contain; border-radius: 8px; background: #000; }
+#clip { display: block; width: 100%; max-height: 700px; object-fit: contain; border-radius: 8px; background: #000; }
 .credit, .clip-missing { font-size: 24px; color: var(--muted); }
 .clip-mode { font-size: 24px; margin: 12px 0 0; font-weight: 600; }
 
@@ -70,12 +70,12 @@ h1 { font-size: 40px; margin: 0; }
 }
 
 #right { grid-area: right; padding: 0 40px 0 16px; }
-#controls { display: flex; flex-direction: column; gap: 8px; }
+#controls { display: flex; flex-direction: column; gap: 5px; }
 #controls button {
   font: inherit;
   font-size: 24px;
   text-align: left;
-  padding: 6px 12px;
+  padding: 3px 12px;
   border: 2px solid #c8c8c8;
   border-radius: 8px;
   background: #fff;
@@ -96,12 +96,21 @@ kbd {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 4px 16px;
-  margin: 24px 0 0;
-  font-size: 26px;
+  margin: 16px 0 0;
+  font-size: 24px;
 }
 #readouts dt { color: var(--muted); }
 #readouts dd { margin: 0; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
-.flag { color: var(--fail); font-size: 24px; }
+.flag { color: var(--fail); font-size: 24px; margin: 4px 0; }
+
+/* what drives the spread: total share as a bar, first-order share as a tick */
+#sobol h2 { font-size: 26px; margin: 14px 0 6px; }
+.bar { display: grid; grid-template-columns: 150px 1fr 70px; align-items: center; gap: 10px; font-size: 24px; height: 34px; }
+.track { position: relative; height: 22px; background: #ececec; border-radius: 4px; }
+.fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ring); border-radius: 4px; }
+.tick { position: absolute; top: -5px; bottom: -5px; width: 4px; margin-left: -2px; background: var(--ink); }
+.val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+.sobol-caption, .sobol-none { font-size: 24px; color: var(--muted); margin: 6px 0 0; }
 
 /* joint drawing */
 .band { fill: var(--band); }

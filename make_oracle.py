@@ -19,6 +19,7 @@ from model import (LOADS, N_RINGS_MAX, PARAMS, SHIELDS, build_stacks, joint_para
                    rescue_rate, run_case, seed_builds, seed_builds_and_rebuilds)
 from rng import Rng
 from statics import blocked_torque, residual, rest, solve, swing
+import sobol
 
 SEEDS = (1, 2, 3)
 HEADLINE_SEED = 1
@@ -72,8 +73,13 @@ def probe():
 
 
 def run_job(job):
-    """One unit of work: ("table", seed, preset), ("case", seed, case) or ("rescue", seed, preset)."""
+    """One unit of work: ("table", seed, preset), ("case", seed, case), ("rescue", seed, preset),
+    ("sobol", None, case) or ("sobol_control", None, group)."""
     kind, seed, arg = job
+    if kind == "sobol":
+        return job, sobol.analyse(*arg)
+    if kind == "sobol_control":  # spec 03's checks: only this group random, on the page case
+        return job, sobol.analyse(*PAGE_CASE, random_groups=(arg,))
     if kind == "table":
         builds = seed_builds(seed, PARAMS["n_builds_oracle"])
         out = {}
@@ -124,14 +130,23 @@ def rel_spread(values):
 def run_all():
     """Table and headline values for every seed, in parallel; and the multi-root report."""
     headline_cases = sorted(set(SHIELD_CASES.values()) | set(CAPTION_CASES.values()))
-    jobs = ([("table", s, p) for s in SEEDS for p in PARAMS["presets"]]
+    sobol_cases = [(p, l, n, sh) for p in PARAMS["presets"] for l in LOADS
+                   for n in range(1, N_RINGS_MAX + 1) for sh in SHIELDS]
+    jobs = ([("sobol", None, c) for c in sobol_cases]  # the longest jobs first
+            + [("sobol_control", None, g) for g in ("rings", "crosstalk")]
+            + [("table", s, p) for s in SEEDS for p in PARAMS["presets"]]
             + [("case", s, c) for s in SEEDS for c in headline_cases]
             + [("rescue", s, p) for s in SEEDS for p in PARAMS["presets"]])
     table = {s: {} for s in SEEDS}
     headline = {s: {"cases": {}, "rescue": {}} for s in SEEDS}
+    sens = {"cases": {}, "controls": {}}
     with ProcessPoolExecutor() as pool:
         for (kind, seed, arg), out in pool.map(run_job, jobs):
-            if kind == "table":
+            if kind == "sobol":
+                sens["cases"][case_key(*arg)] = out
+            elif kind == "sobol_control":
+                sens["controls"][arg] = out
+            elif kind == "table":
                 table[seed].update(out)
             elif kind == "case":
                 headline[seed]["cases"][case_key(*arg)] = out
@@ -152,7 +167,14 @@ def run_all():
         "builds_multi_root": sum(c["n_multi_root"] for s in SEEDS for c in table[s].values())
         + sum(c["n_multi_root"] for s in SEEDS for c in headline[s]["cases"].values()),
     }
-    return table, headline, report
+    sensitivity = {
+        "method": "pick-freeze on centred output; first-order Saltelli 2010, total Jansen 1999; bootstrap SEs",
+        "n": sobol.N_BASE, "n_boot": sobol.N_BOOT, "seed": sobol.SEED,
+        "crosstalk_sigma": sobol.CROSSTALK_SIGMA, "groups": list(sobol.GROUPS),
+        "control_case": case_key(*PAGE_CASE),
+        **sens,
+    }
+    return table, headline, report, sensitivity
 
 
 def seed_checks(headline):
@@ -181,9 +203,22 @@ def seed_checks(headline):
     return results
 
 
+def print_sensitivity(sensitivity):
+    pc = sensitivity["cases"][sensitivity["control_case"]]
+    print(f"sensitivity, {len(sensitivity['cases'])} cases x n {sensitivity['n']}; page case total "
+          + ", ".join(f"{g} {pc['total'][g]:.2f}" for g in sensitivity["groups"]))
+    for g, c in sensitivity["controls"].items():
+        print(f"  control: only {g} random -> its total share {c['total'][g]:.3f} (spec 03: >= 0.95)")
+    worst = min((c["total"][g] - c["first"][g] + 3 * c["diff_se"][g], k, g)
+                for k, c in sensitivity["cases"].items() for g in sensitivity["groups"]
+                if sobol.active(g, k.split("/")[0]))
+    print(f"  total >= first - 3 SE: smallest margin {worst[0]:.3f} ({worst[1]}, {worst[2]}),"
+          " groups with spread only")
+
+
 def main():
     t0 = time.time()
-    table, headline, multi_root = run_all()
+    table, headline, multi_root, sensitivity = run_all()
     head = headline[HEADLINE_SEED]
 
     named = {
@@ -209,6 +244,7 @@ def main():
                           **{name: case_key(*c) for name, c in CAPTION_CASES.items()}},
         "probe": probe(),
         "multi_root_report": multi_root,
+        "sensitivity": sensitivity,
         **named,
         "rescue": head["rescue"],
         "headline": {str(s): headline[s] for s in SEEDS},
@@ -238,6 +274,12 @@ def main():
     n_none = sum(c["n_no_balance"] for s in SEEDS for c in table[s].values())
     n_none += sum(c["n_no_balance"] for s in SEEDS for c in headline[s]["cases"].values())
     print(f"builds with no balance point in range, all seeds: {n_none} (flagged, never a crash)")
+    n_bad = sum(c["n_no_balance"] for c in sensitivity["cases"].values())
+    n_bad += sum(c["n_no_balance"] for c in sensitivity["controls"].values())
+    if n_bad:
+        print(f"sensitivity: {n_bad} samples without a balance point; those cases have no indices")
+    else:
+        print_sensitivity(sensitivity)
     print("caption values (seed 1): " + ", ".join(
         f"{k} {v:.3g}" if isinstance(v, float) else f"{k} {v}" for k, v in named.items()))
     if not all(ok for ok, _ in checks):

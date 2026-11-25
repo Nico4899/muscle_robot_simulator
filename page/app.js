@@ -145,6 +145,17 @@ export function apply(state, action, oracle) {
   return s;
 }
 
+// "What drives the spread" (spec 03): the precomputed indices for the current case, or null
+// with a fixed force (no spread to divide). total: share of the variance the group drives,
+// alone or with others; first: the share it drives alone.
+export function spread_bars(oracle, state) {
+  const sens = oracle.sensitivity;
+  if (state.fixed || !sens) return null;
+  const c = sens.cases[`${state.preset}/${state.load}/${state.n_rings}/${state.shield}`];
+  if (c.n_no_balance > 0) return null; // indices undefined for this case
+  return sens.groups.map((g) => ({ group: g, total: c.total[g], first: c.first[g] }));
+}
+
 // Clip sync: the state of the last cue at or before time t (null before the first cue).
 export function cue_state(cues, t) {
   let st = null;
@@ -216,6 +227,8 @@ const IDLE_EVERY_MS = 4000; // ... re-stimulate every 4 s
 const IDLE_HOLD_MS = 1000;
 const EASE_S = 0.15;
 const MODE_CLIP = "The joint follows the clip.";
+const NO_SPREAD_FIXED = "No spread with a fixed force: every build is the same.";
+const NO_SPREAD_UNDEFINED = "No shares here: some builds of this case reach no balance point.";
 const MODE_VISITOR = "You have the joint. The clip takes over again when you stop.";
 
 function el(tag, attrs = {}, parent = null) {
@@ -368,6 +381,17 @@ function show_text(state, view, oracle, captions) {
   document.getElementById("v-load").textContent = state.load;
   document.getElementById("v-fixed").textContent = state.fixed ? "on" : "off";
   document.getElementById("v-side").textContent = view.side;
+  const bars = spread_bars(oracle, state);
+  document.getElementById("bars").hidden = bars === null;
+  document.getElementById("sobol-none").hidden = bars !== null;
+  document.getElementById("sobol-none").textContent = state.fixed ? NO_SPREAD_FIXED : NO_SPREAD_UNDEFINED;
+  for (const b of bars || []) {
+    const row = document.querySelector(`#bars [data-group="${b.group}"]`);
+    const pct = (v) => `${Math.max(0, Math.min(100, 100 * v))}%`;
+    row.querySelector(".fill").style.width = pct(b.total);
+    row.querySelector(".tick").style.left = pct(b.first);
+    row.querySelector(".val").textContent = `${Math.round(100 * Math.max(0, b.total))} %`;
+  }
 }
 
 async function main() {
@@ -382,6 +406,16 @@ async function main() {
   document.getElementById("subtitle-en").textContent = t(captions.subtitle.en);
   document.getElementById("badge").textContent = `${t(captions.badge.en)} · ${t(captions.badge.ja)}`;
   document.getElementById("clip-credit").textContent = t(captions.clip_credit);
+  document.getElementById("sobol-title").textContent = t(captions.sobol_title);
+  document.getElementById("sobol-caption").textContent = t(captions.sobol_caption);
+  const bars_box = document.getElementById("bars");
+  for (const g of oracle.sensitivity ? oracle.sensitivity.groups : []) {
+    const row = document.createElement("div");
+    row.className = "bar";
+    row.dataset.group = g;
+    row.innerHTML = `<span class="name">${g}</span><span class="track"><span class="fill"></span><span class="tick"></span></span><span class="val"></span>`;
+    bars_box.appendChild(row);
+  }
   for (const dt of document.querySelectorAll("#readouts dt")) {
     dt.textContent = t(captions.readouts[dt.dataset.label]);
   }

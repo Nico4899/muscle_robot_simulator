@@ -302,6 +302,1724 @@
   "seeds": 3,
   "builds_multi_root": 0
  },
+ "sensitivity": {
+  "method": "pick-freeze on centred output; first-order Saltelli 2010, total Jansen 1999; bootstrap SEs",
+  "n": 2048,
+  "n_boot": 200,
+  "seed": 7,
+  "crosstalk_sigma": 0.3,
+  "groups": [
+   "rings",
+   "assembly",
+   "combination",
+   "crosstalk"
+  ],
+  "control_case": "rings/heavy/4/unshielded",
+  "cases": {
+   "rings/light/1/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 83.70129023752932,
+    "first": {
+     "rings": 0.8192233765513306,
+     "assembly": 0.013238788876623957,
+     "combination": 0.018426170883547893,
+     "crosstalk": 0.15110171147085277
+    },
+    "total": {
+     "rings": 0.8359183256797824,
+     "assembly": 0.015757172530656827,
+     "combination": 0.015497094623150269,
+     "crosstalk": 0.14283751498066988
+    },
+    "first_se": {
+     "rings": 0.031750452241626544,
+     "assembly": 0.003630008489788301,
+     "combination": 0.0038095009615799168,
+     "crosstalk": 0.012800908734425104
+    },
+    "total_se": {
+     "rings": 0.02377172378298047,
+     "assembly": 0.00074415884411654,
+     "combination": 0.0006945398575324489,
+     "crosstalk": 0.0062428090003939524
+    },
+    "diff_se": {
+     "rings": 0.023385883751466843,
+     "assembly": 0.003629780777883013,
+     "combination": 0.0037257961449544017,
+     "crosstalk": 0.011632013236623436
+    }
+   },
+   "rings/light/1/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 63.53954842586661,
+    "first": {
+     "rings": 0.9523947805689104,
+     "assembly": 0.01215532576541854,
+     "combination": 0.0198370042212671,
+     "crosstalk": 0.014791286378779904
+    },
+    "total": {
+     "rings": 0.9830854693577243,
+     "assembly": 0.016275832369074,
+     "combination": 0.015739079221895873,
+     "crosstalk": 0.010831909252800465
+    },
+    "first_se": {
+     "rings": 0.03414963396989424,
+     "assembly": 0.0036500585790683504,
+     "combination": 0.0036607765590120377,
+     "crosstalk": 0.0034487870702226216
+    },
+    "total_se": {
+     "rings": 0.024227016000577258,
+     "assembly": 0.0007748899763228414,
+     "combination": 0.0007160811161819524,
+     "crosstalk": 0.0005385132828465707
+    },
+    "diff_se": {
+     "rings": 0.023998419336746468,
+     "assembly": 0.003646348579385655,
+     "combination": 0.003551082146756856,
+     "crosstalk": 0.003373453641439932
+    }
+   },
+   "rings/light/2/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 66.1692909838555,
+    "first": {
+     "rings": 0.749785248468316,
+     "assembly": 0.02719276333537759,
+     "combination": 0.02034954407577625,
+     "crosstalk": 0.24062249445443776
+    },
+    "total": {
+     "rings": 0.7371273092890926,
+     "assembly": 0.02549639385464682,
+     "combination": 0.024994693169679155,
+     "crosstalk": 0.2293299244085441
+    },
+    "first_se": {
+     "rings": 0.03173473665204862,
+     "assembly": 0.004809019400367173,
+     "combination": 0.004825122903723279,
+     "crosstalk": 0.016884499502783035
+    },
+    "total_se": {
+     "rings": 0.023093477154076905,
+     "assembly": 0.0011680618573475608,
+     "combination": 0.0009669733804829518,
+     "crosstalk": 0.009202435484762767
+    },
+    "diff_se": {
+     "rings": 0.023198840457263552,
+     "assembly": 0.004766117118980433,
+     "combination": 0.00469279540729223,
+     "crosstalk": 0.01409706895022291
+    }
+   },
+   "rings/light/2/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 46.16875479992651,
+    "first": {
+     "rings": 0.929150808302346,
+     "assembly": 0.02930418541527481,
+     "combination": 0.024042213400451967,
+     "crosstalk": 0.02350956931359695
+    },
+    "total": {
+     "rings": 0.922380415698558,
+     "assembly": 0.027750875460652732,
+     "combination": 0.027361678816844332,
+     "crosstalk": 0.018784691158475423
+    },
+    "first_se": {
+     "rings": 0.03550706634781768,
+     "assembly": 0.004947964480961166,
+     "combination": 0.005110148387349826,
+     "crosstalk": 0.004544431982761845
+    },
+    "total_se": {
+     "rings": 0.025297966670468873,
+     "assembly": 0.0012521104067084135,
+     "combination": 0.0010395378996710027,
+     "crosstalk": 0.0008391653122677798
+    },
+    "diff_se": {
+     "rings": 0.024220694817892803,
+     "assembly": 0.004940367634572147,
+     "combination": 0.0049538581115361885,
+     "crosstalk": 0.004332107197654723
+    }
+   },
+   "rings/light/3/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 54.84396342489001,
+    "first": {
+     "rings": 0.6553532570204649,
+     "assembly": 0.03253876200743987,
+     "combination": 0.030077464677154976,
+     "crosstalk": 0.2919692349214392
+    },
+    "total": {
+     "rings": 0.6537313503148746,
+     "assembly": 0.03327972284758234,
+     "combination": 0.03297830994446296,
+     "crosstalk": 0.29837735815103805
+    },
+    "first_se": {
+     "rings": 0.026486003211697088,
+     "assembly": 0.005636013183893192,
+     "combination": 0.0054300074226193195,
+     "crosstalk": 0.02038810550185472
+    },
+    "total_se": {
+     "rings": 0.02247354671711783,
+     "assembly": 0.0015026153386745035,
+     "combination": 0.0013012500149608525,
+     "crosstalk": 0.01122208020526669
+    },
+    "diff_se": {
+     "rings": 0.02085562081215801,
+     "assembly": 0.005568857770260507,
+     "combination": 0.005395855632841728,
+     "crosstalk": 0.017072042939712415
+    }
+   },
+   "rings/light/3/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 35.821978225175656,
+    "first": {
+     "rings": 0.8890588556445638,
+     "assembly": 0.0353251050442924,
+     "combination": 0.03761999013844561,
+     "crosstalk": 0.0236527779066464
+    },
+    "total": {
+     "rings": 0.8871441014972357,
+     "assembly": 0.03839369114901526,
+     "combination": 0.037885010351736796,
+     "crosstalk": 0.025379142625930988
+    },
+    "first_se": {
+     "rings": 0.03211454400675207,
+     "assembly": 0.006344573151888192,
+     "combination": 0.005783123428752197,
+     "crosstalk": 0.005519390684703864
+    },
+    "total_se": {
+     "rings": 0.02560307491820903,
+     "assembly": 0.0016338762978359823,
+     "combination": 0.001488833508125772,
+     "crosstalk": 0.001099045388069769
+    },
+    "diff_se": {
+     "rings": 0.022235659062498678,
+     "assembly": 0.006285146057451429,
+     "combination": 0.005635920969106766,
+     "crosstalk": 0.0052979815280345495
+    }
+   },
+   "rings/light/4/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 48.50891117495567,
+    "first": {
+     "rings": 0.5889272499318333,
+     "assembly": 0.03702229996508513,
+     "combination": 0.038205887881536366,
+     "crosstalk": 0.34125972910140173
+    },
+    "total": {
+     "rings": 0.5968507173526091,
+     "assembly": 0.03999734625191398,
+     "combination": 0.03950463636762446,
+     "crosstalk": 0.35532492945001803
+    },
+    "first_se": {
+     "rings": 0.024883999544681908,
+     "assembly": 0.006452755338868892,
+     "combination": 0.00583218010824498,
+     "crosstalk": 0.021636764205006983
+    },
+    "total_se": {
+     "rings": 0.01985935796340662,
+     "assembly": 0.0017776329130685315,
+     "combination": 0.001618737528325355,
+     "crosstalk": 0.01282702586299518
+    },
+    "diff_se": {
+     "rings": 0.020701322894714602,
+     "assembly": 0.006281698822053666,
+     "combination": 0.00582611807252221,
+     "crosstalk": 0.018439932922298372
+    }
+   },
+   "rings/light/4/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 29.779392632780553,
+    "first": {
+     "rings": 0.8410952170193965,
+     "assembly": 0.04335276968792291,
+     "combination": 0.047561454536828834,
+     "crosstalk": 0.02754879340680208
+    },
+    "total": {
+     "rings": 0.8625191610124215,
+     "assembly": 0.04959168131250487,
+     "combination": 0.04855688953660242,
+     "crosstalk": 0.03216295999613565
+    },
+    "first_se": {
+     "rings": 0.03098041377902157,
+     "assembly": 0.007499510473209571,
+     "combination": 0.006541839971953385,
+     "crosstalk": 0.006080170833610089
+    },
+    "total_se": {
+     "rings": 0.024768248281057493,
+     "assembly": 0.0021361430186794404,
+     "combination": 0.00197144448863291,
+     "crosstalk": 0.00136710187879242
+    },
+    "diff_se": {
+     "rings": 0.021246537922098144,
+     "assembly": 0.007214476090426673,
+     "combination": 0.006330680967420017,
+     "crosstalk": 0.005799182064224882
+    }
+   },
+   "rings/heavy/1/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 3.931949983460192,
+    "first": {
+     "rings": 0.8222029244646916,
+     "assembly": 0.013399674778773655,
+     "combination": 0.018181643115137487,
+     "crosstalk": 0.14881966436648822
+    },
+    "total": {
+     "rings": 0.8285207948518373,
+     "assembly": 0.016885391846351697,
+     "combination": 0.01665414137213136,
+     "crosstalk": 0.14226827918137913
+    },
+    "first_se": {
+     "rings": 0.034429106192490726,
+     "assembly": 0.0038755475113012206,
+     "combination": 0.004020071336203964,
+     "crosstalk": 0.01246464723596871
+    },
+    "total_se": {
+     "rings": 0.02456390921320892,
+     "assembly": 0.0008085812842495403,
+     "combination": 0.0007175338839410097,
+     "crosstalk": 0.006078556226485273
+    },
+    "diff_se": {
+     "rings": 0.024724588418691382,
+     "assembly": 0.003894322585509703,
+     "combination": 0.003958274594446772,
+     "crosstalk": 0.011252347400465455
+    }
+   },
+   "rings/heavy/1/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 3.001096153400711,
+    "first": {
+     "rings": 0.9468359721981938,
+     "assembly": 0.013111630740313705,
+     "combination": 0.019931619908674484,
+     "crosstalk": 0.014013375415284792
+    },
+    "total": {
+     "rings": 0.9627147823330985,
+     "assembly": 0.018973149824247366,
+     "combination": 0.01879398081985222,
+     "crosstalk": 0.010873566718824442
+    },
+    "first_se": {
+     "rings": 0.03872472397084389,
+     "assembly": 0.004131026967010955,
+     "combination": 0.004230453795659742,
+     "crosstalk": 0.003238411994694681
+    },
+    "total_se": {
+     "rings": 0.025587793687620184,
+     "assembly": 0.0009420706458865832,
+     "combination": 0.0008236655597409256,
+     "crosstalk": 0.0005168057990852673
+    },
+    "diff_se": {
+     "rings": 0.02780123701633246,
+     "assembly": 0.00418576112830394,
+     "combination": 0.004178707440663277,
+     "crosstalk": 0.003182423836211879
+    }
+   },
+   "rings/heavy/2/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 6.728997999917951,
+    "first": {
+     "rings": 0.7401986521433452,
+     "assembly": 0.027896794136629304,
+     "combination": 0.022470227808886103,
+     "crosstalk": 0.24903161819390213
+    },
+    "total": {
+     "rings": 0.7239067812811253,
+     "assembly": 0.027941747748913642,
+     "combination": 0.02733197410574409,
+     "crosstalk": 0.2379679676314552
+    },
+    "first_se": {
+     "rings": 0.03194379974675654,
+     "assembly": 0.005094843008716195,
+     "combination": 0.005014992793825429,
+     "crosstalk": 0.01670747101260765
+    },
+    "total_se": {
+     "rings": 0.0232818134735906,
+     "assembly": 0.001268779787768407,
+     "combination": 0.0010378380863419916,
+     "crosstalk": 0.009049855226520352
+    },
+    "diff_se": {
+     "rings": 0.022359218725958075,
+     "assembly": 0.005064578818053994,
+     "combination": 0.004859703573013921,
+     "crosstalk": 0.014134214773404218
+    }
+   },
+   "rings/heavy/2/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 4.661299748378086,
+    "first": {
+     "rings": 0.9176088447415993,
+     "assembly": 0.03145036582966619,
+     "combination": 0.02889899856710029,
+     "crosstalk": 0.024208753012207672
+    },
+    "total": {
+     "rings": 0.9073412688978605,
+     "assembly": 0.034075882255974334,
+     "combination": 0.03351271378428256,
+     "crosstalk": 0.01980415148518776
+    },
+    "first_se": {
+     "rings": 0.03706221427252774,
+     "assembly": 0.005543869936551501,
+     "combination": 0.005692518359263412,
+     "crosstalk": 0.004369203410161953
+    },
+    "total_se": {
+     "rings": 0.026258718584773393,
+     "assembly": 0.0015558483757865727,
+     "combination": 0.001258174702785501,
+     "crosstalk": 0.0008519749260399599
+    },
+    "diff_se": {
+     "rings": 0.02511939613161243,
+     "assembly": 0.005558541816339052,
+     "combination": 0.005461375930756311,
+     "crosstalk": 0.004195530584240545
+    }
+   },
+   "rings/heavy/3/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 8.576484380301709,
+    "first": {
+     "rings": 0.6501493588311975,
+     "assembly": 0.034227580809660506,
+     "combination": 0.032648586940691865,
+     "crosstalk": 0.30562220218057934
+    },
+    "total": {
+     "rings": 0.646322894860292,
+     "assembly": 0.036472903095375035,
+     "combination": 0.03573138631562856,
+     "crosstalk": 0.31262198958514503
+    },
+    "first_se": {
+     "rings": 0.027287033084043632,
+     "assembly": 0.005832468318497673,
+     "combination": 0.005643813393324569,
+     "crosstalk": 0.02025231380174458
+    },
+    "total_se": {
+     "rings": 0.022620460951830897,
+     "assembly": 0.0016415077273474663,
+     "combination": 0.0013847717789037142,
+     "crosstalk": 0.010968843681380878
+    },
+    "diff_se": {
+     "rings": 0.020654663660595443,
+     "assembly": 0.005776515964382287,
+     "combination": 0.005527046171916295,
+     "crosstalk": 0.017228836971106713
+    }
+   },
+   "rings/heavy/3/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 5.563388122785096,
+    "first": {
+     "rings": 0.8787390442511409,
+     "assembly": 0.04062182868011381,
+     "combination": 0.04561420078170847,
+     "crosstalk": 0.025055678601333748
+    },
+    "total": {
+     "rings": 0.8852723748656101,
+     "assembly": 0.04767217869821952,
+     "combination": 0.046971131375787484,
+     "crosstalk": 0.02790967345371746
+    },
+    "first_se": {
+     "rings": 0.03378454839802743,
+     "assembly": 0.007018730747384241,
+     "combination": 0.006564937291475602,
+     "crosstalk": 0.005579112893584905
+    },
+    "total_se": {
+     "rings": 0.025987409971397694,
+     "assembly": 0.0020680500603933055,
+     "combination": 0.001767832777045148,
+     "crosstalk": 0.0011641590679993714
+    },
+    "diff_se": {
+     "rings": 0.02392702324062287,
+     "assembly": 0.006963879507442964,
+     "combination": 0.0062756486937419415,
+     "crosstalk": 0.005301283056033662
+    }
+   },
+   "rings/heavy/4/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 10.105128017885427,
+    "first": {
+     "rings": 0.5790987159386076,
+     "assembly": 0.03909073334712514,
+     "combination": 0.041967293274647974,
+     "crosstalk": 0.3557173004431392
+    },
+    "total": {
+     "rings": 0.5830740843901173,
+     "assembly": 0.04308199429098582,
+     "combination": 0.042214500594383655,
+     "crosstalk": 0.36913722915376984
+    },
+    "first_se": {
+     "rings": 0.02599565039679118,
+     "assembly": 0.006697226987704508,
+     "combination": 0.0061497894528176255,
+     "crosstalk": 0.021985643223163136
+    },
+    "total_se": {
+     "rings": 0.020179606373998626,
+     "assembly": 0.0019155199190431006,
+     "combination": 0.001743426890648266,
+     "crosstalk": 0.012778575812182698
+    },
+    "diff_se": {
+     "rings": 0.020950736952889886,
+     "assembly": 0.006515859020382423,
+     "combination": 0.006121723269465704,
+     "crosstalk": 0.01899027015694015
+    }
+   },
+   "rings/heavy/4/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 6.226303847258254,
+    "first": {
+     "rings": 0.8337447021159635,
+     "assembly": 0.05147613748049591,
+     "combination": 0.06081786999111676,
+     "crosstalk": 0.029452066535254597
+    },
+    "total": {
+     "rings": 0.8493988550005035,
+     "assembly": 0.05992965180065214,
+     "combination": 0.05924067168470702,
+     "crosstalk": 0.035080987999571316
+    },
+    "first_se": {
+     "rings": 0.03267035889985757,
+     "assembly": 0.008458569314666682,
+     "combination": 0.007492387387489638,
+     "crosstalk": 0.006535962345283966
+    },
+    "total_se": {
+     "rings": 0.025426197550473355,
+     "assembly": 0.0025749971993888265,
+     "combination": 0.0023451335448948746,
+     "crosstalk": 0.0014825818184883805
+    },
+    "diff_se": {
+     "rings": 0.023118688993099237,
+     "assembly": 0.00821418404293341,
+     "combination": 0.0072488324644555445,
+     "crosstalk": 0.006184311395456668
+    }
+   },
+   "assembly/light/1/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 82.28961527697786,
+    "first": {
+     "rings": 0.08426790645176892,
+     "assembly": 0.7784537536887655,
+     "combination": 0.0,
+     "crosstalk": 0.14829696232284206
+    },
+    "total": {
+     "rings": 0.08929000942387529,
+     "assembly": 0.798587500959414,
+     "combination": 0.0,
+     "crosstalk": 0.1418216749489582
+    },
+    "first_se": {
+     "rings": 0.008950406798460236,
+     "assembly": 0.030562860080907167,
+     "combination": 0.0,
+     "crosstalk": 0.01178784804609613
+    },
+    "total_se": {
+     "rings": 0.0035297585848659825,
+     "assembly": 0.02338316380946016,
+     "combination": 0.0,
+     "crosstalk": 0.0059443127342228355
+    },
+    "diff_se": {
+     "rings": 0.008643613320479276,
+     "assembly": 0.022388478147406674,
+     "combination": 0.0,
+     "crosstalk": 0.010698203599490788
+    }
+   },
+   "assembly/light/1/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 59.71677132866312,
+    "first": {
+     "rings": 0.10522385211949137,
+     "assembly": 0.8774481751609362,
+     "combination": 0.0,
+     "crosstalk": 0.014548595028071704
+    },
+    "total": {
+     "rings": 0.11615272499748196,
+     "assembly": 0.8943614492463259,
+     "combination": 0.0,
+     "crosstalk": 0.011604709888936391
+    },
+    "first_se": {
+     "rings": 0.010394671643896748,
+     "assembly": 0.03153089554676023,
+     "combination": 0.0,
+     "crosstalk": 0.003263800397982404
+    },
+    "total_se": {
+     "rings": 0.0044621808668380055,
+     "assembly": 0.023672826972199548,
+     "combination": 0.0,
+     "crosstalk": 0.0005304420955591069
+    },
+    "diff_se": {
+     "rings": 0.009980201682360464,
+     "assembly": 0.021368210373655397,
+     "combination": 0.0,
+     "crosstalk": 0.0031763466548325333
+    }
+   },
+   "assembly/light/2/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 102.00955640544387,
+    "first": {
+     "rings": 0.056310600745969205,
+     "assembly": 0.82190714581268,
+     "combination": 0.0,
+     "crosstalk": 0.15542299453649655
+    },
+    "total": {
+     "rings": 0.05004301606551378,
+     "assembly": 0.8257588052956737,
+     "combination": 0.0,
+     "crosstalk": 0.15066147642179942
+    },
+    "first_se": {
+     "rings": 0.007039495289911165,
+     "assembly": 0.030455090523987143,
+     "combination": 0.0,
+     "crosstalk": 0.01255106678324969
+    },
+    "total_se": {
+     "rings": 0.002236272439505347,
+     "assembly": 0.02284719312815553,
+     "combination": 0.0,
+     "crosstalk": 0.00648861733436132
+    },
+    "diff_se": {
+     "rings": 0.006809289150992628,
+     "assembly": 0.02147033406456194,
+     "combination": 0.0,
+     "crosstalk": 0.01121421885713273
+    }
+   },
+   "assembly/light/2/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 68.45974416818004,
+    "first": {
+     "rings": 0.07070339185258175,
+     "assembly": 0.9362025596173406,
+     "combination": 0.0,
+     "crosstalk": 0.015481765025745968
+    },
+    "total": {
+     "rings": 0.06591966114160287,
+     "assembly": 0.9368458378121185,
+     "combination": 0.0,
+     "crosstalk": 0.013037268758567163
+    },
+    "first_se": {
+     "rings": 0.008149347323434706,
+     "assembly": 0.03062150094412947,
+     "combination": 0.0,
+     "crosstalk": 0.003554733255716078
+    },
+    "total_se": {
+     "rings": 0.002781241857620937,
+     "assembly": 0.0233846866739308,
+     "combination": 0.0,
+     "crosstalk": 0.0006032291297651271
+    },
+    "diff_se": {
+     "rings": 0.007984990458631509,
+     "assembly": 0.019798630335236378,
+     "combination": 0.0,
+     "crosstalk": 0.0034429235138290363
+    }
+   },
+   "assembly/light/3/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 109.38610213184367,
+    "first": {
+     "rings": 0.04037329044754403,
+     "assembly": 0.8335199136419937,
+     "combination": 0.0,
+     "crosstalk": 0.15532026345297387
+    },
+    "total": {
+     "rings": 0.034372074484164176,
+     "assembly": 0.8365130598129401,
+     "combination": 0.0,
+     "crosstalk": 0.15415030993083778
+    },
+    "first_se": {
+     "rings": 0.0056209320480570145,
+     "assembly": 0.03067931436552584,
+     "combination": 0.0,
+     "crosstalk": 0.012838830755108778
+    },
+    "total_se": {
+     "rings": 0.0015196130469928315,
+     "assembly": 0.02319781173443102,
+     "combination": 0.0,
+     "crosstalk": 0.006534399205847228
+    },
+    "diff_se": {
+     "rings": 0.005547166910268584,
+     "assembly": 0.021332303789807452,
+     "combination": 0.0,
+     "crosstalk": 0.0114838002541356
+    }
+   },
+   "assembly/light/3/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 70.66273941616595,
+    "first": {
+     "rings": 0.05148133138237908,
+     "assembly": 0.9500669754918439,
+     "combination": 0.0,
+     "crosstalk": 0.01456013880614711
+    },
+    "total": {
+     "rings": 0.046245016468082184,
+     "assembly": 0.9532847840761416,
+     "combination": 0.0,
+     "crosstalk": 0.0137240634101424
+    },
+    "first_se": {
+     "rings": 0.0066827361251439975,
+     "assembly": 0.030824135471517623,
+     "combination": 0.0,
+     "crosstalk": 0.003697450340183487
+    },
+    "total_se": {
+     "rings": 0.001883072534768191,
+     "assembly": 0.023371149996879094,
+     "combination": 0.0,
+     "crosstalk": 0.0006362509567840502
+    },
+    "diff_se": {
+     "rings": 0.006574786823709297,
+     "assembly": 0.01953155521927079,
+     "combination": 0.0,
+     "crosstalk": 0.003574731131118103
+    }
+   },
+   "assembly/light/4/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 113.24849200862806,
+    "first": {
+     "rings": 0.028889967031296704,
+     "assembly": 0.8378991090485813,
+     "combination": 0.0,
+     "crosstalk": 0.1564950210408847
+    },
+    "total": {
+     "rings": 0.026445370784571383,
+     "assembly": 0.8443105636153994,
+     "combination": 0.0,
+     "crosstalk": 0.15670377147530828
+    },
+    "first_se": {
+     "rings": 0.005006147654473056,
+     "assembly": 0.030264520778052997,
+     "combination": 0.0,
+     "crosstalk": 0.012960654147733548
+    },
+    "total_se": {
+     "rings": 0.0010924234104672846,
+     "assembly": 0.02300193006586881,
+     "combination": 0.0,
+     "crosstalk": 0.006617523062189067
+    },
+    "diff_se": {
+     "rings": 0.004927191490555628,
+     "assembly": 0.02125063239728328,
+     "combination": 0.0,
+     "crosstalk": 0.011674807115149975
+    }
+   },
+   "assembly/light/4/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 71.50170991411893,
+    "first": {
+     "rings": 0.03878514582558393,
+     "assembly": 0.957641451019781,
+     "combination": 0.0,
+     "crosstalk": 0.014879132062404161
+    },
+    "total": {
+     "rings": 0.03608027477163283,
+     "assembly": 0.9632991049871065,
+     "combination": 0.0,
+     "crosstalk": 0.014231977175578817
+    },
+    "first_se": {
+     "rings": 0.005933009251357971,
+     "assembly": 0.030429006509872954,
+     "combination": 0.0,
+     "crosstalk": 0.0037878182887821003
+    },
+    "total_se": {
+     "rings": 0.0013806008069730188,
+     "assembly": 0.023018108573168185,
+     "combination": 0.0,
+     "crosstalk": 0.0006708948887574898
+    },
+    "diff_se": {
+     "rings": 0.005865687856039971,
+     "assembly": 0.019333382745390103,
+     "combination": 0.0,
+     "crosstalk": 0.003665039934328461
+    }
+   },
+   "assembly/heavy/1/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 4.097831130103979,
+    "first": {
+     "rings": 0.0763969234656171,
+     "assembly": 0.7867606317113153,
+     "combination": 0.0,
+     "crosstalk": 0.14274159360291838
+    },
+    "total": {
+     "rings": 0.08263495803354332,
+     "assembly": 0.8146826259698318,
+     "combination": 0.0,
+     "crosstalk": 0.13621739137921235
+    },
+    "first_se": {
+     "rings": 0.008448760872681508,
+     "assembly": 0.03168089255200291,
+     "combination": 0.0,
+     "crosstalk": 0.011464681292806938
+    },
+    "total_se": {
+     "rings": 0.003298298330252852,
+     "assembly": 0.024135078377169116,
+     "combination": 0.0,
+     "crosstalk": 0.005762452755772571
+    },
+    "diff_se": {
+     "rings": 0.008349135772863855,
+     "assembly": 0.023631708443780444,
+     "combination": 0.0,
+     "crosstalk": 0.010378965590994497
+    }
+   },
+   "assembly/heavy/1/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 3.0873141851042796,
+    "first": {
+     "rings": 0.08534637346560034,
+     "assembly": 0.8920092761154342,
+     "combination": 0.0,
+     "crosstalk": 0.013476115308803457
+    },
+    "total": {
+     "rings": 0.09711314284078364,
+     "assembly": 0.9244160725293934,
+     "combination": 0.0,
+     "crosstalk": 0.010535403118001805
+    },
+    "first_se": {
+     "rings": 0.009380048525956622,
+     "assembly": 0.034814064546128974,
+     "combination": 0.0,
+     "crosstalk": 0.003083326796953532
+    },
+    "total_se": {
+     "rings": 0.003874903876274362,
+     "assembly": 0.025232765687193133,
+     "combination": 0.0,
+     "crosstalk": 0.0004930104485826356
+    },
+    "diff_se": {
+     "rings": 0.009189497724835675,
+     "assembly": 0.02520126168014448,
+     "combination": 0.0,
+     "crosstalk": 0.0030053076314180407
+    }
+   },
+   "assembly/heavy/2/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 11.460912694601973,
+    "first": {
+     "rings": 0.047779710249230535,
+     "assembly": 0.8259964674758011,
+     "combination": 0.0,
+     "crosstalk": 0.14777758452834205
+    },
+    "total": {
+     "rings": 0.044500772667205445,
+     "assembly": 0.8422683990102346,
+     "combination": 0.0,
+     "crosstalk": 0.14341123526347918
+    },
+    "first_se": {
+     "rings": 0.006426206439087543,
+     "assembly": 0.03240026731944486,
+     "combination": 0.0,
+     "crosstalk": 0.012053273250649971
+    },
+    "total_se": {
+     "rings": 0.001918556459046069,
+     "assembly": 0.023508738620472147,
+     "combination": 0.0,
+     "crosstalk": 0.0062523671236084455
+    },
+    "diff_se": {
+     "rings": 0.006293490162482649,
+     "assembly": 0.023534022006495188,
+     "combination": 0.0,
+     "crosstalk": 0.010835564520014173
+    }
+   },
+   "assembly/heavy/2/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 8.533132570452556,
+    "first": {
+     "rings": 0.052374253751417105,
+     "assembly": 0.9410119490596721,
+     "combination": 0.0,
+     "crosstalk": 0.013519728423852833
+    },
+    "total": {
+     "rings": 0.05232302811832058,
+     "assembly": 0.9584942562318931,
+     "combination": 0.0,
+     "crosstalk": 0.011099953675462015
+    },
+    "first_se": {
+     "rings": 0.007267201717380014,
+     "assembly": 0.03550976834301356,
+     "combination": 0.0,
+     "crosstalk": 0.003211871426959691
+    },
+    "total_se": {
+     "rings": 0.0023301497973519983,
+     "assembly": 0.023994122922389328,
+     "combination": 0.0,
+     "crosstalk": 0.0005278013778679428
+    },
+    "diff_se": {
+     "rings": 0.007183425830890848,
+     "assembly": 0.025500930290872765,
+     "combination": 0.0,
+     "crosstalk": 0.0031144407973994204
+    }
+   },
+   "assembly/heavy/3/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 19.240092895266248,
+    "first": {
+     "rings": 0.035054666563489476,
+     "assembly": 0.8368583251037353,
+     "combination": 0.0,
+     "crosstalk": 0.14700055179081906
+    },
+    "total": {
+     "rings": 0.030753703021655324,
+     "assembly": 0.8529959082107567,
+     "combination": 0.0,
+     "crosstalk": 0.14632067124740475
+    },
+    "first_se": {
+     "rings": 0.005142443359807651,
+     "assembly": 0.032874046353811866,
+     "combination": 0.0,
+     "crosstalk": 0.012395249405101895
+    },
+    "total_se": {
+     "rings": 0.0013634697696371478,
+     "assembly": 0.02366854162164083,
+     "combination": 0.0,
+     "crosstalk": 0.006380493697931883
+    },
+    "diff_se": {
+     "rings": 0.005119686805682029,
+     "assembly": 0.02350015013255006,
+     "combination": 0.0,
+     "crosstalk": 0.011090759535709278
+    }
+   },
+   "assembly/heavy/3/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 14.347044085651232,
+    "first": {
+     "rings": 0.03895626930887147,
+     "assembly": 0.9531937917727938,
+     "combination": 0.0,
+     "crosstalk": 0.012563292999936868
+    },
+    "total": {
+     "rings": 0.036862373195261505,
+     "assembly": 0.9709226924408862,
+     "combination": 0.0,
+     "crosstalk": 0.011340886866764975
+    },
+    "first_se": {
+     "rings": 0.005981553919432045,
+     "assembly": 0.03603422954048825,
+     "combination": 0.0,
+     "crosstalk": 0.003285750212770217
+    },
+    "total_se": {
+     "rings": 0.0016569486182684992,
+     "assembly": 0.023523405704577754,
+     "combination": 0.0,
+     "crosstalk": 0.0005411442380687026
+    },
+    "diff_se": {
+     "rings": 0.0058797466948554205,
+     "assembly": 0.02577797153149878,
+     "combination": 0.0,
+     "crosstalk": 0.0031785603585529703
+    }
+   },
+   "assembly/heavy/4/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 26.715740227665098,
+    "first": {
+     "rings": 0.0247630130225802,
+     "assembly": 0.8434526451638981,
+     "combination": 0.0,
+     "crosstalk": 0.14798231127575745
+    },
+    "total": {
+     "rings": 0.023488685311132743,
+     "assembly": 0.8611737880269832,
+     "combination": 0.0,
+     "crosstalk": 0.14804334231930774
+    },
+    "first_se": {
+     "rings": 0.004582337964437221,
+     "assembly": 0.03281738975971146,
+     "combination": 0.0,
+     "crosstalk": 0.012543648276102482
+    },
+    "total_se": {
+     "rings": 0.0009753856779506306,
+     "assembly": 0.02352751925515298,
+     "combination": 0.0,
+     "crosstalk": 0.006475389791618392
+    },
+    "diff_se": {
+     "rings": 0.004513646843384862,
+     "assembly": 0.023811783411610686,
+     "combination": 0.0,
+     "crosstalk": 0.011297200368550845
+    }
+   },
+   "assembly/heavy/4/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 19.9947392514969,
+    "first": {
+     "rings": 0.028306212965760573,
+     "assembly": 0.9630301048175836,
+     "combination": 0.0,
+     "crosstalk": 0.012506925769652235
+    },
+    "total": {
+     "rings": 0.028260825243917452,
+     "assembly": 0.98062772720087,
+     "combination": 0.0,
+     "crosstalk": 0.011487027844383435
+    },
+    "first_se": {
+     "rings": 0.005158087250836192,
+     "assembly": 0.03582771881113492,
+     "combination": 0.0,
+     "crosstalk": 0.003346751559865231
+    },
+    "total_se": {
+     "rings": 0.0011848866152737866,
+     "assembly": 0.023131764706766783,
+     "combination": 0.0,
+     "crosstalk": 0.000547067685642657
+    },
+    "diff_se": {
+     "rings": 0.005004803026234165,
+     "assembly": 0.025729621812686135,
+     "combination": 0.0,
+     "crosstalk": 0.0032446755679722905
+    }
+   },
+   "combination/light/1/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 83.15636260252546,
+    "first": {
+     "rings": 0.08432003759796264,
+     "assembly": 0.0,
+     "combination": 0.7911656568038941,
+     "crosstalk": 0.1342239704874208
+    },
+    "total": {
+     "rings": 0.09066713650323101,
+     "assembly": 0.0,
+     "combination": 0.7777108099098751,
+     "crosstalk": 0.14577940366931258
+    },
+    "first_se": {
+     "rings": 0.009126942100083616,
+     "assembly": 0.0,
+     "combination": 0.030551511365105515,
+     "crosstalk": 0.0136163568806668
+    },
+    "total_se": {
+     "rings": 0.0036962095635553302,
+     "assembly": 0.0,
+     "combination": 0.02334521752268966,
+     "crosstalk": 0.006566041293356729
+    },
+    "diff_se": {
+     "rings": 0.009017230231510584,
+     "assembly": 0.0,
+     "combination": 0.021959741829224753,
+     "crosstalk": 0.012165727992238452
+    }
+   },
+   "combination/light/1/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 61.0212103310609,
+    "first": {
+     "rings": 0.10419803213620131,
+     "assembly": 0.0,
+     "combination": 0.8923645626116923,
+     "crosstalk": 0.009384594062084447
+    },
+    "total": {
+     "rings": 0.11543162307696837,
+     "assembly": 0.0,
+     "combination": 0.8682064925162393,
+     "crosstalk": 0.01179652174795499
+    },
+    "first_se": {
+     "rings": 0.010341666635062202,
+     "assembly": 0.0,
+     "combination": 0.03061257847823777,
+     "crosstalk": 0.0033049910727258984
+    },
+    "total_se": {
+     "rings": 0.004413351956734335,
+     "assembly": 0.0,
+     "combination": 0.022945841622785627,
+     "crosstalk": 0.0005870179151876844
+    },
+    "diff_se": {
+     "rings": 0.010252339410569297,
+     "assembly": 0.0,
+     "combination": 0.020673089498865763,
+     "crosstalk": 0.0032440682757635627
+    }
+   },
+   "combination/light/2/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 101.1406151939407,
+    "first": {
+     "rings": 0.04441251316550521,
+     "assembly": 0.0,
+     "combination": 0.8191092740013378,
+     "crosstalk": 0.14155753234446278
+    },
+    "total": {
+     "rings": 0.04927021587732051,
+     "assembly": 0.0,
+     "combination": 0.817473318222424,
+     "crosstalk": 0.1572840376372263
+    },
+    "first_se": {
+     "rings": 0.006618063588882161,
+     "assembly": 0.0,
+     "combination": 0.030826074390175946,
+     "crosstalk": 0.013648857590297343
+    },
+    "total_se": {
+     "rings": 0.0020426992203761004,
+     "assembly": 0.0,
+     "combination": 0.02311341716865154,
+     "crosstalk": 0.0067310533445071735
+    },
+    "diff_se": {
+     "rings": 0.006741198029340377,
+     "assembly": 0.0,
+     "combination": 0.021241979198826283,
+     "crosstalk": 0.012402226141444348
+    }
+   },
+   "combination/light/2/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 69.35013195647639,
+    "first": {
+     "rings": 0.05723832605394909,
+     "assembly": 0.0,
+     "combination": 0.9329786731024764,
+     "crosstalk": 0.009457497949880595
+    },
+    "total": {
+     "rings": 0.06418645292309325,
+     "assembly": 0.0,
+     "combination": 0.9204605022911726,
+     "crosstalk": 0.013299660429549248
+    },
+    "first_se": {
+     "rings": 0.007731102097696229,
+     "assembly": 0.0,
+     "combination": 0.030335239018480595,
+     "crosstalk": 0.0033884333401993363
+    },
+    "total_se": {
+     "rings": 0.00249615270248451,
+     "assembly": 0.0,
+     "combination": 0.023104450969394858,
+     "crosstalk": 0.0006136221947226141
+    },
+    "diff_se": {
+     "rings": 0.007854551939361297,
+     "assembly": 0.0,
+     "combination": 0.01864009201798798,
+     "crosstalk": 0.0033407880986712356
+    }
+   },
+   "combination/light/3/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 108.60943507430494,
+    "first": {
+     "rings": 0.029797805310570025,
+     "assembly": 0.0,
+     "combination": 0.8309305747233449,
+     "crosstalk": 0.13926188425672806
+    },
+    "total": {
+     "rings": 0.03398629205584835,
+     "assembly": 0.0,
+     "combination": 0.8281170427999723,
+     "crosstalk": 0.16061571002473998
+    },
+    "first_se": {
+     "rings": 0.005525188543173593,
+     "assembly": 0.0,
+     "combination": 0.030578335347625087,
+     "crosstalk": 0.01384026336810108
+    },
+    "total_se": {
+     "rings": 0.0014138300828228961,
+     "assembly": 0.0,
+     "combination": 0.023567554555993287,
+     "crosstalk": 0.006592939497590049
+    },
+    "diff_se": {
+     "rings": 0.005702915217094967,
+     "assembly": 0.0,
+     "combination": 0.021013140685844048,
+     "crosstalk": 0.01282551525537881
+    }
+   },
+   "combination/light/3/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 71.57314150780098,
+    "first": {
+     "rings": 0.04027387167373489,
+     "assembly": 0.0,
+     "combination": 0.9505634117020927,
+     "crosstalk": 0.007786786541326406
+    },
+    "total": {
+     "rings": 0.0451844891024679,
+     "assembly": 0.0,
+     "combination": 0.9388636075336174,
+     "crosstalk": 0.013833781562888108
+    },
+    "first_se": {
+     "rings": 0.006346234644759034,
+     "assembly": 0.0,
+     "combination": 0.030163886907443142,
+     "crosstalk": 0.003512906476142451
+    },
+    "total_se": {
+     "rings": 0.0017853384209750075,
+     "assembly": 0.0,
+     "combination": 0.02342729226664543,
+     "crosstalk": 0.0006362005285883105
+    },
+    "diff_se": {
+     "rings": 0.006443000980687824,
+     "assembly": 0.0,
+     "combination": 0.01833066723642061,
+     "crosstalk": 0.003462895092525708
+    }
+   },
+   "combination/light/4/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 112.82309242532799,
+    "first": {
+     "rings": 0.02391632879552292,
+     "assembly": 0.0,
+     "combination": 0.838325592701879,
+     "crosstalk": 0.14082065691243717
+    },
+    "total": {
+     "rings": 0.026512799283613418,
+     "assembly": 0.0,
+     "combination": 0.8339286511841955,
+     "crosstalk": 0.162961054928809
+    },
+    "first_se": {
+     "rings": 0.0050381855666625725,
+     "assembly": 0.0,
+     "combination": 0.03016504172922465,
+     "crosstalk": 0.013695836339448745
+    },
+    "total_se": {
+     "rings": 0.001116938225356055,
+     "assembly": 0.0,
+     "combination": 0.023707950043801797,
+     "crosstalk": 0.006719805804816943
+    },
+    "diff_se": {
+     "rings": 0.005107998406259645,
+     "assembly": 0.0,
+     "combination": 0.020462533352975276,
+     "crosstalk": 0.012815269038776994
+    }
+   },
+   "combination/light/4/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 72.46395359560708,
+    "first": {
+     "rings": 0.03145428344880782,
+     "assembly": 0.0,
+     "combination": 0.9619102236430144,
+     "crosstalk": 0.007941517701811939
+    },
+    "total": {
+     "rings": 0.03497253573563714,
+     "assembly": 0.0,
+     "combination": 0.9481052543471222,
+     "crosstalk": 0.014350787836182061
+    },
+    "first_se": {
+     "rings": 0.005629341595281525,
+     "assembly": 0.0,
+     "combination": 0.03005397804645907,
+     "crosstalk": 0.003532064119822615
+    },
+    "total_se": {
+     "rings": 0.0014081136596587054,
+     "assembly": 0.0,
+     "combination": 0.023697305921257277,
+     "crosstalk": 0.0006862897451974185
+    },
+    "diff_se": {
+     "rings": 0.005640087455299619,
+     "assembly": 0.0,
+     "combination": 0.0178601544287129,
+     "crosstalk": 0.003491679408017309
+    }
+   },
+   "combination/heavy/1/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 4.140975405581228,
+    "first": {
+     "rings": 0.07661275617526311,
+     "assembly": 0.0,
+     "combination": 0.8032588507845745,
+     "crosstalk": 0.1286080467240421
+    },
+    "total": {
+     "rings": 0.08462792841834069,
+     "assembly": 0.0,
+     "combination": 0.7892903873952918,
+     "crosstalk": 0.14078266360500033
+    },
+    "first_se": {
+     "rings": 0.009097662454093651,
+     "assembly": 0.0,
+     "combination": 0.03158300858657881,
+     "crosstalk": 0.013266826686050559
+    },
+    "total_se": {
+     "rings": 0.003534455639501207,
+     "assembly": 0.0,
+     "combination": 0.023706433133809816,
+     "crosstalk": 0.0065302979081655
+    },
+    "diff_se": {
+     "rings": 0.008900772471169556,
+     "assembly": 0.0,
+     "combination": 0.023258029580218078,
+     "crosstalk": 0.011768190539104854
+    }
+   },
+   "combination/heavy/1/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 3.16194624938961,
+    "first": {
+     "rings": 0.08527177254743773,
+     "assembly": 0.0,
+     "combination": 0.913283885375961,
+     "crosstalk": 0.007961600253007928
+    },
+    "total": {
+     "rings": 0.09792210235772177,
+     "assembly": 0.0,
+     "combination": 0.8921655801791,
+     "crosstalk": 0.01075146689186885
+    },
+    "first_se": {
+     "rings": 0.00970842902045953,
+     "assembly": 0.0,
+     "combination": 0.0333808608569623,
+     "crosstalk": 0.0030696058862688977
+    },
+    "total_se": {
+     "rings": 0.004086930869946594,
+     "assembly": 0.0,
+     "combination": 0.023870724725351376,
+     "crosstalk": 0.0005751185573059138
+    },
+    "diff_se": {
+     "rings": 0.009538532943658272,
+     "assembly": 0.0,
+     "combination": 0.025250956797555516,
+     "crosstalk": 0.0030042695274381786
+    }
+   },
+   "combination/heavy/2/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 11.355629938751898,
+    "first": {
+     "rings": 0.03724618066656504,
+     "assembly": 0.0,
+     "combination": 0.8334690030876747,
+     "crosstalk": 0.13444947015135764
+    },
+    "total": {
+     "rings": 0.04462679390292854,
+     "assembly": 0.0,
+     "combination": 0.8305149329123898,
+     "crosstalk": 0.1502335042413839
+    },
+    "first_se": {
+     "rings": 0.006377968159915911,
+     "assembly": 0.0,
+     "combination": 0.03224285158263145,
+     "crosstalk": 0.013338925644253388
+    },
+    "total_se": {
+     "rings": 0.001922877595427937,
+     "assembly": 0.0,
+     "combination": 0.023026187430399903,
+     "crosstalk": 0.006662189967434874
+    },
+    "diff_se": {
+     "rings": 0.006397134102842544,
+     "assembly": 0.0,
+     "combination": 0.02345984012781938,
+     "crosstalk": 0.01197284236787872
+    }
+   },
+   "combination/heavy/2/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 8.572288272391312,
+    "first": {
+     "rings": 0.04286428502986027,
+     "assembly": 0.0,
+     "combination": 0.9576655064079536,
+     "crosstalk": 0.007780117379311952
+    },
+    "total": {
+     "rings": 0.05141842567428869,
+     "assembly": 0.0,
+     "combination": 0.9422725257241877,
+     "crosstalk": 0.01146226126758773
+    },
+    "first_se": {
+     "rings": 0.006920843274085702,
+     "assembly": 0.0,
+     "combination": 0.033687734735778976,
+     "crosstalk": 0.0030654169367793785
+    },
+    "total_se": {
+     "rings": 0.002282841139945745,
+     "assembly": 0.0,
+     "combination": 0.02286235744261024,
+     "crosstalk": 0.0005898669773231078
+    },
+    "diff_se": {
+     "rings": 0.00685363381184959,
+     "assembly": 0.0,
+     "combination": 0.02488248915561703,
+     "crosstalk": 0.0030045266858438535
+    }
+   },
+   "combination/heavy/3/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 19.083138621912198,
+    "first": {
+     "rings": 0.025682129459554136,
+     "assembly": 0.0,
+     "combination": 0.8462795322374018,
+     "crosstalk": 0.13329156819991247
+    },
+    "total": {
+     "rings": 0.030765859500169607,
+     "assembly": 0.0,
+     "combination": 0.8395905311064648,
+     "crosstalk": 0.15306683011823857
+    },
+    "first_se": {
+     "rings": 0.005263471932890577,
+     "assembly": 0.0,
+     "combination": 0.03238086723046051,
+     "crosstalk": 0.013612679706704127
+    },
+    "total_se": {
+     "rings": 0.0013396315597116125,
+     "assembly": 0.0,
+     "combination": 0.023523261939677922,
+     "crosstalk": 0.006601399913956274
+    },
+    "diff_se": {
+     "rings": 0.005372850139535312,
+     "assembly": 0.0,
+     "combination": 0.023837468407525906,
+     "crosstalk": 0.012392751622561024
+    }
+   },
+   "combination/heavy/3/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 14.421221837038535,
+    "first": {
+     "rings": 0.0307880951615076,
+     "assembly": 0.0,
+     "combination": 0.9741449836608136,
+     "crosstalk": 0.006724291760466034
+    },
+    "total": {
+     "rings": 0.036127140153533896,
+     "assembly": 0.0,
+     "combination": 0.9534372967035757,
+     "crosstalk": 0.011697089708458034
+    },
+    "first_se": {
+     "rings": 0.005539933711140259,
+     "assembly": 0.0,
+     "combination": 0.033768956249418225,
+     "crosstalk": 0.003144576084455049
+    },
+    "total_se": {
+     "rings": 0.001624765912924369,
+     "assembly": 0.0,
+     "combination": 0.02294975329162379,
+     "crosstalk": 0.0005885773690825732
+    },
+    "diff_se": {
+     "rings": 0.005565430267580792,
+     "assembly": 0.0,
+     "combination": 0.025381938639015108,
+     "crosstalk": 0.003085022233644743
+    }
+   },
+   "combination/heavy/4/unshielded": {
+    "n_no_balance": 0,
+    "var_deg2": 26.523209617862697,
+    "first": {
+     "rings": 0.020706129468106002,
+     "assembly": 0.0,
+     "combination": 0.8548379537867163,
+     "crosstalk": 0.13440019315479657
+    },
+    "total": {
+     "rings": 0.02390324226700143,
+     "assembly": 0.0,
+     "combination": 0.8459407918885652,
+     "crosstalk": 0.15488639131352308
+    },
+    "first_se": {
+     "rings": 0.004680673532102572,
+     "assembly": 0.0,
+     "combination": 0.03251906725293032,
+     "crosstalk": 0.013589749223821803
+    },
+    "total_se": {
+     "rings": 0.001064927534160863,
+     "assembly": 0.0,
+     "combination": 0.023767615539233646,
+     "crosstalk": 0.006750155852402291
+    },
+    "diff_se": {
+     "rings": 0.004746991845157343,
+     "assembly": 0.0,
+     "combination": 0.02368094652149367,
+     "crosstalk": 0.012429840093708823
+    }
+   },
+   "combination/heavy/4/shielded": {
+    "n_no_balance": 0,
+    "var_deg2": 20.08988755941473,
+    "first": {
+     "rings": 0.02535578842982334,
+     "assembly": 0.0,
+     "combination": 0.984998454729446,
+     "crosstalk": 0.006742726068785784
+    },
+    "total": {
+     "rings": 0.028250353938080452,
+     "assembly": 0.0,
+     "combination": 0.9638617173205103,
+     "crosstalk": 0.011897521844457795
+    },
+    "first_se": {
+     "rings": 0.004803899047874534,
+     "assembly": 0.0,
+     "combination": 0.03389283430849135,
+     "crosstalk": 0.0031481584996642816
+    },
+    "total_se": {
+     "rings": 0.0012895593425269216,
+     "assembly": 0.0,
+     "combination": 0.023251816602631058,
+     "crosstalk": 0.0006080153445796758
+    },
+    "diff_se": {
+     "rings": 0.004825101626907972,
+     "assembly": 0.0,
+     "combination": 0.025061616729804895,
+     "crosstalk": 0.0030928765119797755
+    }
+   }
+  },
+  "controls": {
+   "rings": {
+    "n_no_balance": 0,
+    "var_deg2": 5.392388980770754,
+    "first": {
+     "rings": 0.9703075708565733,
+     "assembly": 0.0,
+     "combination": 0.0,
+     "crosstalk": 0.0
+    },
+    "total": {
+     "rings": 0.9938755305625492,
+     "assembly": 0.0,
+     "combination": 0.0,
+     "crosstalk": 0.0
+    },
+    "first_se": {
+     "rings": 0.030322557736550116,
+     "assembly": 0.0,
+     "combination": 0.0,
+     "crosstalk": 0.0
+    },
+    "total_se": {
+     "rings": 0.020133719601795937,
+     "assembly": 0.0,
+     "combination": 0.0,
+     "crosstalk": 0.0
+    },
+    "diff_se": {
+     "rings": 0.023192878739524688,
+     "assembly": 0.0,
+     "combination": 0.0,
+     "crosstalk": 0.0
+    }
+   },
+   "crosstalk": {
+    "n_no_balance": 0,
+    "var_deg2": 3.5134326442561834,
+    "first": {
+     "rings": 0.0,
+     "assembly": 0.0,
+     "combination": 0.0,
+     "crosstalk": 1.0277047898571765
+    },
+    "total": {
+     "rings": 0.0,
+     "assembly": 0.0,
+     "combination": 0.0,
+     "crosstalk": 1.002903549691009
+    },
+    "first_se": {
+     "rings": 0.0,
+     "assembly": 0.0,
+     "combination": 0.0,
+     "crosstalk": 0.03893378429230956
+    },
+    "total_se": {
+     "rings": 0.0,
+     "assembly": 0.0,
+     "combination": 0.0,
+     "crosstalk": 0.024201370829456746
+    },
+    "diff_se": {
+     "rings": 0.0,
+     "assembly": 0.0,
+     "combination": 0.0,
+     "crosstalk": 0.03242733052788406
+    }
+   }
+  }
+ },
  "target_deg": 8.0,
  "n_builds_page": 50,
  "shield_ratio": 1.3965702486091232,

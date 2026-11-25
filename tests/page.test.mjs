@@ -3,6 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
+import * as PAGE from "../page/app.js";
 import {
   PRESETS,
   apply,
@@ -142,4 +143,21 @@ test(`every update stays under ${BUDGET_MS} ms`, () => {
     }
   }
   assert.ok(worst < BUDGET_MS, `slowest update ${worst.toFixed(1)} ms`);
+});
+
+test("spread bars: four groups for every case, none with a fixed force", () => {
+  const { spread_bars } = PAGE;
+  let s = default_state(oracle);
+  for (const preset of PRESETS) {
+    for (const load of ["light", "heavy"]) {
+      for (const shield of ["unshielded", "shielded"]) {
+        for (let n = 1; n <= 4; n++) {
+          const bars = spread_bars(oracle, { ...s, preset, load, shield, n_rings: n });
+          assert.equal(bars.length, oracle.sensitivity.groups.length);
+          assert.ok(bars.every((b) => Number.isFinite(b.total) && Number.isFinite(b.first)));
+        }
+      }
+    }
+  }
+  assert.equal(spread_bars(oracle, apply(s, "fixed", oracle)), null);
 });
