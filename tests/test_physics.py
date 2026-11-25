@@ -220,6 +220,13 @@ def test_I9_hand_built_three_roots():
         assert slope < 0, f"from {start:+.3f}: unstable root {th:+.4f}"
     th, _ = solve(A, B, "A", p, th_rest)
     assert abs(th - found[2]) <= 3e-3  # the stable root near +0.86, not the unstable +0.33
+    # mirrored: stacks swapped, B stimulated, every start negated -> every root negated.
+    # Walking down from a start must not reach a root by walking up (or the other way).
+    for start in (-1.1, -0.5, 0.2, th_rest, 0.6, 1.1):
+        th, _ = solve(A, B, "A", p, start)
+        th_m, n_m = solve(B, A, "B", p, -start)
+        assert n_m == 3
+        assert abs(th_m + th) <= 1e-9, f"mirror of {start:+.3f}: {th_m:+.4f} vs {-th:+.4f}"
 
 
 @EXAMPLES
@@ -264,3 +271,72 @@ def test_I12_rings_preset_more_rings_narrower_spread():
         w1 = relative_width(page_swings(builds, "rings", "heavy", "unshielded", 1))
         w4 = relative_width(page_swings(builds, "rings", "heavy", "unshielded", 4))
         assert w4 < w1, f"seed {seed}: width N=4 {w4:.3f} not below N=1 {w1:.3f}"
+
+
+@EXAMPLES
+@given(seed=seed_s, n_rings=n_rings_s, sigma_A=st.floats(0.05, 0.3))
+def test_I13_rebuild_changes_only_the_assembly(seed, n_rings, sigma_A):
+    """Assembly spread > 0: rebuilding (a new u_A) changes the active force F of both stacks,
+    by exp(sigma_A (z_A' - z_A)) exactly, and leaves the passive factor P unchanged."""
+    rng = Rng(seed)
+    builds = model.draw_builds(rng, 3)
+    rebuilds = model.draw_rebuilds(rng, 3)
+    with preset(0.2, sigma_A, 0.1) as name:
+        for bz, rz in zip(builds, rebuilds):
+            before = model.build_stacks(bz, n_rings, name)
+            after = model.build_stacks(bz, n_rings, name, rz)
+            for side, k in (("A", 0), ("B", 1)):
+                ratio = math.exp(sigma_A * (rz[side] - bz[side]["zA"]))
+                assert after[k][1] == before[k][1]
+                assert math.isclose(after[k][0], before[k][0] * ratio, rel_tol=1e-12)
+
+
+@EXAMPLES
+@given(seed=seed_s, n_rings=n_rings_s, sigma_R=st.floats(0.0, 0.3), sigma_A=st.floats(0.0, 0.3),
+       sigma_C=st.floats(0.0, 0.3))
+def test_I14_stack_is_spec_formula(seed, n_rings, sigma_R, sigma_A, sigma_C):
+    """stack() is spec 01's formula, typed here again: F = exp(sigma_A z_A + sigma_C z_C) *
+    sum of exp(log 2 + sigma_R z_a) over the first N rings; P = sum of exp(sigma_R z_b)."""
+    z = model.draw_stack_z(Rng(seed))
+    with preset(sigma_R, sigma_A, sigma_C) as name:
+        F, P = model.stack(z, n_rings, name, z["zA"])
+    eta = math.exp(sigma_A * z["zA"] + sigma_C * z["zC"])
+    F_spec = eta * sum(math.exp(math.log(2.0) + sigma_R * z["za"][j]) for j in range(n_rings))
+    P_spec = sum(math.exp(sigma_R * z["zb"][j]) for j in range(n_rings))
+    assert math.isclose(F, F_spec, rel_tol=1e-12)
+    assert math.isclose(P, P_spec, rel_tol=1e-12)
+
+
+def test_I15_quantile_is_type_7():
+    """Type 7 quantile (linear between order statistics) on a small unsorted example."""
+    xs = [40.0, 10.0, 30.0, 20.0]
+    for q, expected in ((0.0, 10.0), (0.1, 13.0), (0.5, 25.0), (0.9, 37.0), (1.0, 40.0)):
+        assert math.isclose(model.quantile(xs, q), expected, rel_tol=1e-12), q
+
+
+# spec 01's published curves (Fig. 2D means, C20), typed here again
+STRAIN_PCT = (0, 3.83, 15.2, 26.5, 37.9, 49.2, 60.5, 71.9, 83.2, 94.5, 105.9)
+ACTIVE_MN = (1.87, 2.15, 2.32, 2.39, 2.40, 2.28, 2.03, 1.82, 1.58, 1.41, 1.07)
+PASSIVE_MN = (0.57, 0.91, 1.37, 2.05, 2.90, 3.81, 5.19, 6.32, 7.61, 8.80, 10.34)
+
+
+def test_I16_curves_pass_through_the_published_points():
+    """At each published strain, g = active / active(0.24) and the passive force of a median ring
+    = passive * 2.0 / active(0.24) (spec 01); g(0.24) = 1."""
+    p = joint(0.24, 0.0, 1.0)
+    a_ref = 2.32 + (24.0 - 15.2) * (2.39 - 2.32) / (26.5 - 15.2)  # active at 0.24, by hand
+    from statics import ring_forces
+    assert math.isclose(ring_forces(0.24, p)[0], 1.0, rel_tol=1e-12)
+    for e, a, b in zip(STRAIN_PCT, ACTIVE_MN, PASSIVE_MN):
+        g, passive = ring_forces(e / 100, p)
+        assert math.isclose(g, a / a_ref, rel_tol=1e-9), e
+        assert math.isclose(passive, b * 2.0 / a_ref, rel_tol=1e-9), e
+
+
+def test_I17_settings_map_to_spec_parameters():
+    """The page's settings map to spec 01's values, typed here again: load light/heavy ->
+    kappa 2/30; shielding off/on -> chi 1/2.9 and 1/12."""
+    for load, kappa in (("light", 2.0), ("heavy", 30.0)):
+        for shield, chi in (("unshielded", 1 / 2.9), ("shielded", 1 / 12)):
+            p = model.joint_params(load, shield)
+            assert p["kappa"] == kappa and p["chi"] == chi, (load, shield)

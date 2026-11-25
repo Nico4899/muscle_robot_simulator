@@ -51,8 +51,10 @@ check-%:
 	  then printf 'ok    %-8s %3d s\n' $* $$SECONDS; \
 	  else printf 'FAIL  %-8s %3d s   see .check/%s.log\n' $* $$SECONDS $*; touch .check/$*.failed; fi
 
+# slow, not in make check or CI (spec 04); classifications live in reports/mutation_classes.json
 mutate:
-	mutmut run && $(PY) scripts/mutation_report.py > reports/mutation.md
+	mkdir -p reports
+	$(PY) -m mutmut run && $(PY) scripts/mutation_report.py > reports/mutation.md
 
 build:
 	$(PY) build.py
