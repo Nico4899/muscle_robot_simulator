@@ -1,8 +1,9 @@
 SHELL := /bin/bash
 # the project venv when present (pytest, hypothesis live there), else the system python3
 PY ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
-# what make check runs, all in parallel
-CHECKS := test-js test-py numbers recheck scrub
+# what make check runs, all in parallel; pytest is split so its three slow invariants
+# (I10, I11, I12 at about 5-10 s each) run side by side instead of one after another
+CHECKS := test-js py-fast py-I10 py-I11 py-I12 numbers recheck scrub
 
 oracle:
 	$(PY) make_oracle.py
@@ -14,6 +15,18 @@ test-js:
 
 test-py:
 	$(PY) -m pytest tests -q
+
+py-fast:
+	$(PY) -m pytest tests -q -k "not test_I10_ and not test_I11_ and not test_I12_rings_preset"
+
+py-I10:
+	$(PY) -m pytest tests -q -k test_I10_
+
+py-I11:
+	$(PY) -m pytest tests -q -k test_I11_
+
+py-I12:
+	$(PY) -m pytest tests -q -k test_I12_rings_preset
 
 numbers:
 	$(PY) check_numbers.py
@@ -44,4 +57,4 @@ mutate:
 build:
 	$(PY) build.py
 
-.PHONY: oracle test test-js test-py numbers recheck scrub check mutate build
+.PHONY: oracle test test-js test-py py-fast py-I10 py-I11 py-I12 numbers recheck scrub check mutate build

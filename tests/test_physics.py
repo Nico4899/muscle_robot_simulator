@@ -28,7 +28,7 @@ EXAMPLES = settings(max_examples=200, deadline=None, derandomize=True, database=
 # generators (spec 02)
 n_rings_s = st.integers(1, 4)
 force_s = st.floats(0.5, 20.0)  # mN
-passive_s = st.floats(0.01, 1.0)  # mN
+passive_s = st.floats(0.25, 5.0)  # passive factor: 1 per median ring (reference script's range)
 eps_s = st.floats(0.05, 0.37)
 chi_s = st.floats(0.0, 0.9)
 kappa_s = st.floats(0.5, 100.0)
@@ -196,18 +196,19 @@ def test_I9_root_count_matches_independent_grid(A, B, eps, chi, kappa, stim, sta
 
 
 def test_I9_hand_built_three_roots():
-    """Random draws almost never give several roots (spec 02). This joint has three with A
-    stimulated (pre-stretch 0.35, chi 0.85: every root has a strain above 37 %): stable,
-    unstable, stable. The count must match; from any start the solver must follow the torque to
-    the next root in that direction, which is a stable one. From rest that is the stable root
-    at about -0.59 rad, not the nearer unstable one at about +0.22."""
-    p = joint(0.35, 0.85, 3.0)
-    A = (10.0, 0.2)
-    B = (15.0, 0.15)
+    """Random draws almost never give several roots (spec 02); with the published curves they need
+    a soft hinge and a high pre-stretch. This joint (pre-stretch 0.5, chi 0.4, kappa 0.2) has three
+    with A stimulated: stable near -0.99, unstable near +0.33, stable near +0.86 rad. From any start
+    the solver must follow the torque to the next root in that direction, a stable one. From rest
+    (about +0.54) that is +0.86, not the nearer unstable +0.33 the old nearest-bracket rule took."""
+    p = joint(0.5, 0.4, 0.2)
+    A = (10.0, 1.0)
+    B = (30.0, 0.5)
     found = independent_roots(A, B, "A", p)
     assert len(found) == 3
-    th_rest, _ = rest(A, B, p)
-    for start in (-1.0, -0.3, th_rest, 0.3, 0.45, 1.0):
+    th_rest, n_rest = rest(A, B, p)
+    assert n_rest == 1
+    for start in (-1.1, -0.5, 0.2, th_rest, 0.6, 1.1):
         if residual(start, A, B, "A", p) < 0:  # torque pushes down: next root below
             expected = max(r for r in found if r < start)
         else:  # pushes up: next root above
@@ -218,7 +219,7 @@ def test_I9_hand_built_three_roots():
         slope = (residual(th + 1e-6, A, B, "A", p) - residual(th - 1e-6, A, B, "A", p)) / 2e-6
         assert slope < 0, f"from {start:+.3f}: unstable root {th:+.4f}"
     th, _ = solve(A, B, "A", p, th_rest)
-    assert abs(th - found[0]) <= 3e-3  # the stable root near -0.59, the joint's real swing
+    assert abs(th - found[2]) <= 3e-3  # the stable root near +0.86, not the unstable +0.33
 
 
 @EXAMPLES

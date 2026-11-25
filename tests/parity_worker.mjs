@@ -2,14 +2,7 @@
 // Not a test file itself (no .test. in the name). The main thread does all comparisons.
 import { parentPort, workerData } from "node:worker_threads";
 
-import {
-  PARAMS,
-  count_multi_root,
-  rescue_rate,
-  run_case,
-  seed_builds,
-  seed_builds_and_rebuilds,
-} from "../model.js";
+import { PARAMS, rescue_rate, run_case, seed_builds, seed_builds_and_rebuilds } from "../model.js";
 
 // "rings/heavy/4/unshielded" -> run_case on those builds
 function case_from_key(builds, key) {
@@ -17,16 +10,8 @@ function case_from_key(builds, key) {
   return run_case(builds, preset, load, shield, Number(n_rings));
 }
 
-function compute({ kind, seed, keys, rescue_case, settings, n_builds }) {
+function compute({ kind, seed, keys, rescue_case }) {
   const out = {};
-  if (kind === "multi_root") {
-    // settings: report entries without their counts; returns them with JS counts, same order
-    const builds = seed_builds(seed, n_builds);
-    return settings.map((c) => ({
-      ...c,
-      ...count_multi_root(builds, c.preset, c.load, c.shield, c.n_rings, c.eps),
-    }));
-  }
   if (kind === "table" || kind === "headline_cases") {
     const n = kind === "table" ? PARAMS.n_builds_oracle : PARAMS.n_builds_headline;
     const builds = seed_builds(seed, n);

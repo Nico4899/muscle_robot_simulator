@@ -11,18 +11,17 @@ so the first n builds of a stream are the same whatever the total drawn.
 import math
 
 from rng import Rng
-from statics import DEG, blocked_torque, roots, swing
+from statics import DEG, blocked_torque, curve, swing
 
 PARAMS = {
-    # strains
     "eps": 0.24,  # pre-stretch: upper pre-stretch in Morita et al. 2025
-    "eps0": 0.26,  # active force peak strain: from the paper
-    "eps_max": 0.37,  # strain kept below 37 % in the paper: the physical range is 0 to this
-    "w": 0.15,  # width of the active curve: illustrative
-    "c": 8.0,  # passive stiffening: chosen so passive equals active near 37 % strain
-    # forces per ring, mN
-    "a0": 2.0,  # active force at the reference strain: about 2 mN per ring, from the paper
-    "b0": 0.084,  # passive amplitude: illustrative (passive equals active near 37 %)
+    # strain curves: the published MEAN active and passive force of 4 single rings, Fig. 2D
+    # (Dryad file 2D, CC0; claim C20), interpolated between the points, not fitted
+    "strain": [0.0, 0.0383, 0.152, 0.265, 0.379, 0.492, 0.605, 0.719, 0.832, 0.945, 1.059],
+    "active": [1.87, 2.15, 2.32, 2.39, 2.40, 2.28, 2.03, 1.82, 1.58, 1.41, 1.07],  # mN
+    "passive": [0.57, 0.91, 1.37, 2.05, 2.90, 3.81, 5.19, 6.32, 7.61, 8.80, 10.34],  # mN
+    "eps_ref": 0.24,  # reference strain of the curves: a ring's active force a is given here
+    "a0": 2.0,  # active force of a median ring at eps_ref: about 2 mN per ring, from the paper
     # geometry (spec 01 equations): illustrative
     "r": 2.0,  # moment arm
     "r_over_l": 0.25,  # strain per rad of joint angle
@@ -51,18 +50,25 @@ LOADS = ("light", "heavy")
 SHIELDS = ("unshielded", "shielded")
 
 
-def joint_params(load, shield, eps=None):
-    """The joint dict statics.py expects, for a load and a shielding state (and optionally a
-    pre-stretch other than the default, as the page's slider sets)."""
+def joint_params(load, shield):
+    """The joint dict statics.py expects, for a load and a shielding state. The curves are
+    scaled once here: g = active / active(eps_ref); passive in mN of a median ring, scaled so
+    that ring gives a0 active force at eps_ref (spec 01)."""
+    active_ref = curve(PARAMS["eps_ref"], PARAMS["strain"], PARAMS["active"])
+    g_curve = []
+    p_curve = []
+    for j in range(len(PARAMS["strain"])):
+        g_curve.append(PARAMS["active"][j] / active_ref)
+        p_curve.append(PARAMS["passive"][j] * PARAMS["a0"] / active_ref)
     return {
-        "eps": PARAMS["eps"] if eps is None else eps,
+        "eps": PARAMS["eps"],
         "chi": PARAMS["chi_on"] if shield == "shielded" else PARAMS["chi_off"],
         "kappa": PARAMS["kappa_heavy"] if load == "heavy" else PARAMS["kappa_light"],
         "r": PARAMS["r"],
         "r_over_l": PARAMS["r_over_l"],
-        "eps0": PARAMS["eps0"],
-        "w": PARAMS["w"],
-        "c": PARAMS["c"],
+        "strain": PARAMS["strain"],
+        "g_curve": g_curve,
+        "p_curve": p_curve,
     }
 
 
@@ -113,13 +119,14 @@ def seed_builds_and_rebuilds(seed):
 
 
 def stack(z, n_rings, preset, zA):
-    """(F, P) of one stack from its draws: first n_rings rings, eta = exp(u_A + u_C)."""
+    """(F, P) of one stack from its draws: first n_rings rings, eta = exp(u_A + u_C);
+    P sums the rings' passive factors (1 for a median ring)."""
     s = PARAMS["presets"][preset]
     sum_a = 0.0
     sum_b = 0.0
     for j in range(n_rings):
         sum_a += math.exp(math.log(PARAMS["a0"]) + s["sigma_R"] * z["za"][j])
-        sum_b += PARAMS["b0"] * math.exp(s["sigma_R"] * z["zb"][j])
+        sum_b += math.exp(s["sigma_R"] * z["zb"][j])
     eta = math.exp(s["sigma_A"] * zA + s["sigma_C"] * z["zC"])
     return (eta * sum_a, sum_b)
 
@@ -160,69 +167,45 @@ def sd(xs):
 
 
 def run_case(builds, preset, load, shield, n_rings):
-    """Statistics of the swing over builds for one case (spec 01, oracle.json)."""
+    """Statistics of the swing over builds for one case (spec 01, oracle.json). A build with no
+    balance point in the scan range (NaN: the joint runs to its stop) never crashes: it is
+    counted in n_no_balance, left out of the swing statistics, and its raw swing is None."""
     p = joint_params(load, shield)
     swings = []
     rests = []
     torques = []
+    first = []
+    n_no_balance = 0
     n_multi_root = 0
     n_hit = 0
     for bz in builds:
         A, B = build_stacks(bz, n_rings, preset)
         s = swing(A, B, p)
-        if math.isnan(s["swing"]):
-            raise ValueError("no balance point in the scan range")
-        swings.append(s["swing"])
-        rests.append(s["rest"] * DEG)
         torques.append(blocked_torque(A, B, p))
         if s["n_rest"] > 1 or s["n_stim"] > 1:
             n_multi_root += 1
+        balanced = not math.isnan(s["swing"])
+        if len(first) < 5:
+            first.append(s["swing"] if balanced else None)
+        if not balanced:
+            n_no_balance += 1
+            continue
+        swings.append(s["swing"])
+        rests.append(s["rest"] * DEG)
         if s["swing"] >= PARAMS["target_deg"]:
             n_hit += 1
+    n = len(swings)
     return {
-        "median_deg": quantile(swings, 0.5),
-        "q10_deg": quantile(swings, 0.1),
-        "q90_deg": quantile(swings, 0.9),  # with q10 and the median: the relative width (I12)
-        "p_target": n_hit / len(builds),
-        "rest_sd_deg": sd(rests),
+        "median_deg": quantile(swings, 0.5) if n > 0 else None,
+        "q10_deg": quantile(swings, 0.1) if n > 0 else None,
+        "q90_deg": quantile(swings, 0.9) if n > 0 else None,  # with q10, median: width (I12)
+        "p_target": n_hit / n if n > 0 else None,
+        "rest_sd_deg": sd(rests) if n > 0 else None,
         "blocked_torque": quantile(torques, 0.5),
         "n_multi_root": n_multi_root,
-        "first_swings_deg": swings[:5],
+        "n_no_balance": n_no_balance,
+        "first_swings_deg": first,
     }
-
-
-def physical(th, p):
-    """Both strains inside 0 to eps_max at joint angle th."""
-    eA = p["eps"] - p["r_over_l"] * th
-    eB = p["eps"] + p["r_over_l"] * th
-    return 0.0 <= eA <= PARAMS["eps_max"] and 0.0 <= eB <= PARAMS["eps_max"]
-
-
-def count_multi_root(builds, preset, load, shield, n_rings, eps):
-    """Builds with more than one balance point at rest or with A stimulated: counting all roots,
-    and counting only roots with both strains physical (spec 02 report; not an assertion)."""
-    p = joint_params(load, shield, eps)
-    n_any = 0
-    n_physical = 0
-    for bz in builds:
-        A, B = build_stacks(bz, n_rings, preset)
-        multi_any = False
-        multi_physical = False
-        for stim in (None, "A"):
-            found = roots(A, B, stim, p)
-            n_phys = 0
-            for th in found:
-                if physical(th, p):
-                    n_phys += 1
-            if len(found) > 1:
-                multi_any = True
-            if n_phys > 1:
-                multi_physical = True
-        if multi_any:
-            n_any += 1
-        if multi_physical:
-            n_physical += 1
-    return {"any": n_any, "physical": n_physical}
 
 
 def rescue_rate(builds, rebuilds, preset, load, shield, n_rings):

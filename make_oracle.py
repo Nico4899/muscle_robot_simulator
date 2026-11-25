@@ -15,8 +15,8 @@ import sys
 import time
 from concurrent.futures import ProcessPoolExecutor
 
-from model import (LOADS, N_RINGS_MAX, PARAMS, SHIELDS, build_stacks, count_multi_root,
-                   joint_params, rescue_rate, run_case, seed_builds, seed_builds_and_rebuilds)
+from model import (LOADS, N_RINGS_MAX, PARAMS, SHIELDS, build_stacks, joint_params,
+                   rescue_rate, run_case, seed_builds, seed_builds_and_rebuilds)
 from rng import Rng
 from statics import blocked_torque, residual, rest, solve, swing
 
@@ -29,12 +29,10 @@ RATE_N_SE = 3.0
 SHIELD_CASES = {"shielded": ("rings", "heavy", 4, "shielded"),
                 "unshielded": ("rings", "heavy", 4, "unshielded")}
 RESCUE_CASE = ("heavy", "unshielded", 4)
-# multi-root report (spec 02): every demo setting, pre-stretch across the page slider (0-37 %)
-PRESTRETCH_GRID = (0.0, 0.06, 0.12, 0.18, 0.24, 0.30, 0.37)
 # caption medians: rings preset, unshielded (spec leaves the preset open; ASSUMPTION)
 CAPTION_CASES = {f"swing_{load}_n{n}": ("rings", load, n, "unshielded")
                  for load in ("heavy", "light") for n in (1, 4)}
-# page default (spec 03 leaves it open; ASSUMPTION): rings preset, heavy, 4 rings, unshielded
+# page default (spec 03, confirmed 25 Nov): rings preset, heavy, 4 rings, unshielded
 PAGE_CASE = ("rings", "heavy", 4, "unshielded")
 
 
@@ -74,8 +72,7 @@ def probe():
 
 
 def run_job(job):
-    """One unit of work: ("table", seed, preset), ("case", seed, case), ("rescue", seed, preset)
-    or ("multi_root", seed, (preset, load, shield))."""
+    """One unit of work: ("table", seed, preset), ("case", seed, case) or ("rescue", seed, preset)."""
     kind, seed, arg = job
     if kind == "table":
         builds = seed_builds(seed, PARAMS["n_builds_oracle"])
@@ -90,16 +87,6 @@ def run_job(job):
         preset, load, n_rings, shield = arg
         builds = seed_builds(seed, PARAMS["n_builds_headline"])
         return job, run_case(builds, preset, load, shield, n_rings)
-    if kind == "multi_root":
-        preset, load, shield = arg
-        builds = seed_builds(seed, PARAMS["n_builds_oracle"])
-        out = []
-        for n_rings in range(1, N_RINGS_MAX + 1):
-            for eps in PRESTRETCH_GRID:
-                counts = count_multi_root(builds, preset, load, shield, n_rings, eps)
-                out.append({"preset": preset, "load": load, "shield": shield, "n_rings": n_rings,
-                            "eps": eps, **counts})
-        return job, out
     builds, rebuilds = seed_builds_and_rebuilds(seed)
     load, shield, n_rings = RESCUE_CASE
     return job, rescue_rate(builds, rebuilds, arg, load, shield, n_rings)
@@ -126,21 +113,20 @@ def caption_keys():
 
 
 def rel_spread(values):
-    """(max - min) / mid."""
+    """(max - min) / mid; nan when a value is missing (a case with no balanced build)."""
+    if any(v is None for v in values):
+        return math.nan
     lo, hi = min(values), max(values)
     mid = (lo + hi) / 2
     return (hi - lo) / abs(mid) if mid != 0 else (0.0 if hi == lo else math.inf)
 
 
 def run_all():
-    """Table, headline values and the multi-root report, in parallel."""
+    """Table and headline values for every seed, in parallel; and the multi-root report."""
     headline_cases = sorted(set(SHIELD_CASES.values()) | set(CAPTION_CASES.values()))
     jobs = ([("table", s, p) for s in SEEDS for p in PARAMS["presets"]]
             + [("case", s, c) for s in SEEDS for c in headline_cases]
-            + [("rescue", s, p) for s in SEEDS for p in PARAMS["presets"]]
-            + [("multi_root", HEADLINE_SEED, (p, l, sh))
-               for p in PARAMS["presets"] for l in LOADS for sh in SHIELDS])
-    multi_root = []
+            + [("rescue", s, p) for s in SEEDS for p in PARAMS["presets"]])
     table = {s: {} for s in SEEDS}
     headline = {s: {"cases": {}, "rescue": {}} for s in SEEDS}
     with ProcessPoolExecutor() as pool:
@@ -149,8 +135,6 @@ def run_all():
                 table[seed].update(out)
             elif kind == "case":
                 headline[seed]["cases"][case_key(*arg)] = out
-            elif kind == "multi_root":
-                multi_root.extend(out)
             else:
                 headline[seed]["rescue"][arg] = out
     for s in SEEDS:
@@ -160,13 +144,13 @@ def run_all():
         headline[s]["shield_ratio"] = on / off
         for name, case in CAPTION_CASES.items():
             headline[s][name] = cases[case_key(*case)]["median_deg"]
+    # spec 02 report (not an assertion): the table covers every demo setting (pre-stretch is
+    # fixed), so its per-case counts are the report; expected 0 with the published curves
     report = {
-        "seed": HEADLINE_SEED,
-        "n_builds": PARAMS["n_builds_oracle"],
-        "prestretch": list(PRESTRETCH_GRID),
-        "builds_any": sum(c["any"] for c in multi_root),
-        "builds_physical": sum(c["physical"] for c in multi_root),
-        "cases": multi_root,
+        "settings": len(table[HEADLINE_SEED]),
+        "seeds": len(SEEDS),
+        "builds_multi_root": sum(c["n_multi_root"] for s in SEEDS for c in table[s].values())
+        + sum(c["n_multi_root"] for s in SEEDS for c in headline[s]["cases"].values()),
     }
     return table, headline, report
 
@@ -201,14 +185,12 @@ def main():
     t0 = time.time()
     table, headline, multi_root = run_all()
     head = headline[HEADLINE_SEED]
-    page_builds = seed_builds(HEADLINE_SEED, PARAMS["n_builds_page"])
-    preset, load, n_rings, shield = PAGE_CASE
 
     named = {
         "target_deg": PARAMS["target_deg"],
+        "n_builds_page": PARAMS["n_builds_page"],
         "shield_ratio": head["shield_ratio"],
         **{name: head[name] for name in CAPTION_CASES},
-        "n_multi_root": run_case(page_builds, preset, load, shield, n_rings)["n_multi_root"],
     }
     missing = [k for k in caption_keys() if k not in named]
     if missing:
@@ -233,7 +215,7 @@ def main():
         "table": {str(s): table[s] for s in SEEDS},
     }
     with open("oracle.json", "w", encoding="utf-8") as fh:
-        json.dump(oracle, fh, indent=1)
+        json.dump(oracle, fh, indent=1, allow_nan=False)  # NaN is not valid JSON for the page
         fh.write("\n")
 
     n_cases = len(table[HEADLINE_SEED])
@@ -244,21 +226,18 @@ def main():
     print("seed checks (seeds 1 2 3):")
     for ok, line in checks:
         print(f"  {'ok  ' if ok else 'FAIL'} {line}")
-    print("  spec expects shield_ratio about 1.35, rescue about 0.25 / 0.78 / 0.00")
+    print("  spec expects shield_ratio about 1.4, rescue about 0.23 / 0.77 / 0.00")
     print("table seed spread (reported, not asserted):")
     for name in ("median_deg", "q10_deg", "p_target", "rest_sd_deg", "blocked_torque"):
         spreads = {k: rel_spread([table[s][k][name] for s in SEEDS]) for k in table[HEADLINE_SEED]}
         worst = max(spreads, key=spreads.get)
         print(f"  {name:15s} max {spreads[worst]:6.1%} ({worst})")
-    n_multi = sum(c["n_multi_root"] for s in SEEDS for c in table[s].values())
-    n_multi += sum(c["n_multi_root"] for s in SEEDS for c in headline[s]["cases"].values())
-    print(f"builds with more than one root, table and headline, all seeds: {n_multi}")
-    n_report = len(multi_root["cases"])
-    hit = [c for c in multi_root["cases"] if c["any"]]
-    print(f"multi-root report, {n_report} demo settings x {multi_root['n_builds']} builds "
-          f"(pre-stretch {PRESTRETCH_GRID[0]}-{PRESTRETCH_GRID[-1]}): builds with >1 root "
-          f"{multi_root['builds_any']}, with >1 physical root {multi_root['builds_physical']}, "
-          f"in {len(hit)} settings")
+    print(f"multi-root report: {multi_root['settings']} demo settings x {multi_root['seeds']} "
+          f"seeds, builds with more than one root: {multi_root['builds_multi_root']} "
+          f"(spec 02 expects 0)")
+    n_none = sum(c["n_no_balance"] for s in SEEDS for c in table[s].values())
+    n_none += sum(c["n_no_balance"] for s in SEEDS for c in headline[s]["cases"].values())
+    print(f"builds with no balance point in range, all seeds: {n_none} (flagged, never a crash)")
     print("caption values (seed 1): " + ", ".join(
         f"{k} {v:.3g}" if isinstance(v, float) else f"{k} {v}" for k, v in named.items()))
     if not all(ok for ok, _ in checks):

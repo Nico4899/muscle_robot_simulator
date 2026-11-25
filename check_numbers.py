@@ -21,7 +21,7 @@ CITATION = re.compile(r"\[([A-Z]\d+)\]")
 # a bare number: digits not glued to letters, digits or a decimal point (so not "S11", "C4")
 NUMBER = re.compile(r"(?<![A-Za-z0-9_.])\d+(?:\.\d+)?(?![A-Za-z0-9_])")
 VALUE_NUMBER = re.compile(r"\d+(?:\.\d+)?")  # inside a claims.md value: "2x", "5-10 deg"
-KEY_LABELS = ("1-4",)  # control labels on the page (spec 04 whitelist)
+KEY_LABELS = ("1-4", "1 in 10")  # labels, not claims: the rings keys; the 10 % quantile readout
 CREDIT_ONLY = re.compile(r"\b(?:19|20)\d\d\b|\bCC[ -]BY(?:-[A-Z]+)*\s+\d+\.\d+")  # years, licences
 NUMBER_WORDS = re.compile(
     r"\b(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|twenty|thirty|forty|"

@@ -9,13 +9,18 @@ Tolerances (spec 04): ratios 3 % relative; rates max(0.03, 3 x combined binomial
 import json
 import math
 import sys
+from bisect import bisect
 
 import numpy as np
 from scipy.optimize import brentq
 
 # spec 01, PARAMS table and equations (typed from the spec, not imported)
-EPS, EPS0, W, C = 0.24, 0.26, 0.15, 8.0  # pre-stretch; active peak and width; passive rate
-A0, B0 = 2.0, 0.084  # per ring: active force at the reference strain, passive amplitude (mN)
+EPS = 0.24  # pre-stretch
+# published mean curves of 4 single rings, Fig. 2D (C20): strain %, active mN, passive mN
+STRAIN = [x / 100 for x in (0, 3.83, 15.2, 26.5, 37.9, 49.2, 60.5, 71.9, 83.2, 94.5, 105.9)]
+ACTIVE = [1.87, 2.15, 2.32, 2.39, 2.40, 2.28, 2.03, 1.82, 1.58, 1.41, 1.07]
+PASSIVE = [0.57, 0.91, 1.37, 2.05, 2.90, 3.81, 5.19, 6.32, 7.61, 8.80, 10.34]
+EPS_REF, A0 = 0.24, 2.0  # curves' reference strain; a median ring's active force there (mN)
 R, R_OVER_L = 2.0, 0.25  # moment arm; strain per rad
 CHI_OFF, CHI_ON = 1 / 2.9, 1 / 12  # crosstalk unshielded / shielded
 KAPPA_LIGHT, KAPPA_HEAVY = 2.0, 30.0  # hinge stiffness
@@ -31,19 +36,31 @@ RATE_FLOOR, RATE_N_SE = 0.03, 3.0
 I1_TOL_DEG = 1e-6
 
 
+def interp(e, xs, ys):
+    """Linear between the points; beyond them the end segments continue (spec 01)."""
+    k = min(max(bisect(xs, e), 1), len(xs) - 1)
+    x0, x1, y0, y1 = xs[k - 1], xs[k], ys[k - 1], ys[k]
+    return y0 + (y1 - y0) * (e - x0) / (x1 - x0)
+
+
+ACTIVE_REF = interp(EPS_REF, STRAIN, ACTIVE)
+
+
 def g(e):
-    return math.exp(-((e - EPS0) ** 2) / (2 * W ** 2))
+    """Active force relative to the reference strain."""
+    return interp(e, STRAIN, ACTIVE) / ACTIVE_REF
 
 
-def h(e):
-    return math.exp(C * e) - 1
+def p(e):
+    """Passive force of a median ring (mN), scaled to A0 active at EPS_REF; 0 when slack."""
+    return max(0.0, interp(e, STRAIN, PASSIVE) * A0 / ACTIVE_REF)
 
 
 def torque(th, FA, PA, FB, PB, chi, kappa, stimulated):
     """Net torque on the hinge, A stimulated or at rest (spec 01, Balance)."""
     eA, eB = EPS - R_OVER_L * th, EPS + R_OVER_L * th
     active = (FA * g(eA) - chi * FB * g(eB)) / g(EPS) if stimulated else 0.0
-    return R * (active + PA * h(eA) - PB * h(eB)) - kappa * th
+    return R * (active + PA * p(eA) - PB * p(eB)) - kappa * th
 
 
 def angle(FA, PA, FB, PB, chi, kappa, stimulated):
@@ -64,11 +81,11 @@ class Draws:
         self.zA_rebuild = rng.standard_normal((n, 2))
 
     def stacks(self, preset, rebuilt=False):
-        """F (n, 2) and P (n, 2): F = eta * sum(a), P = sum(b), eta = exp(u_A + u_C)."""
+        """F (n, 2) and P (n, 2): F = eta * sum(a), P = sum(b) (passive factors), eta = exp(u_A + u_C)."""
         sR, sA, sC = PRESETS[preset]
         zA = self.zA_rebuild if rebuilt else self.zA
         F = np.exp(sA * zA + sC * self.zC) * np.exp(np.log(A0) + sR * self.za).sum(axis=2)
-        P = (B0 * np.exp(sR * self.zb)).sum(axis=2)
+        P = np.exp(sR * self.zb).sum(axis=2)
         return F, P
 
 
@@ -94,10 +111,13 @@ def main():
 
     # the oracle's PARAMS still say what spec 01 says
     op = oracle["params"]
-    typed = {"eps": EPS, "eps0": EPS0, "w": W, "c": C, "a0": A0, "b0": B0, "r": R,
-             "r_over_l": R_OVER_L, "chi_off": CHI_OFF, "chi_on": CHI_ON,
-             "kappa_light": KAPPA_LIGHT, "kappa_heavy": KAPPA_HEAVY, "target_deg": TARGET_DEG}
+    typed = {"eps": EPS, "eps_ref": EPS_REF, "a0": A0, "r": R, "r_over_l": R_OVER_L,
+             "chi_off": CHI_OFF, "chi_on": CHI_ON, "kappa_light": KAPPA_LIGHT,
+             "kappa_heavy": KAPPA_HEAVY, "target_deg": TARGET_DEG}
     drift = [k for k, v in typed.items() if not math.isclose(op[k], v, rel_tol=1e-12)]
+    drift += [k for k, v in (("strain", STRAIN), ("active", ACTIVE), ("passive", PASSIVE))
+              if len(op[k]) != len(v) or not all(math.isclose(a, b, rel_tol=1e-12)
+                                                 for a, b in zip(op[k], v))]
     drift += [p for p, s in PRESETS.items()
               if tuple(op["presets"][p][k] for k in ("sigma_R", "sigma_A", "sigma_C")) != s]
     report(not drift, f"oracle PARAMS match spec 01" + (f": differ in {drift}" if drift else ""))
@@ -131,7 +151,7 @@ def main():
     # I1: equal deterministic stacks, kappa ~ 0: the ring count cancels
     sw = []
     for k in range(1, N_RINGS + 1):
-        FA, PA = k * A0, k * B0
+        FA, PA = k * A0, k * 1.0  # k median rings: passive factor 1 each
         th0 = angle(FA, PA, FA, PA, CHI_OFF, 1e-9, False)
         th1 = angle(FA, PA, FA, PA, CHI_OFF, 1e-9, True)
         sw.append(math.degrees(th1 - th0))

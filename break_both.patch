@@ -1,28 +1,28 @@
 --- a/statics.py
 +++ b/statics.py
-@@ -41,9 +41,9 @@
-     eB = p["eps"] + p["r_over_l"] * th
-     g0 = g(p["eps"], p)
+@@ -59,9 +59,9 @@
+     gB, pB = ring_forces(eB, p)
+     g0 = ring_forces(p["eps"], p)[0]
      if stim == "A":
--        act = F_A * g(eA, p) / g0 - p["chi"] * F_B * g(eB, p) / g0
-+        act = F_A * g(eA, p) / g0 + p["chi"] * F_B * g(eB, p) / g0
+-        act = F_A * gA / g0 - p["chi"] * F_B * gB / g0
++        act = F_A * gA / g0 + p["chi"] * F_B * gB / g0
      elif stim == "B":
--        act = p["chi"] * F_A * g(eA, p) / g0 - F_B * g(eB, p) / g0
-+        act = -p["chi"] * F_A * g(eA, p) / g0 - F_B * g(eB, p) / g0
+-        act = p["chi"] * F_A * gA / g0 - F_B * gB / g0
++        act = -p["chi"] * F_A * gA / g0 - F_B * gB / g0
      else:
          act = 0.0
-     return p["r"] * (act + P_A * h(eA, p) - P_B * h(eB, p)) - p["kappa"] * th
+     return p["r"] * (act + P_A * pA - P_B * pB) - p["kappa"] * th
 --- a/statics.js
 +++ b/statics.js
-@@ -40,9 +40,9 @@
-   const g0 = g(p.eps, p);
+@@ -59,9 +59,9 @@
+   const g0 = ring_forces(p.eps, p)[0];
    let act;
    if (stim === "A") {
--    act = (F_A * g(eA, p)) / g0 - (p.chi * F_B * g(eB, p)) / g0;
-+    act = (F_A * g(eA, p)) / g0 + (p.chi * F_B * g(eB, p)) / g0;
+-    act = (F_A * gA) / g0 - (p.chi * F_B * gB) / g0;
++    act = (F_A * gA) / g0 + (p.chi * F_B * gB) / g0;
    } else if (stim === "B") {
--    act = (p.chi * F_A * g(eA, p)) / g0 - (F_B * g(eB, p)) / g0;
-+    act = (-p.chi * F_A * g(eA, p)) / g0 - (F_B * g(eB, p)) / g0;
+-    act = (p.chi * F_A * gA) / g0 - (F_B * gB) / g0;
++    act = (-p.chi * F_A * gA) / g0 - (F_B * gB) / g0;
    } else {
      act = 0.0;
    }

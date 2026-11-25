@@ -1,11 +1,13 @@
 """Joint statics: two muscle stacks on a hinge (spec 01, proposal Eq. 2 to 4).
 
 Reference implementation; statics.js ports it line by line with the same names.
-A stack is a pair (F, P): F active force at the reference strain (mN), P passive amplitude (mN).
-`p` is a joint dict from model.joint_params: eps, chi, kappa, r, r_over_l, eps0, w, c.
-Squares are written as d * d and sums as plain loops so both languages round the same way.
+A stack is a pair (F, P): F active force at the reference strain (mN), P passive factor (sum of
+the rings' factors; 1 per median ring). `p` is a joint dict from model.joint_params: eps, chi,
+kappa, r, r_over_l, and the strain curves (strain, g_curve, p_curve) already scaled.
+Sums are plain loops so both languages round the same way.
 """
 import math
+from bisect import bisect_right
 
 TH_MAX = 1.2  # rad, scan range [-TH_MAX, TH_MAX] (spec 01)
 N_SCAN = 241  # scan points (spec 01)
@@ -22,15 +24,29 @@ def scan_grid():
 GRID = scan_grid()
 
 
-def g(e, p):
-    """Active force-length curve: Gaussian, 1 at the peak strain eps0, width w."""
-    d = e - p["eps0"]
-    return math.exp(-(d * d) / (2.0 * p["w"] * p["w"]))
+def segment(e, xs):
+    """Index i of the curve segment used at strain e: the first with xs[i] > e, clamped to 1..n-1,
+    so outside the data the end segments extend (statics.js finds the same index by a loop)."""
+    return min(max(bisect_right(xs, e), 1), len(xs) - 1)
 
 
-def h(e, p):
-    """Passive force-length curve: exp(c e) - 1."""
-    return math.exp(p["c"] * e) - 1.0
+def curve(e, xs, ys):
+    """Piecewise-linear through the points (xs, ys), end segments extended (spec 01)."""
+    i = segment(e, xs)
+    return ys[i - 1] + (e - xs[i - 1]) * (ys[i] - ys[i - 1]) / (xs[i] - xs[i - 1])
+
+
+def ring_forces(e, p):
+    """At strain e: g, the active force relative to eps_ref (1 there), and the passive force of
+    one median ring in mN, clipped at 0 for a slack ring. One segment lookup serves both."""
+    xs = p["strain"]
+    gs = p["g_curve"]
+    ps = p["p_curve"]
+    i = segment(e, xs)
+    t = (e - xs[i - 1]) / (xs[i] - xs[i - 1])
+    g = gs[i - 1] + t * (gs[i] - gs[i - 1])
+    passive = ps[i - 1] + t * (ps[i] - ps[i - 1])
+    return g, max(passive, 0.0)
 
 
 def residual(th, A, B, stim, p):
@@ -39,14 +55,16 @@ def residual(th, A, B, stim, p):
     F_B, P_B = B
     eA = p["eps"] - p["r_over_l"] * th
     eB = p["eps"] + p["r_over_l"] * th
-    g0 = g(p["eps"], p)
+    gA, pA = ring_forces(eA, p)
+    gB, pB = ring_forces(eB, p)
+    g0 = ring_forces(p["eps"], p)[0]
     if stim == "A":
-        act = F_A * g(eA, p) / g0 - p["chi"] * F_B * g(eB, p) / g0
+        act = F_A * gA / g0 - p["chi"] * F_B * gB / g0
     elif stim == "B":
-        act = p["chi"] * F_A * g(eA, p) / g0 - F_B * g(eB, p) / g0
+        act = p["chi"] * F_A * gA / g0 - F_B * gB / g0
     else:
         act = 0.0
-    return p["r"] * (act + P_A * h(eA, p) - P_B * h(eB, p)) - p["kappa"] * th
+    return p["r"] * (act + P_A * pA - P_B * pB) - p["kappa"] * th
 
 
 def solve(A, B, stim, p, start):
@@ -84,17 +102,6 @@ def solve(A, B, stim, p, start):
         else:
             far = mid
     return 0.5 * (near + far), n_roots
-
-
-def roots(A, B, stim, p):
-    """Every balance point on the scan, located to the scan step: the midpoints of the brackets
-    solve() counts. For the multi-root report (spec 02), not for the swing."""
-    f = [residual(th, A, B, stim, p) for th in GRID]
-    found = []
-    for k in range(N_SCAN - 1):
-        if (f[k] < 0) != (f[k + 1] < 0):
-            found.append(0.5 * (GRID[k] + GRID[k + 1]))
-    return found
 
 
 def rest(A, B, p):

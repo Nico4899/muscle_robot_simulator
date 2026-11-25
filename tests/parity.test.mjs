@@ -1,7 +1,7 @@
 // Exact parity: the JS port recomputes every number in oracle.json from the same seeds (spec 01).
 //
 // Covered: PARAMS; the probe (draws, stacks, residuals incl. B stimulated, solves); the whole
-// table and every headline value for every seed; the multi-root report; the named values.
+// table and every headline value for every seed; the named values and the multi-root report.
 // The heavy units run in
 // worker threads (tests/parity_worker.mjs), all started at load, so they compute in parallel;
 // each test awaits its unit and compares here.
@@ -13,7 +13,7 @@ import { Worker } from "node:worker_threads";
 
 import { Rng } from "../rng.js";
 import { blocked_torque, residual, rest, solve, swing } from "../statics.js";
-import { N_RINGS_MAX, PARAMS, build_stacks, joint_params, run_case, seed_builds } from "../model.js";
+import { N_RINGS_MAX, PARAMS, build_stacks, joint_params, seed_builds } from "../model.js";
 
 const oracle = JSON.parse(readFileSync(new URL("../oracle.json", import.meta.url), "utf8"));
 const REL = 1e-9; // spec 01 parity tolerance, relative
@@ -79,18 +79,6 @@ for (const seed of oracle.seeds) {
     rescue_case: oracle.rescue_case,
   });
 }
-// multi-root report: one worker per (preset, load, shield) group of settings
-const report = oracle.multi_root_report;
-const groups = {};
-for (const c of report.cases) {
-  const g = `${c.preset}/${c.load}/${c.shield}`;
-  const { any, physical, ...setting } = c;
-  (groups[g] ??= []).push(setting);
-}
-const report_units = Object.entries(groups).map(([g, settings]) => [
-  g,
-  in_worker({ kind: "multi_root", seed: report.seed, n_builds: report.n_builds, settings }),
-]);
 
 test("PARAMS are the oracle's PARAMS", () => {
   assert.deepEqual(PARAMS, oracle.params);
@@ -150,22 +138,6 @@ for (const seed of oracle.seeds) {
   });
 }
 
-test(`multi-root report: ${report.cases.length} demo settings x ${report.n_builds} builds`, async () => {
-  const got = [];
-  for (const [, unit] of report_units) got.push(...(await unit));
-  const key = (c) => `${c.preset}/${c.load}/${c.shield}/${c.n_rings}/${c.eps}`;
-  const by_key = Object.fromEntries(got.map((c) => [key(c), c]));
-  const expected = Object.fromEntries(report.cases.map((c) => [key(c), c]));
-  assert_close(by_key, expected, "multi_root_report.cases");
-  let any = 0;
-  let physical = 0;
-  for (const c of got) {
-    any += c.any;
-    physical += c.physical;
-  }
-  assert_close([any, physical], [report.builds_any, report.builds_physical], "report totals");
-});
-
 test("top-level named values are the headline seed's", () => {
   const s = String(oracle.headline_seed);
   const head = oracle.headline[s];
@@ -175,9 +147,14 @@ test("top-level named values are the headline seed's", () => {
   assert_close(oracle.shield_ratio, head.shield_ratio, "shield_ratio");
   assert_close(oracle.rescue, head.rescue, "rescue");
   assert_close(oracle.target_deg, PARAMS.target_deg, "target_deg");
+  assert_close(oracle.n_builds_page, PARAMS.n_builds_page, "n_builds_page");
 
-  const pc = oracle.page_case;
-  const page_builds = seed_builds(oracle.headline_seed, PARAMS.n_builds_page);
-  const page = run_case(page_builds, pc.preset, pc.load, pc.shield, pc.n_rings);
-  assert_close(page.n_multi_root, oracle.n_multi_root, "n_multi_root");
+
+  // the multi-root report is the sum of the per-case counts the table tests recompute
+  let n_multi = 0;
+  for (const s of oracle.seeds) {
+    for (const c of Object.values(oracle.table[String(s)])) n_multi += c.n_multi_root;
+    for (const c of Object.values(oracle.headline[String(s)].cases)) n_multi += c.n_multi_root;
+  }
+  assert_close(n_multi, oracle.multi_root_report.builds_multi_root, "multi_root_report");
 });
