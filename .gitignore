@@ -1,1 +1,15 @@
-/reference
+private/
+reference/
+specs/
+*.mp4
+*.mov
+*.png
+*.jpg
+*.tif
+.env
+.claude/
+dist/table/
+mutants/
+__pycache__/
+.hypothesis/
+.pytest_cache/

@@ -1,0 +1,39 @@
+{
+ "_note": "Text for the page. Numbers only through {{key}} placeholders from oracle.json, or values listed in claims.md (row id in brackets after the line, removed at build). Japanese marked (check) needs a native speaker.",
+ "title": {
+  "en": "Why does this joint bend only 5° to 10°? [C1]",
+  "ja": "なぜこの関節は5〜10°しか曲がらないのか？ (check)"
+ },
+ "subtitle": {
+  "en": "Robots powered by lab-grown muscle",
+  "ja": "培養筋肉で動くロボット (check)"
+ },
+ "badge": {
+  "en": "SIMULATED – not fitted to lab data",
+  "ja": "シミュレーション"
+ },
+ "band_label": "published: slither-robot joints, 5° to 10° [C1]",
+ "target_label": "target {{target_deg:.0f}}°",
+ "clip_credit": "Morita, Nie & Takeuchi, Sci. Adv. 2025, Movie S11, CC BY-NC 4.0. Timing matched by eye; angles not measured. [L1]",
+ "steps": {
+  "stimulate": "Fifty builds of the same joint, because no two muscle rings are alike.",
+  "fixed_force": "Most simulators use one fixed muscle force. [C13]",
+  "rings_heavy": "Heavy load: the swing grows from {{swing_heavy_n1:.0f}}° to {{swing_heavy_n4:.0f}}° with more rings.",
+  "rings_light": "Light load: {{swing_light_n1:.0f}}° to {{swing_light_n4:.0f}}°. Rings buy torque, not travel.",
+  "spread": "Where does the spread sit? This is what my experiment will test.",
+  "rebuild_rings": "Same rings, rebuilt: little changes. Fix that fits: add a spare ring.",
+  "rebuild_assembly": "Same rings, rebuilt: your joint changes. Fix that fits: rebuild the stack.",
+  "rebuild_combination": "Same rings, rebuilt: nothing changes. Fix that fits: swap rings or grow a new batch.",
+  "shield": "My model: ×{{shield_ratio:.2f}}. Measured: about ×2. One of my assumptions is probably wrong. [C4]"
+ },
+ "readouts": {
+  "typical": "typical swing",
+  "worst": "worst 1 in 10 builds",
+  "chance": "chance to reach {{target_deg:.0f}}°",
+  "rest": "rest angle",
+  "blocked": "blocked torque",
+  "multi_root": "{{n_multi_root}} builds have two balance points in my model"
+ },
+ "sobol_title": "What drives the spread of the swing",
+ "sobol_caption": "Shares depend on the illustrative ranges I chose."
+}
