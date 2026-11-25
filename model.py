@@ -11,12 +11,13 @@ so the first n builds of a stream are the same whatever the total drawn.
 import math
 
 from rng import Rng
-from statics import DEG, blocked_torque, swing
+from statics import DEG, blocked_torque, roots, swing
 
 PARAMS = {
     # strains
     "eps": 0.24,  # pre-stretch: upper pre-stretch in Morita et al. 2025
     "eps0": 0.26,  # active force peak strain: from the paper
+    "eps_max": 0.37,  # strain kept below 37 % in the paper: the physical range is 0 to this
     "w": 0.15,  # width of the active curve: illustrative
     "c": 8.0,  # passive stiffening: chosen so passive equals active near 37 % strain
     # forces per ring, mN
@@ -50,10 +51,11 @@ LOADS = ("light", "heavy")
 SHIELDS = ("unshielded", "shielded")
 
 
-def joint_params(load, shield):
-    """The joint dict statics.py expects, for a load and a shielding state."""
+def joint_params(load, shield, eps=None):
+    """The joint dict statics.py expects, for a load and a shielding state (and optionally a
+    pre-stretch other than the default, as the page's slider sets)."""
     return {
-        "eps": PARAMS["eps"],
+        "eps": PARAMS["eps"] if eps is None else eps,
         "chi": PARAMS["chi_on"] if shield == "shielded" else PARAMS["chi_off"],
         "kappa": PARAMS["kappa_heavy"] if load == "heavy" else PARAMS["kappa_light"],
         "r": PARAMS["r"],
@@ -186,6 +188,40 @@ def run_case(builds, preset, load, shield, n_rings):
         "n_multi_root": n_multi_root,
         "first_swings_deg": swings[:5],
     }
+
+
+def physical(th, p):
+    """Both strains inside 0 to eps_max at joint angle th."""
+    eA = p["eps"] - p["r_over_l"] * th
+    eB = p["eps"] + p["r_over_l"] * th
+    return 0.0 <= eA <= PARAMS["eps_max"] and 0.0 <= eB <= PARAMS["eps_max"]
+
+
+def count_multi_root(builds, preset, load, shield, n_rings, eps):
+    """Builds with more than one balance point at rest or with A stimulated: counting all roots,
+    and counting only roots with both strains physical (spec 02 report; not an assertion)."""
+    p = joint_params(load, shield, eps)
+    n_any = 0
+    n_physical = 0
+    for bz in builds:
+        A, B = build_stacks(bz, n_rings, preset)
+        multi_any = False
+        multi_physical = False
+        for stim in (None, "A"):
+            found = roots(A, B, stim, p)
+            n_phys = 0
+            for th in found:
+                if physical(th, p):
+                    n_phys += 1
+            if len(found) > 1:
+                multi_any = True
+            if n_phys > 1:
+                multi_physical = True
+        if multi_any:
+            n_any += 1
+        if multi_physical:
+            n_physical += 1
+    return {"any": n_any, "physical": n_physical}
 
 
 def rescue_rate(builds, rebuilds, preset, load, shield, n_rings):

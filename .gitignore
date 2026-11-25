@@ -13,3 +13,4 @@ mutants/
 __pycache__/
 .hypothesis/
 .pytest_cache/
+.venv/

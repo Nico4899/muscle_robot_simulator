@@ -1,4 +1,5 @@
-PY ?= python3
+# the project venv when present (pytest, hypothesis live there), else the system python3
+PY ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 
 oracle:
 	$(PY) make_oracle.py

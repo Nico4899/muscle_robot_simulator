@@ -3,6 +3,7 @@
  "params": {
   "eps": 0.24,
   "eps0": 0.26,
+  "eps_max": 0.37,
   "w": 0.15,
   "c": 8.0,
   "a0": 2.0,
@@ -260,6 +261,3047 @@
    "n_stim": 1
   },
   "blocked_torque": 13.845680174118211
+ },
+ "multi_root_report": {
+  "seed": 1,
+  "n_builds": 1500,
+  "prestretch": [
+   0.0,
+   0.06,
+   0.12,
+   0.18,
+   0.24,
+   0.3,
+   0.37
+  ],
+  "builds_any": 0,
+  "builds_physical": 0,
+  "cases": [
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "rings",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "assembly",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "light",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "unshielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 1,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 2,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 3,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.0,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.06,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.12,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.18,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.24,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.3,
+    "any": 0,
+    "physical": 0
+   },
+   {
+    "preset": "combination",
+    "load": "heavy",
+    "shield": "shielded",
+    "n_rings": 4,
+    "eps": 0.37,
+    "any": 0,
+    "physical": 0
+   }
+  ]
  },
  "target_deg": 8.0,
  "shield_ratio": 1.3619791470320033,

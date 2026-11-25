@@ -50,35 +50,51 @@ def residual(th, A, B, stim, p):
 
 
 def solve(A, B, stim, p, start):
-    """Balance angle (rad) nearest `start`, and the number of balance points on the scan.
+    """Balance angle (rad) the joint reaches from `start`, and the number of balance points on
+    the scan.
 
-    A bracket is a pair of neighbouring scan points whose residuals differ in sign (zero counts
-    as positive, so an exact zero is counted once). Take the bracket whose midpoint is nearest
-    `start` (the first one on a tie) and halve it N_HALVINGS times. No bracket: (nan, 0).
+    The joint follows the net torque: from `start`, walk the scan points in the direction the
+    residual pushes (zero counts as positive) to the first one whose sign differs, then halve
+    that bracket N_HALVINGS times. A crossing reached this way is always stable. n_roots counts
+    the sign changes between neighbouring scan points. No sign change in that direction (the
+    joint runs to its stop): (nan, n_roots).
     """
     f = [residual(th, A, B, stim, p) for th in GRID]
-    best = -1
-    best_d = math.inf
     n_roots = 0
     for k in range(N_SCAN - 1):
         if (f[k] < 0) != (f[k + 1] < 0):
             n_roots += 1
-            d = abs(0.5 * (GRID[k] + GRID[k + 1]) - start)
-            if d < best_d:
-                best = k
-                best_d = d
-    if best < 0:
-        return math.nan, 0
-    lo = GRID[best]
-    hi = GRID[best + 1]
-    lo_neg = f[best] < 0
+    start_neg = residual(start, A, B, stim, p) < 0
+    near = start  # last point with the start's sign
+    far = math.nan  # first point beyond it with the other sign
+    order = range(N_SCAN - 1, -1, -1) if start_neg else range(N_SCAN)
+    for k in order:
+        beyond = GRID[k] < start if start_neg else GRID[k] > start
+        if beyond:
+            if (f[k] < 0) != start_neg:
+                far = GRID[k]
+                break
+            near = GRID[k]
+    if math.isnan(far):
+        return math.nan, n_roots
     for _ in range(N_HALVINGS):
-        mid = 0.5 * (lo + hi)
-        if (residual(mid, A, B, stim, p) < 0) == lo_neg:
-            lo = mid
+        mid = 0.5 * (near + far)
+        if (residual(mid, A, B, stim, p) < 0) == start_neg:
+            near = mid
         else:
-            hi = mid
-    return 0.5 * (lo + hi), n_roots
+            far = mid
+    return 0.5 * (near + far), n_roots
+
+
+def roots(A, B, stim, p):
+    """Every balance point on the scan, located to the scan step: the midpoints of the brackets
+    solve() counts. For the multi-root report (spec 02), not for the swing."""
+    f = [residual(th, A, B, stim, p) for th in GRID]
+    found = []
+    for k in range(N_SCAN - 1):
+        if (f[k] < 0) != (f[k + 1] < 0):
+            found.append(0.5 * (GRID[k] + GRID[k + 1]))
+    return found
 
 
 def rest(A, B, p):

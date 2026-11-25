@@ -1,25 +1,19 @@
-// Exact parity: the JS port recomputes oracle.json's numbers from the same seeds (spec 01).
+// Exact parity: the JS port recomputes every number in oracle.json from the same seeds (spec 01).
 //
 // Covered: PARAMS; the probe (draws, stacks, residuals incl. B stimulated, solves); the whole
-// table for every seed; every headline value of the headline seed (the numbers that reach text).
-// Not recomputed: headline values of the other seeds (they only feed make_oracle.py's seed check
-// and run the same code paths; recomputing them would take about 6 s of the make check budget).
+// table and every headline value for every seed; the multi-root report; the named values.
+// The heavy units run in
+// worker threads (tests/parity_worker.mjs), all started at load, so they compute in parallel;
+// each test awaits its unit and compares here.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { availableParallelism } from "node:os";
+import { Worker } from "node:worker_threads";
 
 import { Rng } from "../rng.js";
 import { blocked_torque, residual, rest, solve, swing } from "../statics.js";
-import {
-  N_RINGS_MAX,
-  PARAMS,
-  build_stacks,
-  joint_params,
-  rescue_rate,
-  run_case,
-  seed_builds,
-  seed_builds_and_rebuilds,
-} from "../model.js";
+import { N_RINGS_MAX, PARAMS, build_stacks, joint_params, run_case, seed_builds } from "../model.js";
 
 const oracle = JSON.parse(readFileSync(new URL("../oracle.json", import.meta.url), "utf8"));
 const REL = 1e-9; // spec 01 parity tolerance, relative
@@ -42,16 +36,61 @@ function assert_close(actual, expected, path) {
   }
 }
 
-// "rings/heavy/4/unshielded" -> run_case arguments
-function parse_key(key) {
-  const [preset, load, n_rings, shield] = key.split("/");
-  return { preset, load, shield, n_rings: Number(n_rings) };
+// At most one worker per spare core at a time; the rest wait in order.
+const MAX_WORKERS = Math.max(1, availableParallelism() - 1);
+let running = 0;
+const waiting = [];
+
+// Run one unit in a worker thread; resolves with what the worker posts.
+function in_worker(job) {
+  const result = new Promise((resolve, reject) => {
+    const start = () => {
+      running += 1;
+      const w = new Worker(new URL("./parity_worker.mjs", import.meta.url), { workerData: job });
+      w.once("message", resolve);
+      w.once("error", reject);
+      w.once("exit", (code) => {
+        running -= 1;
+        if (waiting.length > 0) waiting.shift()();
+        if (code !== 0) reject(new Error(`worker exited with ${code}`));
+      });
+    };
+    if (running < MAX_WORKERS) start();
+    else waiting.push(start);
+  });
+  result.catch(() => {}); // the awaiting test reports it; avoid an unhandled-rejection warning
+  return result;
 }
 
-function case_from_key(builds, key) {
-  const c = parse_key(key);
-  return run_case(builds, c.preset, c.load, c.shield, c.n_rings);
+// Start every heavy unit now so they run in parallel while the tests await them in order.
+const units = {};
+for (const seed of oracle.seeds) {
+  const s = String(seed);
+  units[`table ${s}`] = in_worker({ kind: "table", seed, keys: Object.keys(oracle.table[s]) });
+  units[`cases ${s}`] = in_worker({
+    kind: "headline_cases",
+    seed,
+    keys: Object.keys(oracle.headline[s].cases),
+  });
+  units[`rescue ${s}`] = in_worker({
+    kind: "rescue",
+    seed,
+    keys: Object.keys(oracle.headline[s].rescue),
+    rescue_case: oracle.rescue_case,
+  });
 }
+// multi-root report: one worker per (preset, load, shield) group of settings
+const report = oracle.multi_root_report;
+const groups = {};
+for (const c of report.cases) {
+  const g = `${c.preset}/${c.load}/${c.shield}`;
+  const { any, physical, ...setting } = c;
+  (groups[g] ??= []).push(setting);
+}
+const report_units = Object.entries(groups).map(([g, settings]) => [
+  g,
+  in_worker({ kind: "multi_root", seed: report.seed, n_builds: report.n_builds, settings }),
+]);
 
 test("PARAMS are the oracle's PARAMS", () => {
   assert.deepEqual(PARAMS, oracle.params);
@@ -89,40 +128,56 @@ test("probe: draws, stacks, residuals, solves", () => {
 });
 
 for (const seed of oracle.seeds) {
-  test(`table, seed ${seed}: ${PARAMS.n_builds_oracle} builds x every case`, () => {
-    const builds = seed_builds(seed, PARAMS.n_builds_oracle);
-    for (const [key, expected] of Object.entries(oracle.table[String(seed)])) {
-      assert_close(case_from_key(builds, key), expected, `table.${seed}.${key}`);
+  const s = String(seed);
+
+  test(`table, seed ${s}: ${PARAMS.n_builds_oracle} builds x every case`, async () => {
+    assert_close(await units[`table ${s}`], oracle.table[s], `table.${s}`);
+  });
+
+  test(`headline, seed ${s}: ${PARAMS.n_builds_headline} builds, cases and rescue`, async () => {
+    const head = oracle.headline[s];
+    const cases = await units[`cases ${s}`];
+    assert_close(cases, head.cases, `headline.${s}.cases`);
+    assert_close(await units[`rescue ${s}`], head.rescue, `headline.${s}.rescue`);
+
+    // per-seed named values, recomputed from the JS cases through the oracle's key map
+    const keys = oracle.headline_keys;
+    const ratio = cases[keys.shield_on].median_deg / cases[keys.shield_off].median_deg;
+    assert_close(ratio, head.shield_ratio, `headline.${s}.shield_ratio`);
+    for (const [name, key] of Object.entries(keys)) {
+      if (name.startsWith("swing_")) assert_close(cases[key].median_deg, head[name], name);
     }
   });
 }
 
-test(`headline values, seed ${oracle.headline_seed}: ${PARAMS.n_builds_headline} builds`, () => {
-  const seed = oracle.headline_seed;
-  const head = oracle.headline[String(seed)];
-  const [builds, rebuilds] = seed_builds_and_rebuilds(seed);
-
-  const cases = {};
-  for (const key of Object.keys(head.cases)) cases[key] = case_from_key(builds, key);
-  assert_close(cases, head.cases, `headline.${seed}.cases`);
-
-  const rc = oracle.rescue_case;
-  for (const [preset, expected] of Object.entries(head.rescue)) {
-    const got = rescue_rate(builds, rebuilds, preset, rc.load, rc.shield, rc.n_rings);
-    assert_close(got, expected, `headline.${seed}.rescue.${preset}`);
+test(`multi-root report: ${report.cases.length} demo settings x ${report.n_builds} builds`, async () => {
+  const got = [];
+  for (const [, unit] of report_units) got.push(...(await unit));
+  const key = (c) => `${c.preset}/${c.load}/${c.shield}/${c.n_rings}/${c.eps}`;
+  const by_key = Object.fromEntries(got.map((c) => [key(c), c]));
+  const expected = Object.fromEntries(report.cases.map((c) => [key(c), c]));
+  assert_close(by_key, expected, "multi_root_report.cases");
+  let any = 0;
+  let physical = 0;
+  for (const c of got) {
+    any += c.any;
+    physical += c.physical;
   }
-  assert_close(oracle.rescue, head.rescue, "rescue (top level is the headline seed)");
+  assert_close([any, physical], [report.builds_any, report.builds_physical], "report totals");
+});
 
-  // named values, recomputed from the JS cases through the oracle's own key map
-  const keys = oracle.headline_keys;
-  const ratio = cases[keys.shield_on].median_deg / cases[keys.shield_off].median_deg;
-  assert_close(ratio, oracle.shield_ratio, "shield_ratio");
-  for (const [name, key] of Object.entries(keys)) {
-    if (name.startsWith("swing_")) assert_close(cases[key].median_deg, oracle[name], name);
+test("top-level named values are the headline seed's", () => {
+  const s = String(oracle.headline_seed);
+  const head = oracle.headline[s];
+  for (const name of Object.keys(oracle.headline_keys)) {
+    if (name.startsWith("swing_")) assert_close(oracle[name], head[name], name);
   }
+  assert_close(oracle.shield_ratio, head.shield_ratio, "shield_ratio");
+  assert_close(oracle.rescue, head.rescue, "rescue");
+  assert_close(oracle.target_deg, PARAMS.target_deg, "target_deg");
+
   const pc = oracle.page_case;
-  const page_builds = seed_builds(seed, PARAMS.n_builds_page);
+  const page_builds = seed_builds(oracle.headline_seed, PARAMS.n_builds_page);
   const page = run_case(page_builds, pc.preset, pc.load, pc.shield, pc.n_rings);
   assert_close(page.n_multi_root, oracle.n_multi_root, "n_multi_root");
-  assert_close(oracle.target_deg, PARAMS.target_deg, "target_deg");
 });

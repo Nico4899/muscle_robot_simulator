@@ -49,39 +49,57 @@ export function residual(th, A, B, stim, p) {
   return p.r * (act + P_A * h(eA, p) - P_B * h(eB, p)) - p.kappa * th;
 }
 
-// Balance angle (rad) nearest `start`, and the number of balance points on the scan.
+// Balance angle (rad) the joint reaches from `start`, and the number of balance points on
+// the scan.
 //
-// A bracket is a pair of neighbouring scan points whose residuals differ in sign (zero counts
-// as positive, so an exact zero is counted once). Take the bracket whose midpoint is nearest
-// `start` (the first one on a tie) and halve it N_HALVINGS times. No bracket: [NaN, 0].
+// The joint follows the net torque: from `start`, walk the scan points in the direction the
+// residual pushes (zero counts as positive) to the first one whose sign differs, then halve
+// that bracket N_HALVINGS times. A crossing reached this way is always stable. n_roots counts
+// the sign changes between neighbouring scan points. No sign change in that direction (the
+// joint runs to its stop): [NaN, n_roots].
 export function solve(A, B, stim, p, start) {
   const f = GRID.map((th) => residual(th, A, B, stim, p));
-  let best = -1;
-  let best_d = Infinity;
   let n_roots = 0;
   for (let k = 0; k < N_SCAN - 1; k++) {
-    if (f[k] < 0 !== f[k + 1] < 0) {
-      n_roots += 1;
-      const d = Math.abs(0.5 * (GRID[k] + GRID[k + 1]) - start);
-      if (d < best_d) {
-        best = k;
-        best_d = d;
+    if (f[k] < 0 !== f[k + 1] < 0) n_roots += 1;
+  }
+  const start_neg = residual(start, A, B, stim, p) < 0;
+  let near = start; // last point with the start's sign
+  let far = NaN; // first point beyond it with the other sign
+  const step = start_neg ? -1 : 1;
+  for (let k = start_neg ? N_SCAN - 1 : 0; k >= 0 && k < N_SCAN; k += step) {
+    const beyond = start_neg ? GRID[k] < start : GRID[k] > start;
+    if (beyond) {
+      if (f[k] < 0 !== start_neg) {
+        far = GRID[k];
+        break;
       }
+      near = GRID[k];
     }
   }
-  if (best < 0) return [NaN, 0];
-  let lo = GRID[best];
-  let hi = GRID[best + 1];
-  const lo_neg = f[best] < 0;
+  if (Number.isNaN(far)) return [NaN, n_roots];
   for (let i = 0; i < N_HALVINGS; i++) {
-    const mid = 0.5 * (lo + hi);
-    if ((residual(mid, A, B, stim, p) < 0) === lo_neg) {
-      lo = mid;
+    const mid = 0.5 * (near + far);
+    if ((residual(mid, A, B, stim, p) < 0) === start_neg) {
+      near = mid;
     } else {
-      hi = mid;
+      far = mid;
     }
   }
-  return [0.5 * (lo + hi), n_roots];
+  return [0.5 * (near + far), n_roots];
+}
+
+// Every balance point on the scan, located to the scan step: the midpoints of the brackets
+// solve() counts. For the multi-root report (spec 02), not for the swing.
+export function roots(A, B, stim, p) {
+  const f = GRID.map((th) => residual(th, A, B, stim, p));
+  const found = [];
+  for (let k = 0; k < N_SCAN - 1; k++) {
+    if (f[k] < 0 !== f[k + 1] < 0) {
+      found.push(0.5 * (GRID[k] + GRID[k + 1]));
+    }
+  }
+  return found;
 }
 
 // Rest angle (rad), no stimulation, searched from 0; and its root count.

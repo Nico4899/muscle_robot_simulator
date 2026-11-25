@@ -9,12 +9,13 @@
 // so the first n builds of a stream are the same whatever the total drawn.
 
 import { Rng } from "./rng.js";
-import { DEG, blocked_torque, swing } from "./statics.js";
+import { DEG, blocked_torque, roots, swing } from "./statics.js";
 
 export const PARAMS = {
   // strains
   eps: 0.24, // pre-stretch: upper pre-stretch in Morita et al. 2025
   eps0: 0.26, // active force peak strain: from the paper
+  eps_max: 0.37, // strain kept below 37 % in the paper: the physical range is 0 to this
   w: 0.15, // width of the active curve: illustrative
   c: 8.0, // passive stiffening: chosen so passive equals active near 37 % strain
   // forces per ring, mN
@@ -47,10 +48,11 @@ export const N_RINGS_MAX = 4;
 export const LOADS = ["light", "heavy"];
 export const SHIELDS = ["unshielded", "shielded"];
 
-// The joint object statics.js expects, for a load and a shielding state.
-export function joint_params(load, shield) {
+// The joint object statics.js expects, for a load and a shielding state (and optionally a
+// pre-stretch other than the default, as the page's slider sets).
+export function joint_params(load, shield, eps = null) {
   return {
-    eps: PARAMS.eps,
+    eps: eps === null ? PARAMS.eps : eps,
     chi: shield === "shielded" ? PARAMS.chi_on : PARAMS.chi_off,
     kappa: load === "heavy" ? PARAMS.kappa_heavy : PARAMS.kappa_light,
     r: PARAMS.r,
@@ -189,6 +191,38 @@ export function run_case(builds, preset, load, shield, n_rings) {
     n_multi_root: n_multi_root,
     first_swings_deg: swings.slice(0, 5),
   };
+}
+
+// Both strains inside 0 to eps_max at joint angle th.
+export function physical(th, p) {
+  const eA = p.eps - p.r_over_l * th;
+  const eB = p.eps + p.r_over_l * th;
+  return 0.0 <= eA && eA <= PARAMS.eps_max && 0.0 <= eB && eB <= PARAMS.eps_max;
+}
+
+// Builds with more than one balance point at rest or with A stimulated: counting all roots,
+// and counting only roots with both strains physical (spec 02 report; not an assertion).
+export function count_multi_root(builds, preset, load, shield, n_rings, eps) {
+  const p = joint_params(load, shield, eps);
+  let n_any = 0;
+  let n_physical = 0;
+  for (const bz of builds) {
+    const [A, B] = build_stacks(bz, n_rings, preset);
+    let multi_any = false;
+    let multi_physical = false;
+    for (const stim of [null, "A"]) {
+      const found = roots(A, B, stim, p);
+      let n_phys = 0;
+      for (const th of found) {
+        if (physical(th, p)) n_phys += 1;
+      }
+      if (found.length > 1) multi_any = true;
+      if (n_phys > 1) multi_physical = true;
+    }
+    if (multi_any) n_any += 1;
+    if (multi_physical) n_physical += 1;
+  }
+  return { any: n_any, physical: n_physical };
 }
 
 // Builds missing the target, and the share of those one rebuild (new u_A) lifts to it,

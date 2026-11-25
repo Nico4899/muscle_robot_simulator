@@ -1,0 +1,28 @@
+--- a/statics.py
++++ b/statics.py
+@@ -41,9 +41,9 @@
+     eB = p["eps"] + p["r_over_l"] * th
+     g0 = g(p["eps"], p)
+     if stim == "A":
+-        act = F_A * g(eA, p) / g0 - p["chi"] * F_B * g(eB, p) / g0
++        act = F_A * g(eA, p) / g0 + p["chi"] * F_B * g(eB, p) / g0
+     elif stim == "B":
+-        act = p["chi"] * F_A * g(eA, p) / g0 - F_B * g(eB, p) / g0
++        act = -p["chi"] * F_A * g(eA, p) / g0 - F_B * g(eB, p) / g0
+     else:
+         act = 0.0
+     return p["r"] * (act + P_A * h(eA, p) - P_B * h(eB, p)) - p["kappa"] * th
+--- a/statics.js
++++ b/statics.js
+@@ -40,9 +40,9 @@
+   const g0 = g(p.eps, p);
+   let act;
+   if (stim === "A") {
+-    act = (F_A * g(eA, p)) / g0 - (p.chi * F_B * g(eB, p)) / g0;
++    act = (F_A * g(eA, p)) / g0 + (p.chi * F_B * g(eB, p)) / g0;
+   } else if (stim === "B") {
+-    act = (p.chi * F_A * g(eA, p)) / g0 - (F_B * g(eB, p)) / g0;
++    act = (-p.chi * F_A * g(eA, p)) / g0 - (F_B * g(eB, p)) / g0;
+   } else {
+     act = 0.0;
+   }

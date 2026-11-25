@@ -1,0 +1,14 @@
+--- a/statics.js
++++ b/statics.js
+@@ -40,9 +40,9 @@
+   const g0 = g(p.eps, p);
+   let act;
+   if (stim === "A") {
+-    act = (F_A * g(eA, p)) / g0 - (p.chi * F_B * g(eB, p)) / g0;
++    act = (F_A * g(eA, p)) / g0 + (p.chi * F_B * g(eB, p)) / g0;
+   } else if (stim === "B") {
+-    act = (p.chi * F_A * g(eA, p)) / g0 - (F_B * g(eB, p)) / g0;
++    act = (-p.chi * F_A * g(eA, p)) / g0 - (F_B * g(eB, p)) / g0;
+   } else {
+     act = 0.0;
+   }
