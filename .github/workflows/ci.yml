@@ -1,6 +1,6 @@
 # spec 04: make test numbers recheck on every push (not mutation testing: too slow), then, on
-# main only, build the public page and serve it with GitHub Pages. No clip exists in CI
-# (private/ is never committed), so build.py makes the public page only.
+# main only, build the public page (with the trimmed clip page/s11small.mp4) and serve it with
+# GitHub Pages.
 name: ci
 
 on:
@@ -40,7 +40,7 @@ jobs:
         with:
           python-version: "3.14"
       - run: python build.py
-      - run: test ! -e dist/table && ! grep -q "data:video" dist/public/index.html
+      - run: "! grep -q 'data:image' dist/public/index.html"  # the lab's logo stays off the public page
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

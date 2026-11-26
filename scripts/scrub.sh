@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Release scrub (spec 04): run in make check and before every push. Lists the tracked files and
 # fails on anything that must not be published; prints every hit for a human to look at.
-#   paths:   media files, private/, reference/, .claude/, .env; media embedded as data: URIs
+#   paths:   media files (except the trimmed clip page/s11small.mp4), private/, reference/,
+#            .claude/, .env; media embedded as data: URIs
 #   content: email addresses, /Users/ and /home/ paths, key-like tokens, and the words
 #            seeding, cells requested, rings requested, milestone (the lab's plan stays private)
 # This file itself is not content-grepped: it holds the patterns.
@@ -21,7 +22,8 @@ done < <(printf '%s\n' "$files" | grep -E '^(private|reference|\.claude)/|(^|/)\
 while IFS= read -r f; do
   [ -n "$f" ] && hit "media file tracked: $f"
 done < <(printf '%s\n' "$files" \
-  | grep -iE '\.(mp4|mov|m4v|avi|mkv|webm|png|jpe?g|gif|tiff?|heic|webp|bmp)$')
+  | grep -iE '\.(mp4|mov|m4v|avi|mkv|webm|png|jpe?g|gif|tiff?|heic|webp|bmp)$' \
+  | grep -vx 'page/s11small\.mp4')  # the trimmed Movie S11 (CC BY-NC 4.0), shown on the public page
 
 grep_hits() {  # $1: label, $2: extended regex, $3: extra git grep flags
   while IFS= read -r line; do

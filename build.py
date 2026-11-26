@@ -1,13 +1,13 @@
 """Build the page (spec 04) into single HTML files that work from file:// with no network.
 
-  dist/table/index.html   everything inlined, including the clip from private/ (git-ignored;
-                          for the table at the event, never published)
-  dist/public/index.html  the same without the clip and the lab's logo: a link to the paper
-                          instead, and the SIMULATED badge (GitHub Pages)
+  dist/public/index.html  everything inlined, including the trimmed clip page/s11small.mp4
+                          (GitHub Pages)
+  dist/table/index.html   the same plus the lab's logo from private/ (git-ignored; for the table
+                          at the event)
 
 Inlined: style.css, the JS modules (bundled: each module in its own scope, imports resolved
 from the others' exports), oracle.json, captions.json (with [Cn] tags stripped, spec 04) and
-cues.json. Without private/ only the public page is built.
+cues.json.
 """
 import base64
 import json
@@ -17,8 +17,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 PAGE = ROOT / "page"
-CLIP = ROOT / "private" / "s11small.mp4"
-LOGO = ROOT / "private" / "lab_logo.png"  # the lab's logo: table build only, never published
+CLIP = PAGE / "s11small.mp4"  # Movie S11, trimmed (spec 03); the one media file in the repo
+LOGO = ROOT / "private" / "lab_logo.png"  # the lab's logo: table build only  # the lab's logo: table build only, never published
 MODULES = [ROOT / "rng.js", ROOT / "statics.js", ROOT / "model.js", PAGE / "app.js"]  # deps first
 
 IMPORT = re.compile(r'import\s*\{([^}]*)\}\s*from\s*"([^"]+)";', re.S)
@@ -98,15 +98,13 @@ def write(target, html):
 
 
 def main():
-    write("public", page("none", "none"))
-    if CLIP.exists():
-        b64 = base64.b64encode(CLIP.read_bytes()).decode("ascii")
-        logo = "none"
-        if LOGO.exists():
-            logo = "data:image/png;base64," + base64.b64encode(LOGO.read_bytes()).decode("ascii")
-        write("table", page(f"data:video/mp4;base64,{b64}", logo))
+    clip = "data:video/mp4;base64," + base64.b64encode(CLIP.read_bytes()).decode("ascii")
+    write("public", page(clip, "none"))
+    if LOGO.exists():
+        logo = "data:image/png;base64," + base64.b64encode(LOGO.read_bytes()).decode("ascii")
+        write("table", page(clip, logo))
     else:
-        print(f"build: no {CLIP.relative_to(ROOT)}, so no table page (public only)")
+        print(f"build: no {LOGO.relative_to(ROOT)}, so no table page (public only)")
 
 
 if __name__ == "__main__":

@@ -18,7 +18,8 @@ The simulator is simple on purpose; the checks are the point.
 4. **Never edit a test to make it pass.** Report the failing case and stop. Ask before changing
    any tolerance.
 5. **Stop after each step.** Show the diff and the output of `make check`.
-6. **Never commit:** media (`*.mp4`, `*.mov`, images from the paper), `private/`, `reference/`,
+6. **Never commit:** media (`*.mp4`, `*.mov`, images from the paper; one exception: the trimmed
+   clip `page/s11small.mp4`), `private/`, `reference/`,
    secrets, `.claude/`, lab members' names other than the paper's authors, the lab's experiment
    plan, ring or cell numbers requested from the lab, schedules.
 7. **These specs are your only brief.** If something is missing, ask; don't fill it from elsewhere.
@@ -28,7 +29,7 @@ The simulator is simple on purpose; the checks are the point.
 - `make test`: parity (Node) + physics and oracle tests (pytest)
 - `make check`: test + numbers + recheck + scrub, under 15 s, one line per check
 - `make mutate`: mutation testing of the reference, writes `reports/mutation.md`
-- `make build`: `dist/table/index.html` (with clip) and `dist/public/index.html` (without)
+- `make build`: `dist/public/index.html` (with the clip) and `dist/table/index.html` (plus the lab logo)
 
 ## Style
 Python 3.11+, NumPy, SciPy only in `recheck.py`. Plain ES modules, no npm packages: Node's built-in

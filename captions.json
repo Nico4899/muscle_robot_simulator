@@ -45,7 +45,7 @@
  "clip": {
   "mode_clip": "The joint follows the clip.",
   "mode_visitor": "You have the joint. The clip takes over again when you stop.",
-  "public": "The clip is not part of the public page. Watch Movie S11 in the paper:",
+  "public": "Movie S11 is not included in this copy of the page. Watch it in the paper:",
   "cannot_play": "This browser cannot play the clip (H.264 video). Open the page in Safari, Chrome or Firefox.",
   "play": "Play the clip"
  },

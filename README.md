@@ -27,7 +27,7 @@ python3 -m venv .venv
 
 make check            # every check in parallel, one line each
 make oracle           # regenerate oracle.json (takes a couple of minutes)
-make build            # dist/public/index.html; with private/ also dist/table/index.html (clip, lab logo)
+make build            # dist/public/index.html; with private/ also dist/table/index.html (lab logo)
 ./break_it.sh         # stage a bug in the port: parity goes red, then all is restored
 ./break_it.sh --both  # the same bug in reference and port: parity stays green, an invariant goes red
 make mutate           # mutation testing of the reference, writes reports/mutation.md (slow)
@@ -41,4 +41,4 @@ For development, serve the folder (`python3 -m http.server`) and open `page/inde
 
 ## Credits and licence
 
-The code is under the MIT licence (`LICENSE`). Movie S11 and the figures belong to Morita, Nie & Takeuchi, Science Advances 2025, under CC BY-NC 4.0; the clip is not in this repository, and the public page links to the paper instead. The published curves and angles come from the authors' Dryad dataset (CC0). Sources for every claim are in `claims.md`.
+The code is under the MIT licence (`LICENSE`). Movie S11 and the figures belong to Morita, Nie & Takeuchi, Science Advances 2025, under CC BY-NC 4.0; the trimmed clip `page/s11small.mp4` is shared under the same licence, with this credit. The published curves and angles come from the authors' Dryad dataset (CC0). Sources for every claim are in `claims.md`.

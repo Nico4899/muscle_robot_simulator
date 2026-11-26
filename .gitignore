@@ -2,6 +2,7 @@ private/
 reference/
 specs/
 *.mp4
+!page/s11small.mp4
 *.mov
 *.png
 *.jpg

@@ -658,11 +658,11 @@ async function main() {
     btn.addEventListener("click", () => act(btn.dataset.action));
   }
 
-  // clip: table build only (build.py sets data-src); in development the private copy if present
+  // clip: build.py inlines it (data-src); in development the file next to this page
   const clip = document.getElementById("clip");
   const play = document.getElementById("clip-play");
   const built = Boolean(clip.dataset.src);
-  const src = clip.dataset.src || "../private/s11small.mp4";
+  const src = clip.dataset.src || "s11small.mp4";
   let clip_ok = false;
   const hide_clip = () => {
     clip.closest(".clip-box").hidden = true;
