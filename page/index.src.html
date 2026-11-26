@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Muscle joint demo</title>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -38,6 +38,7 @@
     <div class="clip-box" data-tip="clip" tabindex="0">
       <video id="clip" muted loop playsinline preload="auto" aria-describedby="clip-credit"></video>
       <button class="play" id="clip-play" hidden data-text="clip.play"></button>
+      <span class="pip-label" aria-hidden="true" data-text="mobile.pip"></span>
     </div>
     <p class="clip-mode" id="clip-mode" aria-live="polite"></p>
     <div class="clip-missing" id="clip-missing" hidden>
@@ -50,9 +51,12 @@
 
   <section class="card" id="centre" aria-labelledby="h-sim">
     <h2 id="h-sim" data-text="headings.sim"></h2>
-    <svg id="joint" viewBox="0 0 860 440" role="img" aria-labelledby="joint-label">
-      <title id="joint-label">Simulated joint seen from above</title>
-    </svg>
+    <div class="joint-wrap" id="joint-wrap">
+      <svg id="joint" viewBox="0 0 860 400" role="img" aria-labelledby="joint-label">
+        <title id="joint-label">Simulated joint seen from above</title>
+      </svg>
+    </div>
+    <p class="tap-hint" data-text="mobile.tap"></p>
     <ul class="legend" id="legend"></ul>
     <p class="caption" id="caption" aria-live="polite"></p>
     <dl class="tiles" id="readouts">
@@ -69,13 +73,13 @@
     <h2 id="h-controls" data-text="headings.controls"></h2>
     <div id="controls">
       <button class="primary" data-action="stimulate" data-tip="stimulate" aria-keyshortcuts="Space">
-        <kbd>Space</kbd><span>stimulate side <b id="v-side"></b></span></button>
+        <kbd>Space</kbd><span>stimulate side <b class="v-side"></b></span></button>
       <button data-action="fixed" data-tip="fixed" aria-keyshortcuts="F" aria-pressed="false" id="b-fixed">
-        <kbd>F</kbd><span>fixed force</span><b class="val" id="v-fixed"></b></button>
+        <kbd>F</kbd><span>fixed force</span><b class="val v-fixed"></b></button>
       <div class="row" data-tip="rings">
         <kbd>1-4</kbd><span>rings per side</span>
         <button data-action="rings-" aria-label="fewer rings per side">−</button>
-        <b class="val" id="v-rings" aria-live="polite"></b>
+        <b class="val v-rings" aria-live="polite"></b>
         <button data-action="rings+" aria-label="more rings per side">+</button>
       </div>
       <button data-action="spread" data-tip="spread" aria-keyshortcuts="S">
@@ -98,9 +102,16 @@
     </div>
   </section>
 
-  <div id="tip" class="tip" aria-hidden="true" hidden></div>
   <div id="tip-texts" class="visually-hidden"></div>
 </div>
+<!-- compact layout only (phones, small tablets): the most used controls within thumb reach -->
+<nav class="thumbbar" id="thumbbar" data-label="mobile.quick">
+  <button class="primary" data-action="stimulate"><span data-text="mobile.stimulate"></span> <b class="v-side"></b></button>
+  <button data-action="fixed" aria-pressed="false"><span data-text="mobile.fixed"></span></button>
+  <button id="more" data-label="mobile.more">⋯</button>
+</nav>
+<!-- outside the stage, so it is not scaled with it: fixed to the window -->
+<div id="tip" class="tip" aria-hidden="true" hidden></div>
 <!-- build.py fills these three; in development app.js fetches the files instead -->
 <script type="application/json" id="data-oracle"></script>
 <script type="application/json" id="data-captions"></script>

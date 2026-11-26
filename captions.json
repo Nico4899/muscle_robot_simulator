@@ -114,5 +114,15 @@
  },
  "affiliation": {
   "logo_alt": "Biohybrid Systems Lab (tlab) logo"
+ },
+ "mobile": {
+  "tap": "Tap the joint to stimulate it.",
+  "pip": "the real one",
+  "enlarge": "Enlarge the clip of the real actuator",
+  "shrink": "Shrink the clip of the real actuator",
+  "stimulate": "Stimulate",
+  "fixed": "Fixed force",
+  "more": "All controls",
+  "quick": "Quick controls"
  }
 }
