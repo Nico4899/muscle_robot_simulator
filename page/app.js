@@ -577,7 +577,6 @@ async function main() {
   document.getElementById("title-en").textContent = t(captions.title.en);
   document.getElementById("title-ja").textContent = t(captions.title.ja);
   document.getElementById("badge").textContent = `${t(captions.badge.en)} · ${t(captions.badge.ja)}`;
-  document.getElementById("affiliation-name").textContent = t(captions.affiliation.en);
   // the lab's logo: table build only (build.py sets data-src), like the clip. With the logo the
   // presenter says "simulated" aloud; without it (public build) the SIMULATED badge stays on screen.
   const logo = document.getElementById("logo");

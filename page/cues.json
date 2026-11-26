@@ -1,10 +1,10 @@
 [
   {"t": 0.9, "on": true,  "side": "A"},
   {"t": 1.8, "on": false, "side": "A"},
-  {"t": 2.9, "on": true,  "side": "B"},
-  {"t": 3.8, "on": false, "side": "B"},
+  {"t": 2.9, "on": true,  "side": "A"},
+  {"t": 3.8, "on": false, "side": "A"},
   {"t": 4.8, "on": true,  "side": "A"},
   {"t": 5.6, "on": false, "side": "A"},
-  {"t": 6.9, "on": true,  "side": "B"},
-  {"t": 7.7, "on": false, "side": "B"}
+  {"t": 6.9, "on": true,  "side": "A"},
+  {"t": 7.7, "on": false, "side": "A"}
 ]

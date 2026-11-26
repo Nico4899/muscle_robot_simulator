@@ -80,7 +80,6 @@ h1 { font-size: var(--t-h1); line-height: 1.15; margin: 0; }
   cursor: help;
 }
 .badges { align-items: center; }
-.affiliation { display: flex; align-items: center; gap: 12px; font-weight: 700; cursor: help; }
 #logo { height: 72px; width: auto; display: block; }
 .badge.sim { background: var(--ink); color: var(--card); font-weight: 700; }
 .badge.parity { background: var(--card); font-weight: 700; }
@@ -131,8 +130,20 @@ dt[data-label], #sobol-title, .legend li span:last-child {
 
 /* the real actuator */
 #left { grid-area: left; }
-.clip-box { position: relative; display: flex; justify-content: center; }
-#clip { display: block; height: 460px; max-width: 100%; border-radius: 8px; background: var(--ink); }
+/* the clip zoomed in on the joint: crop x 90-460, y 320-710 of the 608 x 1080 movie, scaled to
+   the card's content width (440 px column - 2 x 24 px padding - 2 x 1 px border = 390 px).
+   Fixed pixels, because WebKit ignores aspect-ratio on a flex item here. */
+.clip-box {
+  --s: calc(390px / 370); /* one movie pixel on the page */
+  position: relative; flex-shrink: 0;
+  width: calc(var(--s) * 370); height: calc(var(--s) * 390);
+  overflow: hidden; border-radius: 8px; background: var(--ink);
+}
+#clip {
+  position: absolute; display: block;
+  width: calc(var(--s) * 608); height: calc(var(--s) * 1080);
+  left: calc(var(--s) * -90); top: calc(var(--s) * -320);
+}
 .play {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
   font: inherit; font-weight: 700; padding: 16px 24px;

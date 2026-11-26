@@ -15,7 +15,7 @@
   "claim": "C19"
  },
  "target_label": "target {{target_deg:.0f}}°",
- "clip_credit": "Morita, Nie & Takeuchi, Sci. Adv. 2025, Movie S11, trimmed, CC BY-NC 4.0. Timing matched by eye; angles not measured. [L1]",
+ "clip_credit": "Morita, Nie & Takeuchi, Sci. Adv. 2025 [L1]",
  "steps": {
   "stimulate": "{{n_builds_page}} builds of the same joint, because no two muscle rings are alike.",
   "fixed_force": "Published design tools for these robots give every muscle the same fixed force. [C13] [C24]",
@@ -56,7 +56,7 @@
  "tips": {
   "badge": "Every angle and force on this page comes from a simplified model, not from lab measurements.",
   "parity": "Green when the page's model reproduces the reference numbers in oracle.json exactly.",
-  "clip": "The lab's antagonistic actuator, stimulated left and right (Movie S11). The simulated joint follows the clip's timing until you take over.",
+  "clip": "The lab's antagonistic actuator (Movie S11): one stack is stimulated again and again, and the joint turns toward it and back. The simulated joint follows the clip's timing, matched by eye, until you take over.",
   "stimulate": "Stimulate one stack electrically; press again to release. The sides take turns.",
   "fixed": "Make every ring identical, as most simulators assume. The spread between builds disappears.",
   "rings": "How many muscle rings each stack holds. More rings give more force, not much more swing.",
@@ -85,7 +85,8 @@
   "g_crosstalk": "How much of the stimulating field reaches the other stack.",
   "ring": "A muscle ring: a loop of lab-grown muscle hooked over two posts. It pulls when stimulated and when stretched.",
   "base": "The fixed side of the joint: one end of every ring hooks onto a post here.",
-  "affiliation": "Built at the Biohybrid Systems Lab."
+  "affiliation": "Biohybrid Systems Lab",
+  "credit": "Movie S11 of the paper, trimmed. Licence: CC BY-NC 4.0. [L1]"
  },
  "headings": {
   "how": "How it works",
@@ -112,7 +113,6 @@
   "crosstalk": "stray field"
  },
  "affiliation": {
-  "en": "Biohybrid Systems Lab",
-  "logo_alt": "tlab logo: Think Hybrid"
+  "logo_alt": "Biohybrid Systems Lab (tlab) logo"
  }
 }
