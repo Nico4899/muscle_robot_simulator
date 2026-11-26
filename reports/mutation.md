@@ -26,7 +26,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
 - `model.sd`: 11
 - `model.seed_builds_and_rebuilds`: 15
 
-## Survivors (27: 10 equivalent, 4 gap, 13 out of scope; 0 to classify)
+## Survivors (27: 11 equivalent, 3 gap, 13 out of scope; 0 to classify)
 
 ### `statics.x_rest__mutmut_10`
 
@@ -40,7 +40,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
 +    return solve(A, B, None, p, 1.0)
 ```
 
-**gap** (Claude, proposed 26 Nov: confirm): Rest searched from 1.0 rad instead of the straight position; differs only when the rest equation has several balance points, which no demo setting or hand-built joint has. Listed as known.
+**equivalent** (Claude, proposed 26 Nov and checked by probes: confirm): Rest searched from 1.0 rad instead of 0. The rest equation has exactly one root for any kappa > 0 (the passive pull only grows with stretch, so the residual strictly decreases), and from either start the walk ends in the same scan bracket, so the bisection is the same. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): identical everywhere. (Reclassified from gap on review.)
 
 ### `statics.x_scan_grid__mutmut_1`
 
@@ -55,7 +55,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      return [TH_MAX * (k - m) / m for k in range(N_SCAN)]
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed (the import fails).
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed (the import fails). Probed 26 Nov: import fails.
 
 ### `statics.x_scan_grid__mutmut_2`
 
@@ -70,7 +70,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      return [TH_MAX * (k - m) / m for k in range(N_SCAN)]
 ```
 
-**equivalent** (Claude, proposed 26 Nov: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). m = 120.0 instead of 120 gives the same grid values.
+**equivalent** (Claude, proposed 26 Nov and checked by probes: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). m = 120.0 instead of 120 gives the same grid values. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): identical everywhere.
 
 ### `statics.x_scan_grid__mutmut_3`
 
@@ -85,7 +85,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      return [TH_MAX * (k - m) / m for k in range(N_SCAN)]
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed by I3.
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed by I3. Probed 26 Nov: demo identical, wide solves differ.
 
 ### `statics.x_scan_grid__mutmut_4`
 
@@ -100,7 +100,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      return [TH_MAX * (k - m) / m for k in range(N_SCAN)]
 ```
 
-**gap** (Claude, proposed 26 Nov: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: survives. The grid runs from -1.2 to 1.22 rad instead of 1.2; it matters only for a balance point in that sliver. Listed as known.
+**gap** (Claude, proposed 26 Nov and checked by probes: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: survives. The grid runs from -1.2 to 1.22 rad instead of 1.2; it matters only for a balance point in that sliver. Listed as known. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): demo identical; 215 wide solves differ (a balance point found between 1.2 and 1.22 rad where the original stops).
 
 ### `statics.x_scan_grid__mutmut_5`
 
@@ -115,7 +115,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      return [TH_MAX * (k - m) / m for k in range(N_SCAN)]
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed by I2.
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed by I2. Probed 26 Nov: demo identical, wide solves differ.
 
 ### `statics.x_scan_grid__mutmut_6`
 
@@ -130,7 +130,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
 +    return [TH_MAX * (k - m) * m for k in range(N_SCAN)]
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed by I9.
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed by I9. Probed 26 Nov: 296 demo numbers differ.
 
 ### `statics.x_scan_grid__mutmut_7`
 
@@ -145,7 +145,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
 +    return [TH_MAX / (k - m) / m for k in range(N_SCAN)]
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed (division by zero at import).
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed (division by zero at import). Probed 26 Nov: import fails.
 
 ### `statics.x_scan_grid__mutmut_8`
 
@@ -160,7 +160,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
 +    return [TH_MAX * (k + m) / m for k in range(N_SCAN)]
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed by I2.
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed by I2. Probed 26 Nov: 383 demo numbers differ.
 
 ### `statics.x_scan_grid__mutmut_9`
 
@@ -175,7 +175,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
 +    return [TH_MAX * (k - m) / m for k in range(None)]
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed (the import fails).
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): scan_grid runs once at import, before mutmut switches a mutant on, so mutmut cannot test it (like module-level constants). applied by hand to a scratch copy and run against test_physics.py on 26 Nov: killed (the import fails). Probed 26 Nov: import fails.
 
 ### `statics.x_segment__mutmut_14`
 
@@ -190,7 +190,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
 +    return min(max(bisect_right(xs, e), 1), len(xs) + 1)
 ```
 
-**equivalent** (Claude, proposed 26 Nov: confirm): The clamp only bites beyond 105.9 % strain; the joint's strains stay within about -25 % to 67 %.
+**equivalent** (Claude, proposed 26 Nov and checked by probes: confirm): The clamp only bites beyond 105.9 % strain; the joint's strains stay within about -25 % to 67 %. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): identical everywhere.
 
 ### `statics.x_segment__mutmut_15`
 
@@ -205,7 +205,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
 +    return min(max(bisect_right(xs, e), 1), len(xs) - 2)
 ```
 
-**equivalent** (Claude, proposed 26 Nov: confirm): The changed clamp only bites from 94.5 % strain; the joint's strains stay below about 67 %.
+**equivalent** (Claude, proposed 26 Nov and checked by probes: confirm): The changed clamp only bites from 94.5 % strain; the joint's strains stay below about 67 %. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): identical everywhere. (The wide solves reach strains of 90 %.)
 
 ### `statics.x_solve__mutmut_16`
 
@@ -223,7 +223,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      start_neg = residual(start, A, B, stim, p) < 0
 ```
 
-**gap** (Claude, proposed 26 Nov: confirm): The root count skips the last scan step (1.19 to 1.2 rad); random joints never put a balance point there. Listed as known.
+**gap** (Claude, proposed 26 Nov and checked by probes: confirm): The root count skips the last scan step (1.19 to 1.2 rad); random joints never put a balance point there. Listed as known. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): demo identical; 117 wide root counts differ, angles never.
 
 ### `statics.x_solve__mutmut_38`
 
@@ -241,7 +241,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      order = range(N_SCAN - 1, -1, -1) if start_neg else range(N_SCAN)
 ```
 
-**equivalent** (Claude, proposed 26 Nov: confirm): Differs only when the residual at the start is exactly 0; walking either way then converges back to that zero.
+**equivalent** (Claude, proposed 26 Nov and checked by probes: confirm): Differs only when the residual at the start is exactly 0; walking either way then converges back to that zero. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): largest difference 9e-21 rad.
 
 ### `statics.x_solve__mutmut_52`
 
@@ -259,7 +259,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
          if beyond:
 ```
 
-**equivalent** (Claude, proposed 26 Nov: confirm): Skips scan point 240 (1.2 rad) when walking down; it is never below a start inside the range.
+**equivalent** (Claude, proposed 26 Nov and checked by probes: confirm): Skips scan point 240 (1.2 rad) when walking down; it is never below a start inside the range. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): identical everywhere.
 
 ### `statics.x_solve__mutmut_54`
 
@@ -277,7 +277,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
          if beyond:
 ```
 
-**equivalent** (Claude, proposed 26 Nov: confirm): Adds index -1, which in Python is scan point 240 (1.2 rad) again; never below a start inside the range.
+**equivalent** (Claude, proposed 26 Nov and checked by probes: confirm): Adds index -1, which in Python is scan point 240 (1.2 rad) again; never below a start inside the range. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): identical everywhere.
 
 ### `statics.x_solve__mutmut_56`
 
@@ -295,7 +295,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
          if beyond:
 ```
 
-**gap** (Claude, proposed 26 Nov: confirm): Walking down in steps of two scan points; differs only when two balance points lie within two steps (0.02 rad), which the scan resolves poorly anyway. Listed as known.
+**gap** (Claude, proposed 26 Nov and checked by probes: confirm): Walking down in steps of two scan points; differs only when two balance points lie within two steps (0.02 rad), which the scan resolves poorly anyway. Listed as known. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): never observed (it needs two balance points within 0.02 rad, a near-tangent joint).
 
 ### `statics.x_solve__mutmut_61`
 
@@ -313,7 +313,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
                  far = GRID[k]
 ```
 
-**equivalent** (Claude, proposed 26 Nov: confirm): A scan point equal to the start has the start's sign, so it can never be the far end of the bracket.
+**equivalent** (Claude, proposed 26 Nov and checked by probes: confirm): A scan point equal to the start has the start's sign, so it can never be the far end of the bracket. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): identical everywhere.
 
 ### `statics.x_solve__mutmut_62`
 
@@ -331,7 +331,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
                  far = GRID[k]
 ```
 
-**equivalent** (Claude, proposed 26 Nov: confirm): As mutant 61, walking up.
+**equivalent** (Claude, proposed 26 Nov and checked by probes: confirm): As mutant 61, walking up. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): identical everywhere.
 
 ### `statics.x_solve__mutmut_63`
 
@@ -349,7 +349,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
              near = GRID[k]
 ```
 
-**equivalent** (Claude, proposed 26 Nov: confirm): Differs only when the residual is exactly 0 on a scan point other than the start.
+**equivalent** (Claude, proposed 26 Nov and checked by probes: confirm): Differs only when the residual is exactly 0 on a scan point other than the start. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): identical everywhere.
 
 ### `statics.x_solve__mutmut_85`
 
@@ -367,7 +367,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
              far = mid
 ```
 
-**equivalent** (Claude, proposed 26 Nov: confirm): Differs only when a bisection midpoint is exactly a root; both converge to it.
+**equivalent** (Claude, proposed 26 Nov and checked by probes: confirm): A residual that rounds to exactly 0 at a bisection midpoint sends the bisection the other way; both converge to the root. Probed 26 Nov (mutant applied to a copy): the demo table (seed 1, 48 cases x 1500 builds) and 63,472 wide solves (soft hinges, equal stacks, starts on scan points, the hand-built joint): 85 demo numbers differ in the last bits (at most 1e-15 relative), a million times below the parity tolerance.
 
 ### `statics.x_swing__mutmut_25`
 
@@ -385,7 +385,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      }
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing".
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing". Probed 26 Nov: run_case raises KeyError.
 
 ### `statics.x_swing__mutmut_26`
 
@@ -403,7 +403,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      }
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing".
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing". Probed 26 Nov: run_case raises KeyError.
 
 ### `statics.x_swing__mutmut_27`
 
@@ -420,7 +420,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      }
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing".
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing". Probed 26 Nov: run_case raises KeyError.
 
 ### `statics.x_swing__mutmut_28`
 
@@ -437,7 +437,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      }
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing".
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing". Probed 26 Nov: run_case raises KeyError.
 
 ### `statics.x_swing__mutmut_29`
 
@@ -453,7 +453,7 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      }
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing".
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing". Probed 26 Nov: run_case raises KeyError.
 
 ### `statics.x_swing__mutmut_30`
 
@@ -469,5 +469,5 @@ purpose (a shared mistake passes parity). Out of scope here, by function:
      }
 ```
 
-**out of scope** (Claude, proposed 26 Nov: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing".
+**out of scope** (Claude, proposed 26 Nov and checked by probes: confirm): Renames a key only run_case and the page read; make oracle then fails with a KeyError and parity goes red. test_physics.py reads only "swing". Probed 26 Nov: run_case raises KeyError.
 

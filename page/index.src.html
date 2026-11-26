@@ -12,63 +12,100 @@
     <div class="titles">
       <h1 id="title-en"></h1>
       <p class="ja" id="title-ja" lang="ja"></p>
-      <p class="sub" id="subtitle-en"></p>
     </div>
     <div class="badges">
-      <span class="badge sim" id="badge"></span>
-      <span class="badge parity" id="parity" title="checking the page against oracle.json">parity</span>
+      <span class="badge sim" id="badge" tabindex="0" data-tip="badge"></span>
+      <span class="badge parity" id="parity" tabindex="0" data-tip="parity">parity</span>
     </div>
   </header>
 
-  <section id="left">
-    <video id="clip" muted loop playsinline autoplay></video>
-    <p class="clip-mode" id="clip-mode"></p>
+  <!-- shown only if the data cannot be loaded (the source page opened from disk) -->
+  <p class="load-error" id="load-error" role="alert" hidden>The page could not load its data.
+    Serve the folder with a local web server, or open the built page in dist.</p>
+
+  <section class="how" aria-labelledby="h-how">
+    <h2 class="visually-hidden" id="h-how" data-text="headings.how"></h2>
+    <ol>
+      <li><span class="step-n" aria-hidden="true"></span><span data-text="explain.rings"></span></li>
+      <li><span class="step-n" aria-hidden="true"></span><span data-text="explain.stimulate"></span></li>
+      <li><span class="step-n" aria-hidden="true"></span><span data-text="explain.spread"></span></li>
+    </ol>
+  </section>
+
+  <section class="card" id="left" aria-labelledby="h-clip">
+    <h2 id="h-clip" data-text="headings.clip"></h2>
+    <div class="clip-box" data-tip="clip" tabindex="0">
+      <video id="clip" muted loop playsinline preload="auto" aria-describedby="clip-credit"></video>
+      <button class="play" id="clip-play" hidden data-text="clip.play"></button>
+    </div>
+    <p class="clip-mode" id="clip-mode" aria-live="polite"></p>
+    <div class="clip-missing" id="clip-missing" hidden>
+      <p id="clip-missing-text" data-text="clip.public"></p>
+      <p><a href="https://doi.org/10.1126/sciadv.adu9962">Morita, Nie and Takeuchi, Science Advances</a></p>
+    </div>
+    <p class="note" id="clip-cannot" hidden data-text="clip.cannot_play"></p>
     <p class="credit" id="clip-credit"></p>
-    <p class="clip-missing" id="clip-missing" hidden>The clip is Movie S11 of the paper:
-      <a href="https://doi.org/10.1126/sciadv.adu9962">Morita, Nie and Takeuchi, Science Advances</a></p>
   </section>
 
-  <section id="centre">
-    <svg id="joint" viewBox="0 0 760 820" role="img" aria-label="Simulated joint seen from above"></svg>
-    <p class="caption" id="caption"></p>
-  </section>
-
-  <section id="right">
-    <div id="controls">
-      <button data-action="stimulate"><kbd>Space</kbd> stimulate side <b id="v-side"></b></button>
-      <button data-action="fixed"><kbd>F</kbd> fixed force: <b id="v-fixed"></b></button>
-      <div class="row">
-        <button data-action="rings-" aria-label="fewer rings">−</button>
-        <span><kbd>1-4</kbd> rings per side: <b id="v-rings"></b></span>
-        <button data-action="rings+" aria-label="more rings">+</button>
-      </div>
-      <button data-action="spread"><kbd>S</kbd> spread: <b id="v-preset"></b></button>
-      <button data-action="rebuild"><kbd>B</kbd> rebuild your joint</button>
-      <button data-action="shield"><kbd>H</kbd> shielding: <b id="v-shield"></b></button>
-      <button data-action="load"><kbd>L</kbd> load: <b id="v-load"></b></button>
-      <button data-action="new"><kbd>R</kbd> new builds</button>
-      <button data-action="reset"><kbd>Esc</kbd> reset</button>
-    </div>
-    <dl id="readouts">
-      <dt data-label="typical"></dt><dd id="r-typical"></dd>
-      <dt data-label="worst"></dt><dd id="r-worst"></dd>
-      <dt data-label="chance"></dt><dd id="r-chance"></dd>
-      <dt data-label="rest"></dt><dd id="r-rest"></dd>
-      <dt data-label="blocked"></dt><dd id="r-blocked"></dd>
+  <section class="card" id="centre" aria-labelledby="h-sim">
+    <h2 id="h-sim" data-text="headings.sim"></h2>
+    <svg id="joint" viewBox="0 0 860 440" role="img" aria-labelledby="joint-label">
+      <title id="joint-label">Simulated joint seen from above</title>
+    </svg>
+    <ul class="legend" id="legend"></ul>
+    <p class="caption" id="caption" aria-live="polite"></p>
+    <dl class="tiles" id="readouts">
+      <div data-tip="typical" tabindex="0"><dt data-label="typical"></dt><dd id="r-typical"></dd></div>
+      <div data-tip="worst" tabindex="0"><dt data-label="worst"></dt><dd id="r-worst"></dd></div>
+      <div data-tip="chance" tabindex="0"><dt data-label="chance"></dt><dd id="r-chance"></dd></div>
+      <div data-tip="rest" tabindex="0"><dt data-label="rest"></dt><dd id="r-rest"></dd></div>
+      <div data-tip="blocked" tabindex="0"><dt data-label="blocked"></dt><dd id="r-blocked"></dd></div>
     </dl>
-    <p class="flag" id="r-no-balance" hidden></p>
+    <p class="flag" id="r-no-balance" role="status" hidden></p>
+  </section>
+
+  <section class="card" id="right" aria-labelledby="h-controls">
+    <h2 id="h-controls" data-text="headings.controls"></h2>
+    <div id="controls">
+      <button class="primary" data-action="stimulate" data-tip="stimulate" aria-keyshortcuts="Space">
+        <kbd>Space</kbd><span>stimulate side <b id="v-side"></b></span></button>
+      <button data-action="fixed" data-tip="fixed" aria-keyshortcuts="F" aria-pressed="false" id="b-fixed">
+        <kbd>F</kbd><span>fixed force</span><b class="val" id="v-fixed"></b></button>
+      <div class="row" data-tip="rings">
+        <kbd>1-4</kbd><span>rings per side</span>
+        <button data-action="rings-" aria-label="fewer rings per side">−</button>
+        <b class="val" id="v-rings" aria-live="polite"></b>
+        <button data-action="rings+" aria-label="more rings per side">+</button>
+      </div>
+      <button data-action="spread" data-tip="spread" aria-keyshortcuts="S">
+        <kbd>S</kbd><span>spread from</span><b class="val" id="v-preset"></b></button>
+      <button data-action="shield" data-tip="shield" aria-keyshortcuts="H" aria-pressed="false" id="b-shield">
+        <kbd>H</kbd><span>shielding</span><b class="val" id="v-shield"></b></button>
+      <button data-action="load" data-tip="load" aria-keyshortcuts="L">
+        <kbd>L</kbd><span>load</span><b class="val" id="v-load"></b></button>
+      <button data-action="rebuild" data-tip="rebuild" aria-keyshortcuts="B"><kbd>B</kbd><span>rebuild your joint</span></button>
+      <div class="pair">
+        <button data-action="new" data-tip="new" aria-keyshortcuts="R"><kbd>R</kbd><span>new builds</span></button>
+        <button data-action="reset" data-tip="reset" aria-keyshortcuts="Escape"><kbd>Esc</kbd><span>reset</span></button>
+      </div>
+    </div>
     <div id="sobol">
-      <h2 id="sobol-title"></h2>
+      <h3 id="sobol-title" data-tip="bars" tabindex="0"></h3>
       <div id="bars"></div>
-      <p class="sobol-none" id="sobol-none" hidden>No spread with a fixed force: every build is the same.</p>
-      <p class="sobol-caption" id="sobol-caption"></p>
+      <p class="note" id="sobol-none" hidden></p>
+      <p class="note" id="sobol-caption"></p>
     </div>
   </section>
+
+  <div id="tip" class="tip" aria-hidden="true" hidden></div>
+  <div id="tip-texts" class="visually-hidden"></div>
 </div>
 <!-- build.py fills these three; in development app.js fetches the files instead -->
 <script type="application/json" id="data-oracle"></script>
 <script type="application/json" id="data-captions"></script>
 <script type="application/json" id="data-cues"></script>
 <script type="module" src="app.js"></script>
+<!-- a module cannot load from disk (file://) in development: then say so instead of a blank page -->
+<script>setTimeout(() => { if (!window.page_ready) document.getElementById("load-error").hidden = false; }, 3000);</script>
 </body>
 </html>

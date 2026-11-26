@@ -1,19 +1,19 @@
 {
  "_note": "Text for the page. Numbers only through {{key}} placeholders from oracle.json, or values listed in claims.md (row id in brackets after the line, removed at build). Japanese marked (check) needs a native speaker.",
  "title": {
-  "en": "Why does this joint bend only 6.2° to 10.5° on average? [C19]",
-  "ja": "なぜこの関節は平均6.2〜10.5°しか曲がらないのか？ [C19] (check)"
- },
- "subtitle": {
-  "en": "Robots powered by lab-grown muscle",
-  "ja": "培養筋肉で動くロボット (check)"
+  "en": "Why does lab-grown muscle bend this joint so little, and every build differently?",
+  "ja": "培養筋肉で動くこの関節は、なぜ少ししか曲がらず、一つ一つ違うのか？ (check)"
  },
  "badge": {
   "en": "SIMULATED – not fitted to lab data",
   "ja": "シミュレーション"
  },
- "band_label": "published: this actuator, 6.2° to 10.5° on average [C19]",
- "band": {"lo_deg": 6.2, "hi_deg": 10.5, "claim": "C19"},
+ "band_label": "published: the lab's actuator, 6.2° to 10.5° on average [C19]",
+ "band": {
+  "lo_deg": 6.2,
+  "hi_deg": 10.5,
+  "claim": "C19"
+ },
  "target_label": "target {{target_deg:.0f}}°",
  "clip_credit": "Morita, Nie & Takeuchi, Sci. Adv. 2025, Movie S11, trimmed, CC BY-NC 4.0. Timing matched by eye; angles not measured. [L1]",
  "steps": {
@@ -35,6 +35,79 @@
   "blocked": "pull when held straight",
   "no_balance": "builds without a balance point (joint at its stop)"
  },
- "sobol_title": "What drives the spread of the swing",
- "sobol_caption": "Shares depend on the illustrative ranges I chose."
+ "sobol_title": "What drives the spread",
+ "sobol_caption": "Shares depend on the illustrative ranges I chose.",
+ "explain": {
+  "rings": "Muscle rings are loops of lab-grown muscle. A stack of them sits on each side of the hinge.",
+  "stimulate": "Stimulate one side: its rings contract and turn the joint, while the stretched rings on the other side pull back.",
+  "spread": "No two rings are alike, so every build of the same joint swings differently. Stray field also reaches the other side."
+ },
+ "clip": {
+  "mode_clip": "The joint follows the clip.",
+  "mode_visitor": "You have the joint. The clip takes over again when you stop.",
+  "public": "The clip is not part of the public page. Watch Movie S11 in the paper:",
+  "cannot_play": "This browser cannot play the clip (H.264 video). Open the page in Safari, Chrome or Firefox.",
+  "play": "Play the clip"
+ },
+ "no_spread": {
+  "fixed": "No spread with a fixed force: every build is the same.",
+  "undefined": "No shares here: some builds of this case reach no balance point."
+ },
+ "tips": {
+  "badge": "Every angle and force on this page comes from a simplified model, not from lab measurements.",
+  "parity": "Green when the page's model reproduces the reference numbers in oracle.json exactly.",
+  "clip": "The lab's antagonistic actuator, stimulated left and right (Movie S11). The simulated joint follows the clip's timing until you take over.",
+  "stimulate": "Stimulate one stack electrically; press again to release. The sides take turns.",
+  "fixed": "Make every ring identical, as most simulators assume. The spread between builds disappears.",
+  "rings": "How many muscle rings each stack holds. More rings give more force, not much more swing.",
+  "spread": "Choose which source of differences between builds dominates: the rings, the assembly of a stack, or which rings end up together.",
+  "rebuild": "Take your joint apart and assemble it again from the same rings.",
+  "shield": "Walls that keep the stimulating field away from the other stack, so it is not stimulated by mistake.",
+  "load": "How hard the hinge resists turning: a light or a heavy load.",
+  "new": "Draw a new set of builds.",
+  "reset": "Back to the starting settings.",
+  "typical": "The median build: half the builds swing more, half less.",
+  "worst": "One build in ten swings less than this.",
+  "chance": "The share of builds that reach the target swing.",
+  "rest": "Your joint's angle before stimulation: uneven stacks make it lean.",
+  "blocked": "How hard your joint's stimulated stack pulls if the joint is held straight.",
+  "you": "Your joint: one of the builds. B rebuilds it from the same rings.",
+  "median": "The typical build: the median angle.",
+  "builds": "Every other build of the same design, one line and tip each.",
+  "band": "The lab's actuator turned this much on average, from short to long stimulation (Fig. 6E of the paper). [C19]",
+  "target": "The swing a design should reach.",
+  "ring_on": "A stimulated stack: its rings contract.",
+  "ring_off": "A relaxed stack: stretched by the joint, its rings pull back.",
+  "bars": "The share of the spread between builds each source causes. Bar: in total, together with the others. Tick: on its own.",
+  "g_rings": "Each ring pulls with its own strength.",
+  "g_assembly": "How a stack is put together: the whole stack pulls a little more or less. Changes when you rebuild.",
+  "g_combination": "Which rings end up in the same stack. Stays the same when you rebuild.",
+  "g_crosstalk": "How much of the stimulating field reaches the other stack.",
+  "ring": "A muscle ring: a loop of lab-grown muscle hooked over two posts. It pulls when stimulated and when stretched.",
+  "base": "The fixed side of the joint: one end of every ring hooks onto a post here."
+ },
+ "headings": {
+  "how": "How it works",
+  "clip": "The real actuator",
+  "sim": "Simulation: the joint seen from above",
+  "controls": "Try it"
+ },
+ "legend": {
+  "you": "your joint",
+  "median": "typical build",
+  "builds": "the other builds",
+  "ring": "muscle ring"
+ },
+ "drawing": {
+  "stimulated": "stimulated",
+  "relaxed": "relaxed",
+  "base": "fixed",
+  "swing": "swing"
+ },
+ "groups": {
+  "rings": "the rings",
+  "assembly": "assembly",
+  "combination": "combination",
+  "crosstalk": "stray field"
+ }
 }
