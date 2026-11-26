@@ -30,7 +30,7 @@ grep_hits() {  # $1: label, $2: extended regex, $3: extra git grep flags
 }
 grep_hits "email" '[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}'
 grep_hits "home path" '/Users/|/home/'
-grep_hits "embedded media" 'data:(video|audio)/'  # the table build inlines the clip
+grep_hits "embedded media" 'data:(video|audio)/[A-Za-z0-9.+-]+;base64,[A-Za-z0-9+/]{100,}'  # an inlined clip, not code that builds one
 grep_hits "key-like token" \
   'sk-[A-Za-z0-9_-]{20,}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|xox[abprs]-[A-Za-z0-9-]{10,}|-----BEGIN [A-Z ]*PRIVATE KEY-----'
 grep_hits "secret assignment" '(api[_-]?key|secret|passw(or)?d|token)["'"'"' ]*[:=][ ]*["'"'"'][^"'"'"']{8,}' -i
