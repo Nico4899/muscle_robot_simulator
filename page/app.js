@@ -577,6 +577,20 @@ async function main() {
   document.getElementById("title-en").textContent = t(captions.title.en);
   document.getElementById("title-ja").textContent = t(captions.title.ja);
   document.getElementById("badge").textContent = `${t(captions.badge.en)} · ${t(captions.badge.ja)}`;
+  document.getElementById("affiliation-name").textContent = t(captions.affiliation.en);
+  // the lab's logo: table build only (build.py sets data-src), like the clip. With the logo the
+  // presenter says "simulated" aloud; without it (public build) the SIMULATED badge stays on screen.
+  const logo = document.getElementById("logo");
+  const logo_src = logo.dataset.src || "../private/lab_logo.png";
+  const badge_only = () => {
+    logo.hidden = true;
+    document.getElementById("badge").hidden = false;
+  };
+  logo.alt = t(captions.affiliation.logo_alt);
+  logo.addEventListener("load", () => (logo.hidden = false));
+  logo.addEventListener("error", badge_only);
+  if (logo_src === "none") badge_only();
+  else logo.src = logo_src;
   document.getElementById("clip-credit").textContent = t(captions.clip_credit);
   document.getElementById("sobol-title").textContent = t(captions.sobol_title);
   document.getElementById("sobol-caption").textContent = t(captions.sobol_caption);

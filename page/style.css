@@ -79,6 +79,9 @@ h1 { font-size: var(--t-h1); line-height: 1.15; margin: 0; }
   white-space: nowrap;
   cursor: help;
 }
+.badges { align-items: center; }
+.affiliation { display: flex; align-items: center; gap: 12px; font-weight: 700; cursor: help; }
+#logo { height: 72px; width: auto; display: block; }
 .badge.sim { background: var(--ink); color: var(--card); font-weight: 700; }
 .badge.parity { background: var(--card); font-weight: 700; }
 .badge.parity.ok { border-color: var(--ok); color: var(--ok); }

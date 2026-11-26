@@ -2,7 +2,8 @@
 
   dist/table/index.html   everything inlined, including the clip from private/ (git-ignored;
                           for the table at the event, never published)
-  dist/public/index.html  the same without the clip: a link to the paper instead (GitHub Pages)
+  dist/public/index.html  the same without the clip and the lab's logo: a link to the paper
+                          instead, and the SIMULATED badge (GitHub Pages)
 
 Inlined: style.css, the JS modules (bundled: each module in its own scope, imports resolved
 from the others' exports), oracle.json, captions.json (with [Cn] tags stripped, spec 04) and
@@ -17,6 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 PAGE = ROOT / "page"
 CLIP = ROOT / "private" / "s11small.mp4"
+LOGO = ROOT / "private" / "lab_logo.png"  # the lab's logo: table build only, never published
 MODULES = [ROOT / "rng.js", ROOT / "statics.js", ROOT / "model.js", PAGE / "app.js"]  # deps first
 
 IMPORT = re.compile(r'import\s*\{([^}]*)\}\s*from\s*"([^"]+)";', re.S)
@@ -62,7 +64,7 @@ def inline_json(obj):
     return json.dumps(obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
 
-def page(clip_src):
+def page(clip_src, logo_src):
     html = (PAGE / "index.src.html").read_text(encoding="utf-8")
     css = (PAGE / "style.css").read_text(encoding="utf-8")
     data = {
@@ -81,6 +83,9 @@ def page(clip_src):
     video = '<video id="clip"'
     assert html.count(video) == 1
     html = html.replace(video, f'<video id="clip" data-src="{clip_src}"')
+    logo = '<img id="logo"'
+    assert html.count(logo) == 1
+    html = html.replace(logo, f'<img id="logo" data-src="{logo_src}"')
     html = html.replace("<!-- build.py fills these three; in development app.js fetches the files instead -->\n", "")
     return html
 
@@ -93,10 +98,13 @@ def write(target, html):
 
 
 def main():
-    write("public", page("none"))
+    write("public", page("none", "none"))
     if CLIP.exists():
         b64 = base64.b64encode(CLIP.read_bytes()).decode("ascii")
-        write("table", page(f"data:video/mp4;base64,{b64}"))
+        logo = "none"
+        if LOGO.exists():
+            logo = "data:image/png;base64," + base64.b64encode(LOGO.read_bytes()).decode("ascii")
+        write("table", page(f"data:video/mp4;base64,{b64}", logo))
     else:
         print(f"build: no {CLIP.relative_to(ROOT)}, so no table page (public only)")
 

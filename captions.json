@@ -84,7 +84,8 @@
   "g_combination": "Which rings end up in the same stack. Stays the same when you rebuild.",
   "g_crosstalk": "How much of the stimulating field reaches the other stack.",
   "ring": "A muscle ring: a loop of lab-grown muscle hooked over two posts. It pulls when stimulated and when stretched.",
-  "base": "The fixed side of the joint: one end of every ring hooks onto a post here."
+  "base": "The fixed side of the joint: one end of every ring hooks onto a post here.",
+  "affiliation": "Built at the Biohybrid Systems Lab."
  },
  "headings": {
   "how": "How it works",
@@ -109,5 +110,9 @@
   "assembly": "assembly",
   "combination": "combination",
   "crosstalk": "stray field"
+ },
+ "affiliation": {
+  "en": "Biohybrid Systems Lab",
+  "logo_alt": "tlab logo: Think Hybrid"
  }
 }

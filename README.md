@@ -1,5 +1,7 @@
 # muscle-joint-demo
 
+Biohybrid Systems Lab.
+
 An offline simulator of an antagonistic joint driven by two stacks of lab-grown muscle rings, as
 built by Morita, Nie and Takeuchi (Science Advances), and the checks behind it. The simulator is
 simple on purpose; the checks are the point:
@@ -25,7 +27,7 @@ python3 -m venv .venv
 
 make check            # every check in parallel, one line each
 make oracle           # regenerate oracle.json (takes a couple of minutes)
-make build            # dist/public/index.html; with private/ also dist/table/index.html
+make build            # dist/public/index.html; with private/ also dist/table/index.html (clip, lab logo)
 ./break_it.sh         # stage a bug in the port: parity goes red, then all is restored
 ./break_it.sh --both  # the same bug in reference and port: parity stays green, an invariant goes red
 make mutate           # mutation testing of the reference, writes reports/mutation.md (slow)
